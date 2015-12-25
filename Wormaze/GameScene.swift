@@ -9,32 +9,64 @@
 import SpriteKit
 
 class GameScene: SKScene {
+    static let stepTime: CFTimeInterval = 0.1
+    
+    var lastStepTime: CFTimeInterval = 0;
+    
+    let gameBoard = GameBoard(tilesX: 60, tilesY: 30)
+    
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
-        let myLabel = SKLabelNode(fontNamed:"Chalkduster")
-        myLabel.text = "Hello, World!";
-        myLabel.fontSize = 45;
-        myLabel.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame));
+        self.anchorPoint = CGPoint(x: 0.0, y: 0.0);
         
-        self.addChild(myLabel)
+        gameBoard.position = CGPoint(x: 50.0, y: 100.0)
+        self.addChild(gameBoard)
+        gameBoard.initialize()
     }
     
     override func mouseDown(theEvent: NSEvent) {
         /* Called when a mouse click occurs */
         
-        let location = theEvent.locationInNode(self)
+    }
+    
+    override func keyDown(theEvent: NSEvent) {
         
-        let sprite = SKSpriteNode(imageNamed:"Spaceship")
-        sprite.position = location;
-        sprite.setScale(0.5)
+        gameBoard.keyDown(theEvent)
         
-        let action = SKAction.rotateByAngle(CGFloat(M_PI), duration:1)
-        sprite.runAction(SKAction.repeatActionForever(action))
+        if(!gameBoard.gameStarted) {
+            return;
+        }
         
-        self.addChild(sprite)
+        if let c = theEvent.characters {
+            if c.containsString("w") {
+                gameBoard.players[0].navigate(PlayerDirection.up)
+            } else if c.containsString("a") {
+                gameBoard.players[0].navigate(PlayerDirection.left)
+            } else if c.containsString("s") {
+                gameBoard.players[0].navigate(PlayerDirection.down)
+            } else if c.containsString("d") {
+                gameBoard.players[0].navigate(PlayerDirection.right)
+            }
+        }
+        
+        switch(theEvent.keyCode) {
+        case 123:
+            gameBoard.players[1].navigate(PlayerDirection.left)
+        case 124:
+            gameBoard.players[1].navigate(PlayerDirection.right)
+        case 125:
+            gameBoard.players[1].navigate(PlayerDirection.down)
+        case 126:
+            gameBoard.players[1].navigate(PlayerDirection.up)
+        default:
+            break
+        }
     }
     
     override func update(currentTime: CFTimeInterval) {
-        /* Called before each frame is rendered */
+        if(currentTime > lastStepTime + GameScene.stepTime) {
+            lastStepTime = currentTime
+            gameBoard.update()
+        }
     }
 }
