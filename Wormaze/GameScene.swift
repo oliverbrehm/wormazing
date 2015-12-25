@@ -12,16 +12,20 @@ class GameScene: SKScene {
     static let stepTime: CFTimeInterval = 0.1
     
     var lastStepTime: CFTimeInterval = 0;
+    var currentTime: CFTimeInterval = 0;
     
-    let gameBoard = GameBoard(tilesX: 60, tilesY: 30)
+    let gameBoard = GameBoard(tilesX: 65, tilesY: 40)
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
-        self.anchorPoint = CGPoint(x: 0.0, y: 0.0);
+        self.backgroundColor = SKColor.brownColor()
         
-        gameBoard.position = CGPoint(x: 50.0, y: 100.0)
+        self.anchorPoint = CGPoint(x: 0.5, y: 0.5);
+        
         self.addChild(gameBoard)
         gameBoard.initialize()
+        
+        gameBoard.position = CGPoint(x: -gameBoard.size.width / 2, y: -gameBoard.size.height / 2);
     }
     
     override func mouseDown(theEvent: NSEvent) {
@@ -31,7 +35,7 @@ class GameScene: SKScene {
     
     override func keyDown(theEvent: NSEvent) {
         
-        gameBoard.keyDown(theEvent)
+        gameBoard.anyKeyHit(currentTime)
         
         if(!gameBoard.gameStarted) {
             return;
@@ -64,9 +68,10 @@ class GameScene: SKScene {
     }
     
     override func update(currentTime: CFTimeInterval) {
+        self.currentTime = currentTime;
         if(currentTime > lastStepTime + GameScene.stepTime) {
             lastStepTime = currentTime
-            gameBoard.update()
+            gameBoard.update(currentTime)
         }
     }
 }

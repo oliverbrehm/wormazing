@@ -17,10 +17,16 @@ class GameBoard: SKNode {
     var growTimer = 0 // steps
     var gameStarted = false
     
+    var timeOutStart = 0.0
+    
+    let timeOutLenghth = 1.0
+    
     var tilesX: Int = 0
     var tilesY: Int = 0
     
-    let gameOverNode = SKSpriteNode(color: NSColor.redColor(), size: CGSize(width: 200, height: 200))
+    var size : CGSize = CGSize(width: 0.0, height: 0.0)
+    
+    let gameOverNode = SKSpriteNode(color: NSColor.redColor(), size: CGSize(width: 0.0 ,height: 0.0))
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -35,27 +41,35 @@ class GameBoard: SKNode {
     
     func initialize()
     {
+        self.size = CGSize(width: GameBoard.tileSize * CGFloat(tilesX), height: GameBoard.tileSize * CGFloat(tilesY))
+        
         // frame
-        let frame = SKSpriteNode(color: NSColor.blueColor(), size: CGSize(width: GameBoard.tileSize * CGFloat(tilesX), height: GameBoard.tileSize * CGFloat(tilesY)));
+        let frame = SKSpriteNode(color: NSColor.greenColor(), size: self.size);
         frame.alpha = 0.2
         frame.position = CGPoint(x: 0.0, y: 0.0)
         frame.anchorPoint = CGPoint(x: 0.0, y: 0.0)
         self.addChild(frame)
         
+        // game over node
+        self.gameOverNode.size = frame.size
+        self.gameOverNode.position = CGPoint(x: 0.0, y: 0.0)
+        self.gameOverNode.anchorPoint = CGPoint(x: 0.0, y: 0.0)
+        self.gameOverNode.alpha = 0.6
+        
         // debug
-        let test1 = SKSpriteNode(color: SKColor.redColor(), size: CGSize(width: 50, height: 50))
+        let test1 = SKSpriteNode(color: SKColor.brownColor(), size: CGSize(width: 4, height: 4))
         test1.position = CGPoint(x: 0.0, y: 0.0)
         test1.anchorPoint = CGPoint(x: 0.0, y: 0.0)
         self.addChild(test1)
         
-        let test2 = SKSpriteNode(color: SKColor.redColor(), size: CGSize(width: 50, height: 50))
-        test2.position = CGPoint(x: GameBoard.tileSize * CGFloat(tilesX), y: GameBoard.tileSize * CGFloat(tilesY))
+        let test2 = SKSpriteNode(color: SKColor.brownColor(), size: CGSize(width: 4, height: 4))
+        test2.position = CGPoint(x: self.size.width, y: self.size.height)
         test2.anchorPoint = CGPoint(x: 1.0, y: 1.0)
         self.addChild(test2)
     }
     
-    override func keyDown(theEvent: NSEvent) {
-        if(!gameStarted) {
+    func anyKeyHit(currentTime: CFTimeInterval) {
+        if(!gameStarted && currentTime > self.timeOutStart + self.timeOutLenghth) {
             newGame()
             startGame()
         }
@@ -63,6 +77,13 @@ class GameBoard: SKNode {
     
     func newGame()
     {
+        for player in self.players {
+            player.removeTiles()
+            player.removeFromParent()
+        }
+        
+        self.players.removeAll()
+        
         gameOverNode.removeFromParent()
         let player1 = Player(x: 1, y: 3, color: SKColor.greenColor(), gameBoard: self)
         self.players.append(player1)
@@ -76,22 +97,26 @@ class GameBoard: SKNode {
         gameStarted = true
     }
     
-    func gameOver()
+    func gameOver(loser: Int)
     {
-        gameOverNode.position = CGPoint(x: 300, y: 300)
+        gameOverNode.removeAllChildren()
         self.addChild(gameOverNode)
         
-        for player in self.players {
-            player.removeTiles()
-            player.removeFromParent()
+        let label : SKLabelNode
+
+        if(loser == 1) {
+            label = SKLabelNode(text: "Green wins!")
+        } else {
+            label = SKLabelNode(text: "Orange wins!")
         }
         
-        self.players.removeAll()
+        label.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2)
+        gameOverNode.addChild(label)
         
         gameStarted = false
     }
     
-    func update()
+    func update(currentTime: CFTimeInterval)
     {
         if(!gameStarted) {
             return;
@@ -102,9 +127,11 @@ class GameBoard: SKNode {
             growTimer = 0
         }
         
-        for player in self.players {
+        for(var i = 0; i < players.count; i++) {
+            let player = players[i]
             if(player.step()) {
-                gameOver()
+                gameOver(i)
+                self.timeOutStart = currentTime
                 break
             }
             
