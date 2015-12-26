@@ -9,16 +9,23 @@
 import Foundation
 import SpriteKit
 
-class PlayerTile {
+class PlayerTile : SKSpriteNode {
     var x, y : Int
-    var sprite: SKSpriteNode
     
     init(x: Int, y: Int, color: SKColor) {
         self.x = x;
         self.y = y;
-        self.sprite = SKSpriteNode(color: color, size: CGSize(width: GameBoard.tileSize, height: GameBoard.tileSize));
-        self.sprite.anchorPoint = CGPoint(x: 0.0, y: 0.0)
-        self.sprite.position = CGPoint(x: CGFloat(x) * GameBoard.tileSize, y: CGFloat(y) * GameBoard.tileSize);
+        
+        super.init(texture: nil, color: color, size: CGSize(width: GameBoard.tileSize, height: GameBoard.tileSize))
+
+        self.anchorPoint = CGPoint(x: 0.0, y: 0.0)
+        self.position = CGPoint(x: CGFloat(x) * GameBoard.tileSize, y: CGFloat(y) * GameBoard.tileSize);
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        self.x = 0
+        self.y = 0
+        super.init(texture: nil, color: NSColor.blackColor(), size: CGSizeZero)
     }
 }
 
@@ -26,23 +33,22 @@ class Tiles
 {
     var tiles: [PlayerTile] = [PlayerTile(x: 0,y: 0, color: SKColor.blackColor())]
     var current = 0
-    var increase: Bool = false
+    var increase: Int = 0
     
     func addTile(tile: PlayerTile) {
 
-        if(increase) {
+        if(increase > 0) {
             tiles.insert(tile, atIndex: current)
-            increase = false
-            current = (current + 1) % tiles.count
+            increase--
         } else {
-            tiles[current].sprite.removeFromParent()
+            tiles[current].removeFromParent()
             tiles[current] = tile;
-            current = (current + 1) % tiles.count
         }
+        current = (current + 1) % tiles.count
     }
     
-    func increaseCapacity() {
-        increase = true
+    func increaseCapacity(size: Int) {
+        increase += size
     }
     
     func head() -> PlayerTile {
@@ -64,6 +70,7 @@ class Player: SKNode {
     var tiles: Tiles
     let gameBoard: GameBoard
     let color: SKColor
+    var didNavigate = false
     
     required init?(coder aDecoder: NSCoder) {
         gameBoard = GameBoard(tilesX: 50, tilesY: 50)
@@ -80,26 +87,26 @@ class Player: SKNode {
         
         let tile = PlayerTile(x: x, y: y, color: self.color)
         self.tiles.addTile(tile)
-        self.gameBoard.addChild(tile.sprite)
+        self.gameBoard.addChild(tile)
     }
     
     func moveTo(x: Int, y: Int) {
         print("moveTo \(x), \(y)")
         let newTile = PlayerTile(x: x, y: y, color: self.color)
         self.tiles.addTile(newTile)
-        self.gameBoard.addChild(newTile.sprite)
+        self.gameBoard.addChild(newTile)
     }
     
-    func grow()
+    func grow(size: Int)
     {
-        self.tiles.increaseCapacity()
+        self.tiles.increaseCapacity(size)
     }
     
     func removeTiles()
     {
         for tile in self.tiles.tiles
         {
-            tile.sprite.removeFromParent()
+            tile.removeFromParent()
         }
     }
     
@@ -155,12 +162,22 @@ class Player: SKNode {
         }
         
         self.moveTo(destX, y: destY)
+        self.didNavigate = false
+        
+        if(self.gameBoard.hitItem(destX, y: destY)) {
+            self.grow(5)
+            self.gameBoard.spawnItem()
+        }
         
         return false
     }
     
     func navigate(playerDirection : PlayerDirection)
     {
+        if(didNavigate) {
+            return;
+        }
+        
         // impossible cases
         if(nextDirection == PlayerDirection.up && playerDirection == PlayerDirection.down
             || nextDirection == PlayerDirection.down && playerDirection == PlayerDirection.up
@@ -169,6 +186,7 @@ class Player: SKNode {
                 return;
         } else {
             self.nextDirection = playerDirection
+            didNavigate = true
         }
     }
 }

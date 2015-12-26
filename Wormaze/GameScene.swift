@@ -14,7 +14,8 @@ class GameScene: SKScene {
     var lastStepTime: CFTimeInterval = 0;
     var currentTime: CFTimeInterval = 0;
     
-    let gameBoard = GameBoard(tilesX: 65, tilesY: 40)
+    let gameBoard = GameBoard(tilesX: 80, tilesY: 60)
+
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
@@ -23,7 +24,8 @@ class GameScene: SKScene {
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5);
         
         self.addChild(gameBoard)
-        gameBoard.initialize()
+        gameBoard.initialize(CGSize(width: self.size.width - 15, height: self.size.height - 15))
+    
         
         gameBoard.position = CGPoint(x: -gameBoard.size.width / 2, y: -gameBoard.size.height / 2);
     }
@@ -41,6 +43,10 @@ class GameScene: SKScene {
             return;
         }
         
+        if(gameBoard.players.count < 1) {
+            return
+        }
+        
         if let c = theEvent.characters {
             if c.containsString("w") {
                 gameBoard.players[0].navigate(PlayerDirection.up)
@@ -51,6 +57,10 @@ class GameScene: SKScene {
             } else if c.containsString("d") {
                 gameBoard.players[0].navigate(PlayerDirection.right)
             }
+        }
+        
+        if(gameBoard.players.count < 2) {
+            return
         }
         
         switch(theEvent.keyCode) {

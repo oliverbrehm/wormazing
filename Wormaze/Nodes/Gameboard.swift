@@ -10,12 +10,14 @@ import Foundation
 import SpriteKit
 
 class GameBoard: SKNode {
-    static let tileSize: CGFloat = 15.0
-    static let growingTime = 5 // steps
+    static var tileSize: CGFloat = 15.0
+    static let growingTime = 10 // steps
     
     var players: [Player] = []
     var growTimer = 0 // steps
     var gameStarted = false
+    
+    var collectables: [Collectable] = []
     
     var timeOutStart = 0.0
     
@@ -39,9 +41,11 @@ class GameBoard: SKNode {
         
     }
     
-    func initialize()
+    func initialize(size: CGSize)
     {
-        self.size = CGSize(width: GameBoard.tileSize * CGFloat(tilesX), height: GameBoard.tileSize * CGFloat(tilesY))
+        self.size = size
+        GameBoard.tileSize = min(self.size.width / CGFloat(self.tilesX), self.size.height / CGFloat(self.tilesY))
+        self.size = CGSize(width: CGFloat(self.tilesX) * GameBoard.tileSize, height: CGFloat(self.tilesY) * GameBoard.tileSize)
         
         // frame
         let frame = SKSpriteNode(color: NSColor.greenColor(), size: self.size);
@@ -57,12 +61,12 @@ class GameBoard: SKNode {
         self.gameOverNode.alpha = 0.6
         
         // debug
-        let test1 = SKSpriteNode(color: SKColor.brownColor(), size: CGSize(width: 4, height: 4))
+        let test1 = SKSpriteNode(color: SKColor.brownColor(), size: CGSize(width: 5, height: 5))
         test1.position = CGPoint(x: 0.0, y: 0.0)
         test1.anchorPoint = CGPoint(x: 0.0, y: 0.0)
         self.addChild(test1)
         
-        let test2 = SKSpriteNode(color: SKColor.brownColor(), size: CGSize(width: 4, height: 4))
+        let test2 = SKSpriteNode(color: SKColor.brownColor(), size: CGSize(width: 5, height: 5))
         test2.position = CGPoint(x: self.size.width, y: self.size.height)
         test2.anchorPoint = CGPoint(x: 1.0, y: 1.0)
         self.addChild(test2)
@@ -90,11 +94,39 @@ class GameBoard: SKNode {
         
         let player2 = Player(x: 1, y: 20, color: SKColor.orangeColor(), gameBoard: self)
         self.players.append(player2)
+        
+        for collectable in self.collectables {
+            collectable.removeFromParent()
+        }
+        self.collectables.removeAll()
+        self.spawnItem()
     }
     
     func startGame()
     {
         gameStarted = true
+    }
+    
+    func spawnItem()
+    {
+        var x, y : Int
+        let maxTries = self.tilesX * self.tilesY
+        var tries = 0
+        
+        repeat {
+            x = Int(arc4random()) % self.tilesX
+            y = Int(arc4random()) % self.tilesY
+            tries++
+        } while(self.pointOccupied(x, y: y) && tries < maxTries)
+        
+        if(tries == maxTries) {
+            return
+        }
+        
+        let collectable = Collectable(x: x, y: y)
+        print("SPAWN(\(x),\(y))")
+        self.collectables.append(collectable)
+        self.addChild(collectable)
     }
     
     func gameOver(loser: Int)
@@ -114,6 +146,36 @@ class GameBoard: SKNode {
         gameOverNode.addChild(label)
         
         gameStarted = false
+    }
+    
+    func hitItem(x: Int, y: Int) -> Bool {
+        var toRemove : Collectable? = nil
+        
+        for collectable in self.collectables {
+            if(collectable.x == x && collectable.y == y) {
+                toRemove = collectable
+                break
+            }
+        }
+        
+        if(toRemove != nil) {
+            toRemove!.removeFromParent()
+            self.collectables.removeAtIndex(self.collectables.indexOf(toRemove!)!)
+            return true
+        }
+        
+        return false
+    }
+    
+    func pointOccupied(x: Int, y: Int) -> Bool
+    {
+        for player in self.players {
+            if(player.occupiesPoint(x, y: y)) {
+                return true
+            }
+        }
+        
+        return false
     }
     
     func update(currentTime: CFTimeInterval)
@@ -136,7 +198,7 @@ class GameBoard: SKNode {
             }
             
             if(grow) {
-                player.grow()
+                player.grow(1)
             }
         }
         
