@@ -12,15 +12,19 @@ import SpriteKit
 class Collectable: SKSpriteNode {
     var x, y: Int
     
+    var lastTime: CFTimeInterval = -1.0
+    
+    static let texture = SKTexture(imageNamed: "collectable")
+    
     init(x: Int, y: Int)
     {
         self.x = x
         self.y = y
         
-        super.init(texture: nil, color: NSColor.blueColor(), size: CGSize(width: GameBoard.tileSize, height: GameBoard.tileSize))
+        super.init(texture: Collectable.texture, color: NSColor.blueColor(), size: CGSize(width: GameBoard.tileSize, height: GameBoard.tileSize))
         
-        self.anchorPoint = CGPoint(x: 0.0, y: 0.0)
-        self.position = CGPoint(x: CGFloat(x) * GameBoard.tileSize, y: CGFloat(y) * GameBoard.tileSize);
+        self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        self.position = CGPoint(x: (CGFloat(x) + 0.5) * GameBoard.tileSize, y: (CGFloat(y) + 0.5) * GameBoard.tileSize);
         //self.zPosition = 0
     }
     
@@ -28,5 +32,15 @@ class Collectable: SKSpriteNode {
         self.x = 0
         self.y = 0
         super.init(coder: aDecoder)
+    }
+    
+    func update(time: CFTimeInterval) {
+        if(lastTime > 0.0) {
+            let dt = time - lastTime
+            let rotation = CGFloat(dt * 0.3 * M_PI)
+            self.zRotation += rotation
+        }
+        
+        lastTime = time
     }
 }
