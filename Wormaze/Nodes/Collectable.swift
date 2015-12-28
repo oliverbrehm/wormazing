@@ -23,6 +23,7 @@ class Collectable: SKSpriteNode {
         
         super.init(texture: Collectable.texture, color: NSColor.blueColor(), size: CGSize(width: GameBoard.tileSize, height: GameBoard.tileSize))
         
+        self.zPosition = GameScene.zPositions.Player
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         self.position = CGPoint(x: (CGFloat(x) + 0.5) * GameBoard.tileSize, y: (CGFloat(y) + 0.5) * GameBoard.tileSize);
         

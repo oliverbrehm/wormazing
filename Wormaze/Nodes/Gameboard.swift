@@ -21,14 +21,13 @@ class GameBoard: SKSpriteNode {
     var delegate : GameBoardDelegate?
     
     var players: [Player] = []
+    var player1: Player?
+    var player2: Player?
+    
     var growTimer = 0 // steps
     var gameStarted = false
     
     var collectables: [Collectable] = []
-    
-    var timeOutStart = 0.0
-    
-    let timeOutLenghth = 1.0
     
     var tilesX: Int = 0
     var tilesY: Int = 0
@@ -47,6 +46,7 @@ class GameBoard: SKSpriteNode {
     
     func initialize(size: CGSize)
     {
+        self.zPosition = GameScene.zPositions.Background
         self.size = size
         GameBoard.tileSize = Tile.texture.size().width
         
@@ -66,12 +66,6 @@ class GameBoard: SKSpriteNode {
         self.gameOverNode.zPosition = 10
     }
     
-    func restartGame(currentTime: CFTimeInterval) {
-        // TODO remove timeout, obsolete?
-        newGame()
-        startGame()
-    }
-    
     func newGame()
     {
         for player in self.players {
@@ -80,19 +74,31 @@ class GameBoard: SKSpriteNode {
         }
         
         self.players.removeAll()
+        player1 = nil
+        player2 = nil
         
         gameOverNode.removeFromParent()
-        let player1 = Player(x: 1, y: 3, color: SKColor.greenColor(), gameBoard: self)
-        self.players.append(player1)
-        
-        //let player2 = Player(x: 1, y: 20, color: SKColor.orangeColor(), gameBoard: self)
-        //self.players.append(player2)
         
         for collectable in self.collectables {
             collectable.removeFromParent()
         }
         self.collectables.removeAll()
         self.spawnItem()
+    }
+    
+    func addPlayer(id: Int) {
+        if(self.gameStarted) {
+            return
+        }
+        
+        if(id == 0) {
+            player1 = Player(x: 1, y: 3, color: SKColor.greenColor(), gameBoard: self)
+            self.players.append(player1!)
+        } else {// if(id == 1) {
+            player2 = Player(x: 1, y: self.tilesY - 4, color: SKColor.orangeColor(), gameBoard: self)
+            self.players.append(player2!)
+        }
+    
     }
     
     func startGame()
@@ -174,7 +180,6 @@ class GameBoard: SKSpriteNode {
             let player = players[i]
             if(player.step()) {
                 gameOver(i)
-                self.timeOutStart = currentTime
                 break
             }
             

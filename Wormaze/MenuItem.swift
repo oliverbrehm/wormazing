@@ -14,6 +14,7 @@ class MenuItem: SKSpriteNode {
     {
         super.init(texture: nil, color: SKColor.darkGrayColor(), size: size)
         self.name = name
+        self.zPosition = GameScene.zPositions.Menu
     }
 
     required init?(coder aDecoder: NSCoder) {

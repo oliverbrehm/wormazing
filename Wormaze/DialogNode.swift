@@ -14,9 +14,9 @@ class DialogNode: SKSpriteNode
     var items: [MenuItem] = []
     var focus: Int = 0
     
-    init()
+    init(size: CGSize, color: SKColor)
     {
-        super.init(texture: nil, color: SKColor.blackColor(), size: CGSizeZero)
+        super.init(texture: nil, color: color, size: CGSizeZero)
     }
 
     required init?(coder aDecoder: NSCoder) {

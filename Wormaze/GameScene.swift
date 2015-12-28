@@ -8,12 +8,30 @@
 
 import SpriteKit
 
+struct GameSceneZ
+{
+    let Background = CGFloat(0)
+    let Player = CGFloat(1)
+    let Menu = CGFloat(2)
+}
+
 protocol GameSceneDelegate
 {
     func gameSceneDidCancel()
 }
 
-class GameScene: SKScene, GameBoardDelegate, GameOverNodeDelegate {
+enum GameState
+{
+    case PrepareGame
+    case RunningGame
+    case GameOver
+}
+
+class GameScene: SKScene, GameBoardDelegate, GameOverNodeDelegate, PrepareGameNodeDelegate {
+    static let zPositions = GameSceneZ()
+    
+    var gameState = GameState.PrepareGame
+    
     static let stepTime: CFTimeInterval = 0.1
     
     var lastStepTime: CFTimeInterval = 0;
@@ -22,8 +40,7 @@ class GameScene: SKScene, GameBoardDelegate, GameOverNodeDelegate {
     let gameBoard = GameBoard()
     
     var gameOverNode: GameOverNode?
-    
-    var runningGame = false
+    var prepareGameNode: PrepareGameNode?
     
     var gameSceneDelegate: GameSceneDelegate?
     
@@ -40,9 +57,10 @@ class GameScene: SKScene, GameBoardDelegate, GameOverNodeDelegate {
         
         gameBoard.position = CGPoint(x: -gameBoard.size.width / 2.0, y: -gameBoard.size.height / 2.0);
         
-        gameOverNode = GameOverNode(delegate: self)
-        self.addChild(gameOverNode!)
-        gameOverNode!.initialize()
+        self.prepareGameNode = PrepareGameNode(size: CGSize(width: 400, height: 300), color: SKColor.blueColor())
+        self.addChild(self.prepareGameNode!)
+        self.prepareGameNode!.initialize()
+        self.prepareGameNode!.delegate = self
     }
     
     override func mouseDown(theEvent: NSEvent) {
@@ -52,7 +70,39 @@ class GameScene: SKScene, GameBoardDelegate, GameOverNodeDelegate {
     
     override func keyDown(theEvent: NSEvent) {
         
-        if(!runningGame) {
+        if(gameState == .PrepareGame) {
+            if(theEvent.keyCode == 0x24) {
+                self.prepareGameNode?.enterPressed()
+            }
+            if theEvent.modifierFlags.contains(NSEventModifierFlags.NumericPadKeyMask) {
+                if let theArrow = theEvent.charactersIgnoringModifiers, keyChar = theArrow.unicodeScalars.first?.value{
+                    switch Int(keyChar){
+                    case NSUpArrowFunctionKey:
+                        self.prepareGameNode?.arrowKeyPressed()
+                    case NSDownArrowFunctionKey:
+                        self.prepareGameNode?.arrowKeyPressed()
+                    case NSRightArrowFunctionKey:
+                        self.prepareGameNode?.arrowKeyPressed()
+                    case NSLeftArrowFunctionKey:
+                        self.prepareGameNode?.arrowKeyPressed()
+                    default:
+                        break
+                    }
+                }
+            }
+            
+            if let c = theEvent.characters {
+                if c.containsString("w") {
+                    self.prepareGameNode?.wasdPressed()
+                } else if c.containsString("a") {
+                    self.prepareGameNode?.wasdPressed()
+                } else if c.containsString("s") {
+                    self.prepareGameNode?.wasdPressed()
+                } else if c.containsString("d") {
+                    self.prepareGameNode?.wasdPressed()
+                }
+            }
+        } else if(gameState == .GameOver) {
             if(theEvent.keyCode == 0x24) {
                 gameOverNode?.acceptItem()
             }
@@ -73,42 +123,38 @@ class GameScene: SKScene, GameBoardDelegate, GameOverNodeDelegate {
                     }
                 }
             }
-        } else {
+        } else if(gameState == .RunningGame) {
             if(!gameBoard.gameStarted) {
                 return;
             }
             
-            if(gameBoard.players.count < 1) {
-                return
-            }
-            
-            if let c = theEvent.characters {
-                if c.containsString("w") {
-                    gameBoard.players[0].navigate(PlayerDirection.up)
-                } else if c.containsString("a") {
-                    gameBoard.players[0].navigate(PlayerDirection.left)
-                } else if c.containsString("s") {
-                    gameBoard.players[0].navigate(PlayerDirection.down)
-                } else if c.containsString("d") {
-                    gameBoard.players[0].navigate(PlayerDirection.right)
+            if(gameBoard.player1 != nil) {
+                if let c = theEvent.characters {
+                    if c.containsString("w") {
+                        gameBoard.player1?.navigate(PlayerDirection.up)
+                    } else if c.containsString("a") {
+                        gameBoard.player1?.navigate(PlayerDirection.left)
+                    } else if c.containsString("s") {
+                        gameBoard.player1?.navigate(PlayerDirection.down)
+                    } else if c.containsString("d") {
+                        gameBoard.player1?.navigate(PlayerDirection.right)
+                    }
                 }
             }
             
-            if(gameBoard.players.count < 2) {
-                return
-            }
-            
-            switch(theEvent.keyCode) {
-            case 123:
-                gameBoard.players[1].navigate(PlayerDirection.left)
-            case 124:
-                gameBoard.players[1].navigate(PlayerDirection.right)
-            case 125:
-                gameBoard.players[1].navigate(PlayerDirection.down)
-            case 126:
-                gameBoard.players[1].navigate(PlayerDirection.up)
-            default:
-                break
+            if(gameBoard.player2 != nil) {
+                switch(theEvent.keyCode) {
+                case 123:
+                    gameBoard.player2?.navigate(PlayerDirection.left)
+                case 124:
+                    gameBoard.player2?.navigate(PlayerDirection.right)
+                case 125:
+                    gameBoard.player2?.navigate(PlayerDirection.down)
+                case 126:
+                    gameBoard.player2?.navigate(PlayerDirection.up)
+                default:
+                    break
+                }
             }
         }
     }
@@ -126,17 +172,31 @@ class GameScene: SKScene, GameBoardDelegate, GameOverNodeDelegate {
         gameOverNode = GameOverNode(delegate: self)
         self.addChild(gameOverNode!)
         gameOverNode!.initialize()
-        self.runningGame = false
+        self.gameState = .GameOver
     }
     
     func gameOverNodeDidContinue() {
-        self.runningGame = true
-        self.gameBoard.restartGame(self.currentTime)
+        self.gameBoard.newGame()
         self.gameOverNode?.removeFromParent()
         self.gameOverNode = nil
+        self.prepareGameNode = PrepareGameNode(size: CGSize(width: 400, height: 300), color: SKColor.blueColor())
+        self.addChild(self.prepareGameNode!)
+        self.prepareGameNode!.initialize()
+        self.prepareGameNode!.delegate = self
+        self.gameState = .PrepareGame
     }
     
     func gameOverNodeDidCancel() {
         self.gameSceneDelegate?.gameSceneDidCancel()
+    }
+    
+    func prepareGameNodeAddedPlayer(id: Int) {
+        self.gameBoard.addPlayer(id)
+    }
+    
+    func prepareGameNodeDidContinue() {
+        self.gameBoard.startGame()
+        self.gameState = .RunningGame
+        self.prepareGameNode?.removeFromParent()
     }
 }

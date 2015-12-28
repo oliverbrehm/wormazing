@@ -26,6 +26,7 @@ class Tile : SKSpriteNode {
         
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         self.position = CGPoint(x: (CGFloat(x) + 0.5) * GameBoard.tileSize, y: (CGFloat(y) + 0.5) * GameBoard.tileSize);
+        self.zPosition = GameScene.zPositions.Player
         self.colorBlendFactor = 1.0
         
         switch(playerDirection) { // native sprite rotation pointing up

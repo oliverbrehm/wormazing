@@ -26,7 +26,7 @@ class MainMenu : DialogNode
     init(delegate: MainMenuDelegate?)
     {
         self.delegate = delegate
-        super.init()
+        super.init(size: CGSize(width: 400.0, height: 300.0), color: SKColor(calibratedRed: 1.0, green: 1.0, blue: 1.0, alpha: 0.5))
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
     }
     
@@ -48,7 +48,7 @@ class MainMenu : DialogNode
         testButton.initialize()
     }
     
-    convenience override init()
+    convenience init()
     {
         self.init(delegate: nil)
     }
