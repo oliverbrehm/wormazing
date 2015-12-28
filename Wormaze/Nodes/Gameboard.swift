@@ -9,9 +9,16 @@
 import Foundation
 import SpriteKit
 
+protocol GameBoardDelegate
+{
+    func gameBoardGameOver()
+}
+
 class GameBoard: SKSpriteNode {
     static var tileSize: CGFloat = 15.0
     static let growingTime = 10 // steps
+    
+    var delegate : GameBoardDelegate?
     
     var players: [Player] = []
     var growTimer = 0 // steps
@@ -41,7 +48,7 @@ class GameBoard: SKSpriteNode {
     func initialize(size: CGSize)
     {
         self.size = size
-        GameBoard.tileSize = PlayerTile.texture.size().width
+        GameBoard.tileSize = Tile.texture.size().width
         
         self.anchorPoint = CGPoint(x: 0.0, y: 0.0)
         
@@ -59,11 +66,10 @@ class GameBoard: SKSpriteNode {
         self.gameOverNode.zPosition = 10
     }
     
-    func anyKeyHit(currentTime: CFTimeInterval) {
-        if(!gameStarted && currentTime > self.timeOutStart + self.timeOutLenghth) {
-            newGame()
-            startGame()
-        }
+    func restartGame(currentTime: CFTimeInterval) {
+        // TODO remove timeout, obsolete?
+        newGame()
+        startGame()
     }
     
     func newGame()
@@ -118,19 +124,7 @@ class GameBoard: SKSpriteNode {
     
     func gameOver(loser: Int)
     {
-        gameOverNode.removeAllChildren()
-        self.addChild(gameOverNode)
-        
-        let label : SKLabelNode
-
-        if(loser == 1) {
-            label = SKLabelNode(text: "Green wins!")
-        } else {
-            label = SKLabelNode(text: "Orange wins!")
-        }
-        
-        label.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2)
-        gameOverNode.addChild(label)
+        self.delegate?.gameBoardGameOver()
         
         gameStarted = false
     }
@@ -163,13 +157,6 @@ class GameBoard: SKSpriteNode {
         }
         
         return false
-    }
-    
-    func update(time: CFTimeInterval)
-    {
-        for collectable in self.collectables {
-            collectable.update(time)
-        }
     }
     
     func updateStep(currentTime: CFTimeInterval)

@@ -25,7 +25,8 @@ class Collectable: SKSpriteNode {
         
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         self.position = CGPoint(x: (CGFloat(x) + 0.5) * GameBoard.tileSize, y: (CGFloat(y) + 0.5) * GameBoard.tileSize);
-        //self.zPosition = 0
+        
+        self.runAction(SKAction.repeatActionForever(SKAction.rotateByAngle(CGFloat(2 * M_PI), duration: 4.0)))
     }
     
     required init?(coder aDecoder: NSCoder) {

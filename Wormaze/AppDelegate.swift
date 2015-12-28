@@ -11,18 +11,41 @@ import Cocoa
 import SpriteKit
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, MenuSceneDelegate, GameSceneDelegate {
     
     @IBOutlet weak var window: NSWindow!
     @IBOutlet weak var skView: SKView!
     
+    var menuScene : MenuScene?
+    
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         /* Pick a size for the scene */
+        menuScene = MenuScene(menuDelegate: self)
+        self.skView!.presentScene(menuScene)
+    }
+    
+    func applicationShouldTerminateAfterLastWindowClosed(sender: NSApplication) -> Bool {
+        return true
+    }
+    
+    func menuSceneDidCancel() {
+        
+    }
+    
+    func gameSceneDidCancel() {
+        // TODO why doesn't resuing the old scene do anything...
+        //self.skView!.presentScene(self.menuScene!, transition: SKTransition.crossFadeWithDuration(0.5))
+        let m = MenuScene(menuDelegate: self)
+        self.skView!.presentScene(m, transition: SKTransition.crossFadeWithDuration(0.5))
+    }
+    
+    func menuSceneDidStartGame() {
+        /* Set the scale mode to scale to fit the window */
         if let scene = GameScene(fileNamed:"GameScene") {
-            /* Set the scale mode to scale to fit the window */
             scene.scaleMode = .Fill
-            
-            self.skView!.presentScene(scene)
+            scene.gameSceneDelegate = self
+                        
+            self.skView!.presentScene(scene, transition: SKTransition.crossFadeWithDuration(0.5))
             
             /* Sprite Kit applies additional optimizations to improve rendering performance */
             self.skView!.ignoresSiblingOrder = true
@@ -30,9 +53,5 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             self.skView!.showsFPS = true
             self.skView!.showsNodeCount = true
         }
-    }
-    
-    func applicationShouldTerminateAfterLastWindowClosed(sender: NSApplication) -> Bool {
-        return true
     }
 }
