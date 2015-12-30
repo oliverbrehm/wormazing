@@ -21,8 +21,6 @@ class GameBoard: SKSpriteNode {
     var delegate : GameBoardDelegate?
     
     var players: [Player] = []
-    var player1: Player?
-    var player2: Player?
     
     var growTimer = 0 // steps
     var gameStarted = false
@@ -74,8 +72,6 @@ class GameBoard: SKSpriteNode {
         }
         
         self.players.removeAll()
-        player1 = nil
-        player2 = nil
         
         gameOverNode.removeFromParent()
         
@@ -83,26 +79,35 @@ class GameBoard: SKSpriteNode {
             collectable.removeFromParent()
         }
         self.collectables.removeAll()
-        self.spawnItem()
     }
     
-    func addPlayer(id: Int) {
+    func addPlayer() -> Player? {
         if(self.gameStarted) {
-            return
+            return nil
         }
         
-        if(id == 0) {
-            player1 = Player(x: 1, y: 3, color: SKColor.greenColor(), gameBoard: self)
-            self.players.append(player1!)
-        } else {// if(id == 1) {
-            player2 = Player(x: 1, y: self.tilesY - 4, color: SKColor.orangeColor(), gameBoard: self)
-            self.players.append(player2!)
+        let color : SKColor
+        if(players.count == 0) {
+            color = SKColor.orangeColor()
+        } else if(players.count == 1) {
+            color = SKColor.blueColor()
+        } else if(players.count == 2) {
+            color = SKColor.purpleColor()
+        } else {
+            color = SKColor.greenColor()
         }
-    
+        
+        let player = Player(x:  3, y: (self.players.count + 1) * 5, color: color, gameBoard: self)
+        
+        self.players.append(player)
+        
+        return player
     }
     
     func startGame()
     {
+        self.spawnItem()
+
         gameStarted = true
     }
     
@@ -128,7 +133,7 @@ class GameBoard: SKSpriteNode {
         self.addChild(collectable)
     }
     
-    func gameOver(loser: Int)
+    func gameOver()
     {
         self.delegate?.gameBoardGameOver()
         
@@ -165,6 +170,18 @@ class GameBoard: SKSpriteNode {
         return false
     }
     
+    func numberOfAlivePlayers() -> Int
+    {
+        var n = 0
+        for player in self.players {
+            if(player.isAlive) {
+                n++
+            }
+        }
+        
+        return n
+    }
+    
     func updateStep(currentTime: CFTimeInterval)
     {
         if(!gameStarted) {
@@ -178,13 +195,20 @@ class GameBoard: SKSpriteNode {
         
         for(var i = 0; i < players.count; i++) {
             let player = players[i]
-            if(player.step()) {
-                gameOver(i)
-                break
-            }
-            
-            if(grow) {
-                player.grow(1)
+            if(player.isAlive) {
+                if(player.step()) {
+                    player.gameOver()
+                    
+                    if(numberOfAlivePlayers() < 1) {
+                        gameOver()
+                        break
+                    }
+                    
+                }
+                
+                if(grow) {
+                    player.grow(1)
+                }
             }
         }
         

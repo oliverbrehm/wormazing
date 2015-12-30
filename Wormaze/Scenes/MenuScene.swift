@@ -30,6 +30,7 @@ class MenuScene: SKScene, MainMenuDelegate {
         super.init(size: CGSize(width: 800, height: 600))
         self.backgroundColor = SKColor.redColor()
         self.mainMenu.delegate = self
+        self.mainMenu.size = self.size
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
     }
 

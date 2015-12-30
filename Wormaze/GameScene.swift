@@ -27,7 +27,7 @@ enum GameState
     case GameOver
 }
 
-class GameScene: SKScene, GameBoardDelegate, GameOverNodeDelegate, PrepareGameNodeDelegate {
+class GameScene: SKScene, GameBoardDelegate, GameOverNodeDelegate, PrepareGameNodeDelegate, GameControllerDelegate {
     static let zPositions = GameSceneZ()
     
     var gameState = GameState.PrepareGame
@@ -44,6 +44,10 @@ class GameScene: SKScene, GameBoardDelegate, GameOverNodeDelegate, PrepareGameNo
     
     var gameSceneDelegate: GameSceneDelegate?
     
+    let wasdController = GameController()
+    let hbnmController = GameController()
+    let arrowController = GameController()
+    
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
         self.backgroundColor = SKColor(SRGBRed: 0.8, green: 0.5, blue: 0.0, alpha: 1.0)
@@ -57,10 +61,14 @@ class GameScene: SKScene, GameBoardDelegate, GameOverNodeDelegate, PrepareGameNo
         
         gameBoard.position = CGPoint(x: -gameBoard.size.width / 2.0, y: -gameBoard.size.height / 2.0);
         
-        self.prepareGameNode = PrepareGameNode(size: CGSize(width: 400, height: 300), color: SKColor.blueColor())
+        self.prepareGameNode = PrepareGameNode(size: CGSize(width: self.size.width, height: self.size.height), color: SKColor(calibratedWhite: 1.0, alpha: 0.3))
         self.addChild(self.prepareGameNode!)
         self.prepareGameNode!.initialize()
         self.prepareGameNode!.delegate = self
+        
+        self.wasdController.delegate = self
+        self.hbnmController.delegate = self
+        self.arrowController.delegate = self
     }
     
     override func mouseDown(theEvent: NSEvent) {
@@ -70,97 +78,66 @@ class GameScene: SKScene, GameBoardDelegate, GameOverNodeDelegate, PrepareGameNo
     
     override func keyDown(theEvent: NSEvent) {
         
-        if(gameState == .PrepareGame) {
-            if(theEvent.keyCode == 0x24) {
+        if(theEvent.keyCode == 0x24) {
+            // enter key
+            switch self.gameState
+            {
+            case .PrepareGame:
                 self.prepareGameNode?.enterPressed()
+            case .GameOver:
+                self.gameOverNode?.acceptItem()
+            default:
+                break
             }
-            if theEvent.modifierFlags.contains(NSEventModifierFlags.NumericPadKeyMask) {
-                if let theArrow = theEvent.charactersIgnoringModifiers, keyChar = theArrow.unicodeScalars.first?.value{
-                    switch Int(keyChar){
-                    case NSUpArrowFunctionKey:
-                        self.prepareGameNode?.arrowKeyPressed()
-                    case NSDownArrowFunctionKey:
-                        self.prepareGameNode?.arrowKeyPressed()
-                    case NSRightArrowFunctionKey:
-                        self.prepareGameNode?.arrowKeyPressed()
-                    case NSLeftArrowFunctionKey:
-                        self.prepareGameNode?.arrowKeyPressed()
-                    default:
-                        break
-                    }
-                }
-            }
-            
-            if let c = theEvent.characters {
-                if c.containsString("w") {
-                    self.prepareGameNode?.wasdPressed()
-                } else if c.containsString("a") {
-                    self.prepareGameNode?.wasdPressed()
-                } else if c.containsString("s") {
-                    self.prepareGameNode?.wasdPressed()
-                } else if c.containsString("d") {
-                    self.prepareGameNode?.wasdPressed()
-                }
-            }
-        } else if(gameState == .GameOver) {
-            if(theEvent.keyCode == 0x24) {
-                gameOverNode?.acceptItem()
-            }
-            
-            if theEvent.modifierFlags.contains(NSEventModifierFlags.NumericPadKeyMask) {
-                if let theArrow = theEvent.charactersIgnoringModifiers, keyChar = theArrow.unicodeScalars.first?.value{
-                    switch Int(keyChar){
-                    case NSUpArrowFunctionKey:
-                        gameOverNode?.selectPreviousItem()
-                    case NSDownArrowFunctionKey:
-                        gameOverNode?.selectNextItem()
-                    case NSRightArrowFunctionKey:
-                        gameOverNode?.selectNextItem()
-                    case NSLeftArrowFunctionKey:
-                        gameOverNode?.selectPreviousItem()
-                    default:
-                        break
-                    }
-                }
-            }
-        } else if(gameState == .RunningGame) {
-            if(!gameBoard.gameStarted) {
-                return;
-            }
-            
-            if(gameBoard.player1 != nil) {
-                if let c = theEvent.characters {
-                    if c.containsString("w") {
-                        gameBoard.player1?.navigate(PlayerDirection.up)
-                    } else if c.containsString("a") {
-                        gameBoard.player1?.navigate(PlayerDirection.left)
-                    } else if c.containsString("s") {
-                        gameBoard.player1?.navigate(PlayerDirection.down)
-                    } else if c.containsString("d") {
-                        gameBoard.player1?.navigate(PlayerDirection.right)
-                    }
-                }
-            }
-            
-            if(gameBoard.player2 != nil) {
-                switch(theEvent.keyCode) {
-                case 123:
-                    gameBoard.player2?.navigate(PlayerDirection.left)
-                case 124:
-                    gameBoard.player2?.navigate(PlayerDirection.right)
-                case 125:
-                    gameBoard.player2?.navigate(PlayerDirection.down)
-                case 126:
-                    gameBoard.player2?.navigate(PlayerDirection.up)
+        }
+        
+        if theEvent.modifierFlags.contains(NSEventModifierFlags.NumericPadKeyMask) {
+            if let theArrow = theEvent.charactersIgnoringModifiers, keyChar = theArrow.unicodeScalars.first?.value{
+                
+                // arrow keys controller
+                switch Int(keyChar){
+                case NSUpArrowFunctionKey:
+                    self.arrowController.keyDown(.up)
+                case NSDownArrowFunctionKey:
+                    self.arrowController.keyDown(.down)
+                case NSRightArrowFunctionKey:
+                    self.arrowController.keyDown(.right)
+                case NSLeftArrowFunctionKey:
+                    self.arrowController.keyDown(.left)
                 default:
                     break
                 }
+            }
+        }
+            
+        if let c = theEvent.characters {
+            // wasd controller
+            if c.containsString("w") {
+                self.wasdController.keyDown(.up)
+            } else if c.containsString("a") {
+                self.wasdController.keyDown(.left)
+            } else if c.containsString("s") {
+                self.wasdController.keyDown(.down)
+            } else if c.containsString("d") {
+                self.wasdController.keyDown(.right)
+            }
+            
+            // hbnm controller
+            if c.containsString("h") {
+                self.hbnmController.keyDown(.up)
+            } else if c.containsString("b") {
+                self.hbnmController.keyDown(.left)
+            } else if c.containsString("n") {
+                self.hbnmController.keyDown(.down)
+            } else if c.containsString("m") {
+                self.hbnmController.keyDown(.right)
             }
         }
     }
     
     override func update(currentTime: CFTimeInterval) {        
         self.currentTime = currentTime;
+                
         if(currentTime > lastStepTime + GameScene.stepTime) {
             lastStepTime = currentTime
             gameBoard.updateStep(currentTime)
@@ -170,33 +147,53 @@ class GameScene: SKScene, GameBoardDelegate, GameOverNodeDelegate, PrepareGameNo
     
     func gameBoardGameOver() {
         gameOverNode = GameOverNode(delegate: self)
+        self.gameOverNode?.size = self.size
         self.addChild(gameOverNode!)
         gameOverNode!.initialize()
         self.gameState = .GameOver
+        
+        self.wasdController.assignDialog(self.gameOverNode)
+        self.arrowController.assignDialog(self.gameOverNode)
+        self.hbnmController.assignDialog(self.gameOverNode)
     }
     
     func gameOverNodeDidContinue() {
         self.gameBoard.newGame()
         self.gameOverNode?.removeFromParent()
         self.gameOverNode = nil
-        self.prepareGameNode = PrepareGameNode(size: CGSize(width: 400, height: 300), color: SKColor.blueColor())
+        self.prepareGameNode = PrepareGameNode(size: CGSize(width: self.size.width, height: self.size.height), color: SKColor(calibratedWhite: 1.0, alpha: 0.3))
         self.addChild(self.prepareGameNode!)
         self.prepareGameNode!.initialize()
         self.prepareGameNode!.delegate = self
         self.gameState = .PrepareGame
+        
+        self.wasdController.removeControl()
+        self.hbnmController.removeControl()
+        self.arrowController.removeControl()
     }
     
     func gameOverNodeDidCancel() {
         self.gameSceneDelegate?.gameSceneDidCancel()
     }
     
-    func prepareGameNodeAddedPlayer(id: Int) {
-        self.gameBoard.addPlayer(id)
-    }
-    
     func prepareGameNodeDidContinue() {
         self.gameBoard.startGame()
         self.gameState = .RunningGame
         self.prepareGameNode?.removeFromParent()
+    }
+    
+    func gameControllerNotAssigned(controller: GameController) {
+        if(self.gameState == .PrepareGame) {
+            let player = self.gameBoard.addPlayer()
+            controller.assignPlayer(player)
+            
+            if(controller === wasdController) {
+                self.prepareGameNode?.wasdPressed(player!.color)
+            } else if(controller === arrowController) {
+                self.prepareGameNode?.arrowKeyPressed(player!.color)
+            } else if(controller === hbnmController) {
+                self.prepareGameNode?.hbnmPressed(player!.color)
+            }
+        }
     }
 }

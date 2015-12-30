@@ -12,6 +12,7 @@ import SpriteKit
 class Tile : SKSpriteNode {
     var x, y : Int
     let predecessor : Tile?
+    var dead = false
     
     static let texture = SKTexture(imageNamed: "playerTile")
     static let headTexture = SKTexture(imageNamed: "playerHead")
@@ -43,6 +44,15 @@ class Tile : SKSpriteNode {
     
     func makeTail() {
         self.texture = Tile.tailTexture
+    }
+    
+    func die(delay: NSTimeInterval) {
+        let delayAction = SKAction.waitForDuration(delay)
+        let colorizeAction = SKAction.colorizeWithColor(SKColor.blackColor(), colorBlendFactor: 1.0, duration: 0.2)
+        
+        self.runAction(SKAction.sequence([delayAction, colorizeAction]))
+        
+        self.dead = true
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -122,5 +132,29 @@ class PlayerTiles
         }
         
         return tiles[current]
+    }
+    
+    func die()
+    {
+        if(self.tiles.count < 1) {
+            return
+        }
+        
+        var delay = 0.0
+        
+        for(var i = current - 1;;) {
+            if(i < 0) {
+                i = self.tiles.count - 1
+            }
+            
+            let tile = self.tiles[i]
+            tile.die(delay)
+            delay += 0.04
+            
+            i--
+            if(i == current - 1) {
+                break
+            }
+        }
     }
 }

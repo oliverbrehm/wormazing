@@ -16,7 +16,8 @@ class DialogNode: SKSpriteNode
     
     init(size: CGSize, color: SKColor)
     {
-        super.init(texture: nil, color: color, size: CGSizeZero)
+        super.init(texture: nil, color: color, size: size)
+        self.zPosition = GameScene.zPositions.Menu
     }
 
     required init?(coder aDecoder: NSCoder) {

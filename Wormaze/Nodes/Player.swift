@@ -20,6 +20,7 @@ class Player: SKNode {
     let gameBoard: GameBoard
     let color: SKColor
     var didNavigate = false
+    var isAlive = true
     
     required init?(coder aDecoder: NSCoder) {
         gameBoard = GameBoard()
@@ -40,6 +41,12 @@ class Player: SKNode {
     func moveTo(x: Int, y: Int) {
         print("moveTo \(x), \(y)")
         self.gameBoard.addChild(self.tiles.addTile(x, y: y, color: self.color, playerDirection: self.nextDirection))
+    }
+    
+    func gameOver()
+    {
+        self.isAlive = false
+        self.tiles.die()
     }
     
     func grow(size: Int)
@@ -119,7 +126,7 @@ class Player: SKNode {
     
     func navigate(playerDirection : PlayerDirection)
     {
-        if(didNavigate) {
+        if(didNavigate || !self.gameBoard.gameStarted) {
             return;
         }
         

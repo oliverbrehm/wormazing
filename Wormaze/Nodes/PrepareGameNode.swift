@@ -11,14 +11,13 @@ import SpriteKit
 
 protocol PrepareGameNodeDelegate
 {
-    func prepareGameNodeAddedPlayer(id: Int)
     func prepareGameNodeDidContinue()
 }
 
 class PrepareGameNode: DialogNode {
     var delegate: PrepareGameNodeDelegate?
     
-    var text, player1, player2: SKLabelNode?
+    var text, player1, player2, player3: SKLabelNode?
     
     var playerJoined = false
     
@@ -28,38 +27,55 @@ class PrepareGameNode: DialogNode {
         text!.position = CGPoint(x: -0.0, y: 100.0)
         text!.fontColor = SKColor.blackColor()
         self.addChild(text!)
+        text?.hidden = true
         
         player1 = SKLabelNode(fontNamed: "Chalkduster")
         player1!.color = SKColor.greenColor()
         player1!.text = "Press WASD to join"
-        player1!.position = CGPoint(x: -200.0, y: 0.0)
-        player1!.fontColor = SKColor.greenColor()
+        player1!.position = CGPoint(x: -0.0, y: 0.0)
+        player1!.fontColor = SKColor.whiteColor()
         player1!.fontSize = 18
         self.addChild(player1!)
         
         player2 = SKLabelNode(fontNamed: "Chalkduster")
         player2!.color = SKColor.orangeColor()
         player2!.text = "Press arrow keys to join"
-        player2!.position = CGPoint(x: 200.0, y: 0.0)
-        player2!.fontColor = SKColor.orangeColor()
+        player2!.position = CGPoint(x: 0.0, y: -100.0)
+        player2!.fontColor = SKColor.whiteColor()
         player2!.fontSize = 18
         self.addChild(player2!)
+        
+        player3 = SKLabelNode(fontNamed: "Chalkduster")
+        player3!.color = SKColor.orangeColor()
+        player3!.text = "Press HBNM to join"
+        player3!.position = CGPoint(x: 0.0, y: -200.0)
+        player3!.fontColor = SKColor.whiteColor()
+        player3!.fontSize = 18
+        self.addChild(player3!)
     }
     
-    func wasdPressed()
+    func wasdPressed(color: SKColor)
     {
-        player1?.text = "OK"
-        //player1?.fontColor = SKColor.whiteColor()
-        self.delegate?.prepareGameNodeAddedPlayer(0)
+        player1?.text = "WASD ready..."
+        player1?.fontColor = color
         playerJoined = true
+        text?.hidden = false
     }
     
-    func arrowKeyPressed()
+    func arrowKeyPressed(color: SKColor)
     {
-        player2?.text = "OK"
-        //player2?.fontColor = SKColor.whiteColor()
-        self.delegate?.prepareGameNodeAddedPlayer(1)
+        player2?.text = "Arrow keys ready..."
+        player2?.fontColor = color
         playerJoined = true
+        text?.hidden = false
+    }
+    
+    func hbnmPressed(color: SKColor)
+    {
+        player3?.text = "HBNM ready..."
+        player3?.fontColor = color
+        playerJoined = true
+        text?.hidden = false
     }
     
     func enterPressed()
