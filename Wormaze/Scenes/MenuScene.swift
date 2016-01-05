@@ -45,32 +45,6 @@ class MenuScene: SKScene, MainMenuDelegate {
         self.mainMenu.initialize()
     }
     
-    override func mouseDown(theEvent: NSEvent) {
-    }
-    
-    override func keyDown(theEvent: NSEvent) {
-        if(theEvent.keyCode == 0x24) {
-            mainMenu.acceptItem()
-        }
-        
-        if theEvent.modifierFlags.contains(NSEventModifierFlags.NumericPadKeyMask) {
-            if let theArrow = theEvent.charactersIgnoringModifiers, keyChar = theArrow.unicodeScalars.first?.value{
-                switch Int(keyChar){
-                case NSUpArrowFunctionKey:
-                    mainMenu.selectPreviousItem()
-                case NSDownArrowFunctionKey:
-                    mainMenu.selectNextItem()
-                case NSRightArrowFunctionKey:
-                    mainMenu.selectNextItem()
-                case NSLeftArrowFunctionKey:
-                    mainMenu.selectPreviousItem()
-                default:
-                    break
-                }
-            }
-        }
-    }
-    
     override func update(currentTime: CFTimeInterval) {
 
     }

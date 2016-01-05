@@ -20,7 +20,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, MenuSceneDelegate, GameScene
     
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         /* Pick a size for the scene */
-        menuScene = MenuScene(menuDelegate: self)
+        menuScene = MenuSceneOsx(menuDelegate: self)
         self.skView!.presentScene(menuScene)
     }
     
@@ -35,13 +35,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, MenuSceneDelegate, GameScene
     func gameSceneDidCancel() {
         // TODO why doesn't resuing the old scene do anything...
         //self.skView!.presentScene(self.menuScene!, transition: SKTransition.crossFadeWithDuration(0.5))
-        let m = MenuScene(menuDelegate: self)
+        let m = MenuSceneOsx(menuDelegate: self)
         self.skView!.presentScene(m, transition: SKTransition.crossFadeWithDuration(0.5))
     }
     
     func menuSceneDidStartGame() {
         /* Set the scale mode to scale to fit the window */
-        if let scene = GameScene(fileNamed:"GameScene") {
+        if let scene = GameSceneOsx(fileNamed:"GameScene") {
             scene.scaleMode = .Fill
             scene.gameSceneDelegate = self
                         

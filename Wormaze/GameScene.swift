@@ -50,7 +50,7 @@ class GameScene: SKScene, GameBoardDelegate, GameOverNodeDelegate, PrepareGameNo
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
-        self.backgroundColor = SKColor(SRGBRed: 0.8, green: 0.5, blue: 0.0, alpha: 1.0)
+        self.backgroundColor = SKColor(red: 0.8, green: 0.5, blue: 0.0, alpha: 1.0)
         
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5);
         
@@ -61,7 +61,7 @@ class GameScene: SKScene, GameBoardDelegate, GameOverNodeDelegate, PrepareGameNo
         
         gameBoard.position = CGPoint(x: -gameBoard.size.width / 2.0, y: -gameBoard.size.height / 2.0);
         
-        self.prepareGameNode = PrepareGameNode(size: CGSize(width: self.size.width, height: self.size.height), color: SKColor(calibratedWhite: 1.0, alpha: 0.3))
+        self.prepareGameNode = PrepareGameNode(size: CGSize(width: self.size.width, height: self.size.height), color: SKColor(white: 1.0, alpha: 0.3))
         self.addChild(self.prepareGameNode!)
         self.prepareGameNode!.initialize()
         self.prepareGameNode!.delegate = self
@@ -71,69 +71,7 @@ class GameScene: SKScene, GameBoardDelegate, GameOverNodeDelegate, PrepareGameNo
         self.arrowController.delegate = self
     }
     
-    override func mouseDown(theEvent: NSEvent) {
-        /* Called when a mouse click occurs */
-        
-    }
-    
-    override func keyDown(theEvent: NSEvent) {
-        
-        if(theEvent.keyCode == 0x24) {
-            // enter key
-            switch self.gameState
-            {
-            case .PrepareGame:
-                self.prepareGameNode?.enterPressed()
-            case .GameOver:
-                self.gameOverNode?.acceptItem()
-            default:
-                break
-            }
-        }
-        
-        if theEvent.modifierFlags.contains(NSEventModifierFlags.NumericPadKeyMask) {
-            if let theArrow = theEvent.charactersIgnoringModifiers, keyChar = theArrow.unicodeScalars.first?.value{
-                
-                // arrow keys controller
-                switch Int(keyChar){
-                case NSUpArrowFunctionKey:
-                    self.arrowController.keyDown(.up)
-                case NSDownArrowFunctionKey:
-                    self.arrowController.keyDown(.down)
-                case NSRightArrowFunctionKey:
-                    self.arrowController.keyDown(.right)
-                case NSLeftArrowFunctionKey:
-                    self.arrowController.keyDown(.left)
-                default:
-                    break
-                }
-            }
-        }
-            
-        if let c = theEvent.characters {
-            // wasd controller
-            if c.containsString("w") {
-                self.wasdController.keyDown(.up)
-            } else if c.containsString("a") {
-                self.wasdController.keyDown(.left)
-            } else if c.containsString("s") {
-                self.wasdController.keyDown(.down)
-            } else if c.containsString("d") {
-                self.wasdController.keyDown(.right)
-            }
-            
-            // hbnm controller
-            if c.containsString("h") {
-                self.hbnmController.keyDown(.up)
-            } else if c.containsString("b") {
-                self.hbnmController.keyDown(.left)
-            } else if c.containsString("n") {
-                self.hbnmController.keyDown(.down)
-            } else if c.containsString("m") {
-                self.hbnmController.keyDown(.right)
-            }
-        }
-    }
+
     
     override func update(currentTime: CFTimeInterval) {        
         self.currentTime = currentTime;
@@ -141,7 +79,8 @@ class GameScene: SKScene, GameBoardDelegate, GameOverNodeDelegate, PrepareGameNo
         if(currentTime > lastStepTime + GameScene.stepTime) {
             lastStepTime = currentTime
             gameBoard.updateStep(currentTime)
-            CGDisplayHideCursor(0)
+            // TODO
+            //CGDisplayHideCursor(0)
         }
     }
     
@@ -161,7 +100,7 @@ class GameScene: SKScene, GameBoardDelegate, GameOverNodeDelegate, PrepareGameNo
         self.gameBoard.newGame()
         self.gameOverNode?.removeFromParent()
         self.gameOverNode = nil
-        self.prepareGameNode = PrepareGameNode(size: CGSize(width: self.size.width, height: self.size.height), color: SKColor(calibratedWhite: 1.0, alpha: 0.3))
+        self.prepareGameNode = PrepareGameNode(size: CGSize(width: self.size.width, height: self.size.height), color: SKColor(white: 1.0, alpha: 0.3))
         self.addChild(self.prepareGameNode!)
         self.prepareGameNode!.initialize()
         self.prepareGameNode!.delegate = self

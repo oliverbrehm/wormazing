@@ -30,7 +30,7 @@ class GameBoard: SKSpriteNode {
     var tilesX: Int = 0
     var tilesY: Int = 0
     
-    let gameOverNode = SKSpriteNode(color: NSColor.redColor(), size: CGSize(width: 0.0 ,height: 0.0))
+    let gameOverNode = SKSpriteNode(color: SKColor.redColor(), size: CGSize(width: 0.0 ,height: 0.0))
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -39,7 +39,7 @@ class GameBoard: SKSpriteNode {
     init() {
         self.tilesX = 0
         self.tilesY = 0
-        super.init(texture: nil, color: SKColor(calibratedRed: 0.0, green: 0.5, blue: 0.0, alpha: 1.0), size: CGSizeZero)
+        super.init(texture: nil, color: SKColor(red: 0.0, green: 0.5, blue: 0.0, alpha: 1.0), size: CGSizeZero)
     }
     
     func initialize(size: CGSize)

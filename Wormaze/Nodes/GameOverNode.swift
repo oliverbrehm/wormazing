@@ -22,7 +22,7 @@ class GameOverNode : DialogNode
     init(delegate: GameOverNodeDelegate?)
     {
         self.delegate = delegate
-        super.init(size: CGSize(width: 400.0, height: 300.0), color: SKColor(calibratedRed: 1.0, green: 1.0, blue: 1.0, alpha: 0.3))
+        super.init(size: CGSize(width: 400.0, height: 300.0), color: SKColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.3))
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
     }
     

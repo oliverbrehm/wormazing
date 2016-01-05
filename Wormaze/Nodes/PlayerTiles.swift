@@ -59,7 +59,7 @@ class Tile : SKSpriteNode {
         self.x = 0
         self.y = 0
         self.predecessor = Tile(coder: aDecoder)!
-        super.init(texture: nil, color: NSColor.blackColor(), size: CGSizeZero)
+        super.init(texture: nil, color: SKColor.blackColor(), size: CGSizeZero)
     }
     
     func rotateLeft() {
