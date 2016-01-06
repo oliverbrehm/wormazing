@@ -17,7 +17,7 @@ protocol PrepareGameNodeDelegate
 class PrepareGameNode: DialogNode {
     var delegate: PrepareGameNodeDelegate?
     
-    var text, player1, player2, player3: SKLabelNode?
+    var text, player1, player2, player3, player4: SKLabelNode?
     
     var playerJoined = false
     
@@ -52,6 +52,14 @@ class PrepareGameNode: DialogNode {
         player3!.fontColor = SKColor.whiteColor()
         player3!.fontSize = 18
         self.addChild(player3!)
+        
+        player4 = SKLabelNode(fontNamed: "Chalkduster")
+        player4!.color = SKColor.orangeColor()
+        player4!.text = "Add remote"
+        player4!.position = CGPoint(x: 0.0, y: -300.0)
+        player4!.fontColor = SKColor.whiteColor()
+        player4!.fontSize = 18
+        self.addChild(player4!)
     }
     
     func wasdPressed(color: SKColor)
@@ -74,6 +82,13 @@ class PrepareGameNode: DialogNode {
     {
         player3?.text = "HBNM ready..."
         player3?.fontColor = color
+        playerJoined = true
+        text?.hidden = false
+    }
+    
+    func remoteAdded(color: SKColor) {
+        player4?.text = "Remote ready..."
+        player4?.fontColor = color
         playerJoined = true
         text?.hidden = false
     }

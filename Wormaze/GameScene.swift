@@ -47,6 +47,7 @@ class GameScene: SKScene, GameBoardDelegate, GameOverNodeDelegate, PrepareGameNo
     let wasdController = GameController()
     let hbnmController = GameController()
     let arrowController = GameController()
+    let remotControl = GameController()
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
@@ -69,6 +70,7 @@ class GameScene: SKScene, GameBoardDelegate, GameOverNodeDelegate, PrepareGameNo
         self.wasdController.delegate = self
         self.hbnmController.delegate = self
         self.arrowController.delegate = self
+        self.remotControl.delegate = self
     }
     
 
@@ -94,6 +96,7 @@ class GameScene: SKScene, GameBoardDelegate, GameOverNodeDelegate, PrepareGameNo
         self.wasdController.assignDialog(self.gameOverNode)
         self.arrowController.assignDialog(self.gameOverNode)
         self.hbnmController.assignDialog(self.gameOverNode)
+        self.remotControl.assignDialog(self.gameOverNode)
     }
     
     func gameOverNodeDidContinue() {
@@ -109,6 +112,7 @@ class GameScene: SKScene, GameBoardDelegate, GameOverNodeDelegate, PrepareGameNo
         self.wasdController.removeControl()
         self.hbnmController.removeControl()
         self.arrowController.removeControl()
+        self.remotControl.removeControl()
     }
     
     func gameOverNodeDidCancel() {
@@ -132,6 +136,8 @@ class GameScene: SKScene, GameBoardDelegate, GameOverNodeDelegate, PrepareGameNo
                 self.prepareGameNode?.arrowKeyPressed(player!.color)
             } else if(controller === hbnmController) {
                 self.prepareGameNode?.hbnmPressed(player!.color)
+            } else if(controller === remotControl) {
+                self.prepareGameNode?.remoteAdded(player!.color)
             }
         }
     }
