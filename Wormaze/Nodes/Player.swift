@@ -39,7 +39,6 @@ class Player: SKNode {
     }
     
     func moveTo(x: Int, y: Int) {
-        print("moveTo \(x), \(y)")
         self.gameBoard.addChild(self.tiles.addTile(x, y: y, color: self.color, playerDirection: self.nextDirection))
     }
     

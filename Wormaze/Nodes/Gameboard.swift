@@ -128,7 +128,6 @@ class GameBoard: SKSpriteNode {
         }
         
         let collectable = Collectable(x: x, y: y)
-        print("SPAWN(\(x),\(y))")
         self.collectables.append(collectable)
         self.addChild(collectable)
     }

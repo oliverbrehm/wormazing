@@ -245,9 +245,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		774666CA1C2D74D10043B095 /* Wormazing */ = {
+		774666CA1C2D74D10043B095 /* Wormazing-osx */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 774666DC1C2D74D10043B095 /* Build configuration list for PBXNativeTarget "Wormazing" */;
+			buildConfigurationList = 774666DC1C2D74D10043B095 /* Build configuration list for PBXNativeTarget "Wormazing-osx" */;
 			buildPhases = (
 				774666C71C2D74D10043B095 /* Sources */,
 				774666C81C2D74D10043B095 /* Frameworks */,
@@ -257,7 +257,7 @@
 			);
 			dependencies = (
 			);
-			name = Wormazing;
+			name = "Wormazing-osx";
 			productName = Wormaze;
 			productReference = 774666CB1C2D74D10043B095 /* Wormazing.app */;
 			productType = "com.apple.product-type.application";
@@ -311,7 +311,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				774666CA1C2D74D10043B095 /* Wormazing */,
+				774666CA1C2D74D10043B095 /* Wormazing-osx */,
 				778656921C3C1027001C4E32 /* Wormazing-tv */,
 			);
 		};
@@ -516,7 +516,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Wormaze/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = edu.self.Wormazing;
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.self.Wormazing-osx";
 				PRODUCT_NAME = Wormazing;
 			};
 			name = Debug;
@@ -528,7 +528,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Wormaze/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = edu.self.Wormazing;
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.self.Wormazing-osx";
 				PRODUCT_NAME = Wormazing;
 			};
 			name = Release;
@@ -584,7 +584,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		774666DC1C2D74D10043B095 /* Build configuration list for PBXNativeTarget "Wormazing" */ = {
+		774666DC1C2D74D10043B095 /* Build configuration list for PBXNativeTarget "Wormazing-osx" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				774666DD1C2D74D10043B095 /* Debug */,
