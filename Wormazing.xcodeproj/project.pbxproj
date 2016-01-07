@@ -49,10 +49,6 @@
 		778656BB1C3C1245001C4E32 /* playerHead.svg in Resources */ = {isa = PBXBuildFile; fileRef = 777F61F91C30248300664D3C /* playerHead.svg */; };
 		778656BC1C3C1245001C4E32 /* playerTail.svg in Resources */ = {isa = PBXBuildFile; fileRef = 777F61FA1C30248300664D3C /* playerTail.svg */; };
 		778656BD1C3C1245001C4E32 /* playerTile.svg in Resources */ = {isa = PBXBuildFile; fileRef = 777F61FB1C30248300664D3C /* playerTile.svg */; };
-		77F0A4B81C3C19A700C7E950 /* GameSceneOsx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F0A4B71C3C19A700C7E950 /* GameSceneOsx.swift */; };
-		77F0A4BA1C3C1A1500C7E950 /* MenuSceneOsx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F0A4B91C3C1A1500C7E950 /* MenuSceneOsx.swift */; };
-		77F0A4BC1C3C1A8300C7E950 /* GameSceneTv.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F0A4BB1C3C1A8300C7E950 /* GameSceneTv.swift */; };
-		77F0A4BE1C3C1A9F00C7E950 /* MenuSceneTv.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F0A4BD1C3C1A9F00C7E950 /* MenuSceneTv.swift */; };
 		77F0A4BF1C3C1B8000C7E950 /* GameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7700DA791C34346800059A73 /* GameController.swift */; };
 		77F0A4C01C3C6E9100C7E950 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 774666D21C2D74D10043B095 /* GameScene.sks */; };
 		77F5D1361C31D2B10045A59E /* PrepareGameNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F5D1351C31D2B10045A59E /* PrepareGameNode.swift */; };
@@ -63,6 +59,10 @@
 		77FBF05C1C317F040048D24D /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FBF05B1C317F040048D24D /* MenuScene.swift */; };
 		77FBF05F1C3187790048D24D /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FBF05E1C3187790048D24D /* MenuItem.swift */; };
 		77FBF0611C3188960048D24D /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FBF0601C3188960048D24D /* MenuButton.swift */; };
+		A7F7AAD61C3EBD590031E3A9 /* GameViewOsx.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F7AAD51C3EBD590031E3A9 /* GameViewOsx.swift */; };
+		A7F7AAD81C3EBD650031E3A9 /* GameViewTv.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F7AAD71C3EBD650031E3A9 /* GameViewTv.swift */; };
+		A7F7AADA1C3EC3710031E3A9 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F7AAD91C3EC3710031E3A9 /* GameView.swift */; };
+		A7F7AADB1C3EC3710031E3A9 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F7AAD91C3EC3710031E3A9 /* GameView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,9 +72,9 @@
 		774666CE1C2D74D10043B095 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Wormaze/AppDelegate.swift; sourceTree = "<group>"; };
 		774666D01C2D74D10043B095 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		774666D21C2D74D10043B095 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
-		774666D41C2D74D10043B095 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		774666D41C2D74D10043B095 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Wormaze/Assets.xcassets; sourceTree = "<group>"; };
 		774666D71C2D74D10043B095 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		774666D91C2D74D10043B095 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		774666D91C2D74D10043B095 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Wormaze/Info.plist; sourceTree = "<group>"; };
 		774666E01C2D75510043B095 /* Gameboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Gameboard.swift; path = Nodes/Gameboard.swift; sourceTree = "<group>"; };
 		774666E21C2D798F0043B095 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Player.swift; path = Nodes/Player.swift; sourceTree = "<group>"; };
 		777F61F01C3001CA00664D3C /* playerTile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = playerTile.png; path = Textures/playerTile.png; sourceTree = "<group>"; };
@@ -92,10 +92,6 @@
 		778656A01C3C1027001C4E32 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		778656A21C3C1027001C4E32 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		778656A41C3C1027001C4E32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		77F0A4B71C3C19A700C7E950 /* GameSceneOsx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameSceneOsx.swift; path = "Wormazing-osx/GameSceneOsx.swift"; sourceTree = "<group>"; };
-		77F0A4B91C3C1A1500C7E950 /* MenuSceneOsx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuSceneOsx.swift; path = "Wormazing-osx/MenuSceneOsx.swift"; sourceTree = "<group>"; };
-		77F0A4BB1C3C1A8300C7E950 /* GameSceneTv.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameSceneTv.swift; sourceTree = "<group>"; };
-		77F0A4BD1C3C1A9F00C7E950 /* MenuSceneTv.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuSceneTv.swift; sourceTree = "<group>"; };
 		77F5D1351C31D2B10045A59E /* PrepareGameNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PrepareGameNode.swift; path = Nodes/PrepareGameNode.swift; sourceTree = "<group>"; };
 		77FBF0511C3176590048D24D /* PlayerTiles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerTiles.swift; path = Nodes/PlayerTiles.swift; sourceTree = "<group>"; };
 		77FBF0531C3177CE0048D24D /* GameOverNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameOverNode.swift; path = Nodes/GameOverNode.swift; sourceTree = "<group>"; };
@@ -104,6 +100,9 @@
 		77FBF05B1C317F040048D24D /* MenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuScene.swift; path = Scenes/MenuScene.swift; sourceTree = "<group>"; };
 		77FBF05E1C3187790048D24D /* MenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		77FBF0601C3188960048D24D /* MenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuButton.swift; path = Nodes/MenuButton.swift; sourceTree = "<group>"; };
+		A7F7AAD51C3EBD590031E3A9 /* GameViewOsx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameViewOsx.swift; path = "Wormazing-osx/GameViewOsx.swift"; sourceTree = "<group>"; };
+		A7F7AAD71C3EBD650031E3A9 /* GameViewTv.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewTv.swift; sourceTree = "<group>"; };
+		A7F7AAD91C3EC3710031E3A9 /* GameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,8 +147,9 @@
 			children = (
 				77FBF0591C317E940048D24D /* Scenes */,
 				774666DF1C2D75190043B095 /* Nodes */,
-				77FBF05A1C317EAC0048D24D /* Resources */,
 				7700DA791C34346800059A73 /* GameController.swift */,
+				A7F7AAD91C3EC3710031E3A9 /* GameView.swift */,
+				77FBF05A1C317EAC0048D24D /* Resources */,
 			);
 			name = Wormazing;
 			path = Wormaze;
@@ -194,8 +194,7 @@
 				7786569F1C3C1027001C4E32 /* Main.storyboard */,
 				778656A21C3C1027001C4E32 /* Assets.xcassets */,
 				778656A41C3C1027001C4E32 /* Info.plist */,
-				77F0A4BB1C3C1A8300C7E950 /* GameSceneTv.swift */,
-				77F0A4BD1C3C1A9F00C7E950 /* MenuSceneTv.swift */,
+				A7F7AAD71C3EBD650031E3A9 /* GameViewTv.swift */,
 			);
 			path = "Wormazing-tv";
 			sourceTree = "<group>";
@@ -203,9 +202,11 @@
 		778656A81C3C1044001C4E32 /* Wormazing-osx */ = {
 			isa = PBXGroup;
 			children = (
+				774666D41C2D74D10043B095 /* Assets.xcassets */,
+				774666D91C2D74D10043B095 /* Info.plist */,
+				774666D61C2D74D10043B095 /* MainMenu.xib */,
 				774666CE1C2D74D10043B095 /* AppDelegate.swift */,
-				77F0A4B71C3C19A700C7E950 /* GameSceneOsx.swift */,
-				77F0A4B91C3C1A1500C7E950 /* MenuSceneOsx.swift */,
+				A7F7AAD51C3EBD590031E3A9 /* GameViewOsx.swift */,
 			);
 			name = "Wormazing-osx";
 			sourceTree = "<group>";
@@ -224,9 +225,6 @@
 			isa = PBXGroup;
 			children = (
 				777F61EF1C2FFDA600664D3C /* Textures */,
-				774666D41C2D74D10043B095 /* Assets.xcassets */,
-				774666D61C2D74D10043B095 /* MainMenu.xib */,
-				774666D91C2D74D10043B095 /* Info.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -365,14 +363,14 @@
 				77133C1B1C2EE9C3000EB7A1 /* Collectable.swift in Sources */,
 				77FBF0581C31791A0048D24D /* MainMenu.swift in Sources */,
 				77F5D1361C31D2B10045A59E /* PrepareGameNode.swift in Sources */,
-				77F0A4B81C3C19A700C7E950 /* GameSceneOsx.swift in Sources */,
+				A7F7AAD61C3EBD590031E3A9 /* GameViewOsx.swift in Sources */,
 				77FBF0561C3178370048D24D /* DialogNode.swift in Sources */,
+				A7F7AADA1C3EC3710031E3A9 /* GameView.swift in Sources */,
 				774666E31C2D798F0043B095 /* Player.swift in Sources */,
 				77FBF0521C3176590048D24D /* PlayerTiles.swift in Sources */,
 				774666D11C2D74D10043B095 /* GameScene.swift in Sources */,
 				77FBF0541C3177CE0048D24D /* GameOverNode.swift in Sources */,
 				77FBF05C1C317F040048D24D /* MenuScene.swift in Sources */,
-				77F0A4BA1C3C1A1500C7E950 /* MenuSceneOsx.swift in Sources */,
 				77FBF0611C3188960048D24D /* MenuButton.swift in Sources */,
 				77FBF05F1C3187790048D24D /* MenuItem.swift in Sources */,
 				774666CF1C2D74D10043B095 /* AppDelegate.swift in Sources */,
@@ -392,12 +390,12 @@
 				778656AC1C3C1225001C4E32 /* MainMenu.swift in Sources */,
 				778656AD1C3C1225001C4E32 /* MenuItem.swift in Sources */,
 				778656AE1C3C1225001C4E32 /* MenuButton.swift in Sources */,
+				A7F7AAD81C3EBD650031E3A9 /* GameViewTv.swift in Sources */,
 				778656AF1C3C1225001C4E32 /* Gameboard.swift in Sources */,
 				778656B01C3C1225001C4E32 /* Player.swift in Sources */,
 				778656B11C3C1225001C4E32 /* Collectable.swift in Sources */,
-				77F0A4BE1C3C1A9F00C7E950 /* MenuSceneTv.swift in Sources */,
 				778656B21C3C1225001C4E32 /* PlayerTiles.swift in Sources */,
-				77F0A4BC1C3C1A8300C7E950 /* GameSceneTv.swift in Sources */,
+				A7F7AADB1C3EC3710031E3A9 /* GameView.swift in Sources */,
 				778656B31C3C1225001C4E32 /* GameOverNode.swift in Sources */,
 				778656B41C3C1225001C4E32 /* PrepareGameNode.swift in Sources */,
 				7786569C1C3C1027001C4E32 /* GameViewController.swift in Sources */,
@@ -414,6 +412,7 @@
 				774666D71C2D74D10043B095 /* Base */,
 			);
 			name = MainMenu.xib;
+			path = Wormaze;
 			sourceTree = "<group>";
 		};
 		7786569F1C3C1027001C4E32 /* Main.storyboard */ = {

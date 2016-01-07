@@ -15,7 +15,7 @@ protocol MenuSceneDelegate
     func menuSceneDidStartGame()
 }
 
-class MenuScene: SKScene, MainMenuDelegate {
+class MenuScene: SKScene, DialogNodeDelegate {
     let menuDelegate : MenuSceneDelegate?
     
     let mainMenu: MainMenu
@@ -27,13 +27,13 @@ class MenuScene: SKScene, MainMenuDelegate {
     init(menuDelegate: MenuSceneDelegate?) {
         self.mainMenu = MainMenu()
         self.menuDelegate = menuDelegate
-        super.init(size: CGSize(width: 800, height: 600))
+        super.init(size: CGSize(width: 1920, height: 1080))
         self.backgroundColor = SKColor.redColor()
         self.mainMenu.delegate = self
         self.mainMenu.size = self.size
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         self.menuDelegate = nil
         self.mainMenu = MainMenu()
@@ -43,16 +43,28 @@ class MenuScene: SKScene, MainMenuDelegate {
     override func didMoveToView(view: SKView) {
         self.addChild(mainMenu)
         self.mainMenu.initialize()
+        
+        if let view = self.view as? GameView {
+            view.primaryController()?.removeControl()
+            view.primaryController()?.assignDialog(self.mainMenu)
+        }
+        
+        (self.view as! GameView).primaryController()!.assignDialog(self.mainMenu)
     }
     
     override func update(currentTime: CFTimeInterval) {
 
     }
     
-    func mainMenuDidSelectOption(option: MainMenuOption) {
-        if(option == MainMenuOption.StartGame) {
+    func dialogDidAcceptItem(dialog: DialogNode, item: MenuItem?) {
+        if(item == nil) {
+            return
+        }
+        
+        if(item!.name == "startGame") {
             self.menuDelegate?.menuSceneDidStartGame()
+        } else if(item!.name == "exitGame") {
+            exit(EXIT_SUCCESS)
         }
     }
-
 }

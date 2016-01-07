@@ -9,23 +9,10 @@
 import Foundation
 import SpriteKit
 
-enum MainMenuOption
-{
-    case StartGame
-}
-
-protocol MainMenuDelegate
-{
-    func mainMenuDidSelectOption(option: MainMenuOption)
-}
-
 class MainMenu : DialogNode
 {
-    var delegate: MainMenuDelegate?
-    
-    init(delegate: MainMenuDelegate?)
+    init()
     {
-        self.delegate = delegate
         super.init(size: CGSize(width: 400.0, height: 300.0), color: SKColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5))
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)        
     }
@@ -48,23 +35,7 @@ class MainMenu : DialogNode
         testButton.initialize()
     }
     
-    convenience init()
-    {
-        self.init(delegate: nil)
-    }
-    
     required init?(coder aDecoder: NSCoder) {
-        self.delegate = nil
         super.init(coder: aDecoder)
     }
-    
-    func acceptItem()
-    {
-        if(self.selectedItem().name == "startGame") {
-            self.delegate?.mainMenuDidSelectOption(.StartGame)
-        } else if(self.selectedItem().name == "exitGame") {
-            exit(EXIT_SUCCESS)
-        }
-    }
-    
 }

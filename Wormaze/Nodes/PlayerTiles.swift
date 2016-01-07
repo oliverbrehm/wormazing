@@ -46,11 +46,14 @@ class Tile : SKSpriteNode {
         self.texture = Tile.tailTexture
     }
     
-    func die(delay: NSTimeInterval) {
+    func die(delay: NSTimeInterval, delayDelta: NSTimeInterval, tiles: PlayerTiles, index: Int) {
         let delayAction = SKAction.waitForDuration(delay)
-        let colorizeAction = SKAction.colorizeWithColor(SKColor.blackColor(), colorBlendFactor: 1.0, duration: 0.2)
+        let colorizeAction = SKAction.colorizeWithColor(SKColor.blackColor(), colorBlendFactor: 1.0, duration: 0.5)
+        let deletionDelayAction = SKAction.waitForDuration(delayDelta * Double(tiles.tiles.count))
         
-        self.runAction(SKAction.sequence([delayAction, colorizeAction]))
+        self.runAction(SKAction.sequence([delayAction, colorizeAction, deletionDelayAction]), completion: {
+            tiles.removeIndex(index)
+        })
         
         self.dead = true
     }
@@ -81,7 +84,7 @@ class Tile : SKSpriteNode {
 
 class PlayerTiles
 {
-    var tiles: [Tile] = []
+    var tiles: [Tile?] = []
     var current = 0
     var increase: Int = 0
     
@@ -98,7 +101,7 @@ class PlayerTiles
             tiles.insert(tile, atIndex: current)
             increase--
         } else {
-            tiles[current].removeFromParent()
+            tiles[current]?.removeFromParent()
             tiles[current] = tile;
         }
         current = (current + 1) % tiles.count
@@ -108,6 +111,11 @@ class PlayerTiles
         }
         
         return tile
+    }
+    
+    func removeIndex(index: Int) {
+        self.tiles[index]?.removeFromParent()
+        self.tiles[index] = nil
     }
     
     func increaseCapacity(size: Int) {
@@ -140,6 +148,7 @@ class PlayerTiles
             return
         }
         
+        let delayDelta = 0.07
         var delay = 0.0
         
         for(var i = current - 1;;) {
@@ -148,8 +157,8 @@ class PlayerTiles
             }
             
             let tile = self.tiles[i]
-            tile.die(delay)
-            delay += 0.04
+            tile?.die(delay, delayDelta: delayDelta, tiles: self, index: i)
+            delay += delayDelta
             
             i--
             if(i == current - 1) {

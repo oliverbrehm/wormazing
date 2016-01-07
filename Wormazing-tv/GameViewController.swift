@@ -18,9 +18,10 @@ class GameViewController: UIViewController, MenuSceneDelegate, GameSceneDelegate
         super.viewDidLoad()
         
         /* Pick a size for the scene */
-        menuScene = MenuSceneTv(menuDelegate: self)
-        let skView = self.view as! SKView
-        skView.presentScene(menuScene)
+        menuScene = MenuScene(menuDelegate: self)
+        let gameView = self.view as! GameViewTv
+        gameView.presentScene(menuScene)
+        gameView.initialize()
 
         /*if let scene = GameScene(fileNamed: "GameScene") {
             // Configure the view.
@@ -46,11 +47,11 @@ class GameViewController: UIViewController, MenuSceneDelegate, GameSceneDelegate
     func menuSceneDidCancel() {
         
     }
-    
+        
     func gameSceneDidCancel() {
         // TODO why doesn't resuing the old scene do anything...
         //self.skView!.presentScene(self.menuScene!, transition: SKTransition.crossFadeWithDuration(0.5))
-        self.menuScene = MenuSceneTv(menuDelegate: self)
+        self.menuScene = MenuScene(menuDelegate: self)
         let skView = self.view as! SKView
         skView.presentScene(self.menuScene!, transition: SKTransition.crossFadeWithDuration(0.5))
         self.gameScene = nil
@@ -58,7 +59,7 @@ class GameViewController: UIViewController, MenuSceneDelegate, GameSceneDelegate
     
     func menuSceneDidStartGame() {
         /* Set the scale mode to scale to fit the window */
-        gameScene = GameSceneTv(fileNamed:"GameScene")
+        gameScene = GameScene(fileNamed:"GameScene")
         if(gameScene != nil) {
             gameScene!.scaleMode = .Fill
             gameScene!.gameSceneDelegate = self

@@ -57,14 +57,18 @@ class Player: SKNode {
     {
         for tile in self.tiles.tiles
         {
-            tile.removeFromParent()
+            tile?.removeFromParent()
         }
     }
     
     func occupiesPoint(x: Int, y: Int) -> Bool
     {
         for tile in self.tiles.tiles {
-            if(tile.x == x && tile.y == y) {
+            if(tile == nil) {
+                continue
+            }
+            
+            if(tile!.x == x && tile!.y == y) {
                 return true
             }
         }

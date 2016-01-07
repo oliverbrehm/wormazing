@@ -1,4 +1,4 @@
-//
+ //
 //  GameController.swift
 //  Wormazing
 //
@@ -10,7 +10,7 @@ import Foundation
 
 enum GameKey
 {
-    case up, down, left, right
+    case up, down, left, right, enter
 }
 
 protocol GameControllerDelegate
@@ -24,15 +24,19 @@ class GameController
     var dialog: DialogNode?
     var delegate: GameControllerDelegate?
     
+    let name: String
+    
+    init(name: String) {
+        self.name = name
+    }
+    
     func assignPlayer(player: Player?)
     {
-        self.dialog = nil
         self.player = player
     }
     
     func assignDialog(dialog: DialogNode?)
     {
-        self.player = nil
         self.dialog = dialog
     }
     
@@ -62,6 +66,8 @@ class GameController
         case .right:
             self.player?.navigate(PlayerDirection.right)
             self.dialog?.selectNextItem()
+        case .enter:
+            self.dialog?.acceptItem()
         }
     }
 }

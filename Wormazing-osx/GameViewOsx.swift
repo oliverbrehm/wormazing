@@ -1,16 +1,34 @@
-//
-//  GameSceneOsx.swift
+         //
+//  GameViewOsx.swift
 //  Wormazing
 //
-//  Created by Oliver Brehm on 05.01.16.
+//  Created by Oliver Brehm on 07.01.16.
 //  Copyright © 2016 Oliver Brehm. All rights reserved.
 //
 
 import Foundation
 import SpriteKit
 
-class GameSceneOsx : GameScene
+class GameViewOsx : GameView
 {
+    let wasdController = GameController(name: "wasdController")
+    let hbnmController = GameController(name: "hbnmController")
+    let arrowController = GameController(name: "arrowKeysController")
+    
+    override func initialize() {
+        super.initialize()
+        
+        self.wasdController.delegate = self
+        self.hbnmController.delegate = self
+        self.arrowController.delegate = self
+        
+        self.gameControllers.appendContentsOf([wasdController, hbnmController, arrowController])
+    }
+    
+    override func primaryController() -> GameController?
+    {
+        return wasdController
+    }
     
     override func mouseDown(theEvent: NSEvent) {
         /* Called when a mouse click occurs */
@@ -20,16 +38,7 @@ class GameSceneOsx : GameScene
     override func keyDown(theEvent: NSEvent) {
         
         if(theEvent.keyCode == 0x24) {
-            // enter key
-            switch self.gameState
-            {
-            case .PrepareGame:
-                self.prepareGameNode?.enterPressed()
-            case .GameOver:
-                self.gameOverNode?.acceptItem()
-            default:
-                break
-            }
+            self.wasdController.keyDown(.enter)
         }
         
         if theEvent.modifierFlags.contains(NSEventModifierFlags.NumericPadKeyMask) {
@@ -76,4 +85,5 @@ class GameSceneOsx : GameScene
         }
     }
     
+
 }

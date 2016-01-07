@@ -9,30 +9,15 @@
 import Foundation
 import SpriteKit
 
-protocol GameOverNodeDelegate
-{
-    func gameOverNodeDidContinue()
-    func gameOverNodeDidCancel()
-}
-
 class GameOverNode : DialogNode
 {
-    let delegate: GameOverNodeDelegate?
-    
-    init(delegate: GameOverNodeDelegate?)
+    init()
     {
-        self.delegate = delegate
         super.init(size: CGSize(width: 400.0, height: 300.0), color: SKColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.3))
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
     }
-    
-    convenience init()
-    {
-        self.init(delegate: nil)
-    }
 
     required init?(coder aDecoder: NSCoder) {
-        self.delegate = nil
         super.init(coder: aDecoder)
     }
 
@@ -48,13 +33,5 @@ class GameOverNode : DialogNode
         exitGameButton.position = CGPoint(x: 0.0, y: -0.0)
         self.addItem(exitGameButton)
         exitGameButton.initialize()
-    }
-    
-    func acceptItem() {
-        if(self.selectedItem().name == "playAgain") {
-            self.delegate?.gameOverNodeDidContinue()
-        } else if(self.selectedItem().name == "toMenu") {
-            self.delegate?.gameOverNodeDidCancel()
-        }
     }
 }

@@ -11,47 +11,35 @@ import Cocoa
 import SpriteKit
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate, MenuSceneDelegate, GameSceneDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     
     @IBOutlet weak var window: NSWindow!
-    @IBOutlet weak var skView: SKView!
+    @IBOutlet weak var gameView: GameViewOsx!
     
-    var menuScene : MenuScene?
+    var fullscreen = false
     
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         /* Pick a size for the scene */
-        menuScene = MenuSceneOsx(menuDelegate: self)
-        self.skView!.presentScene(menuScene)
+        gameView.initialize()
+        self.window.delegate = self
+        CGDisplayHideCursor(0)
+    }
+    
+    func applicationWillTerminate(notification: NSNotification) {
+            CGDisplayShowCursor(0)
+        print("show")
     }
     
     func applicationShouldTerminateAfterLastWindowClosed(sender: NSApplication) -> Bool {
         return true
     }
     
-    func menuSceneDidCancel() {
-        
-    }
-    
-    func gameSceneDidCancel() {
-        // TODO why doesn't resuing the old scene do anything...
-        //self.skView!.presentScene(self.menuScene!, transition: SKTransition.crossFadeWithDuration(0.5))
-        let m = MenuSceneOsx(menuDelegate: self)
-        self.skView!.presentScene(m, transition: SKTransition.crossFadeWithDuration(0.5))
-    }
-    
-    func menuSceneDidStartGame() {
-        /* Set the scale mode to scale to fit the window */
-        if let scene = GameSceneOsx(fileNamed:"GameScene") {
-            scene.scaleMode = .Fill
-            scene.gameSceneDelegate = self
-                        
-            self.skView!.presentScene(scene, transition: SKTransition.crossFadeWithDuration(0.5))
-            
-            /* Sprite Kit applies additional optimizations to improve rendering performance */
-            self.skView!.ignoresSiblingOrder = true
-            
-            self.skView!.showsFPS = true
-            self.skView!.showsNodeCount = true
+    func windowDidBecomeMain(notification: NSNotification) {
+        if(!self.fullscreen) {
+            if((self.window.styleMask & NSFullScreenWindowMask) == 0) {
+                self.window.toggleFullScreen(nil)
+                self.fullscreen = true
+            }
         }
     }
 }

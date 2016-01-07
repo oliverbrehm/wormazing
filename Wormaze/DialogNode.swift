@@ -1,4 +1,4 @@
-//
+ //
 //  DialogNode.swift
 //  Wormazing
 //
@@ -9,10 +9,17 @@
 import Foundation
 import SpriteKit
 
+protocol DialogNodeDelegate
+{
+    func dialogDidAcceptItem(dialog: DialogNode, item: MenuItem?)
+}
+
 class DialogNode: SKSpriteNode
 {
     var items: [MenuItem] = []
     var focus: Int = 0
+    
+    var delegate: DialogNodeDelegate?
     
     init(size: CGSize, color: SKColor)
     {
@@ -42,7 +49,11 @@ class DialogNode: SKSpriteNode
         items[focus].setFocus()
     }
     
-    func selectedItem() -> MenuItem {
+    func selectedItem() -> MenuItem? {
+        if(self.items.count < 1) {
+            return nil
+        }
+        
         return items[focus]
     }
     
@@ -57,5 +68,9 @@ class DialogNode: SKSpriteNode
             focus = items.count - 1
         }
         items[focus].setFocus()
+    }
+    
+    func acceptItem() {
+        self.delegate?.dialogDidAcceptItem(self, item: self.selectedItem())
     }
 }
