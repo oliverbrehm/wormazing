@@ -38,6 +38,7 @@ enum GameState
     case PrepareGame
     case RunningGame
     case GameOver
+    case Paused
 }
 
 enum GameMode
@@ -61,6 +62,7 @@ class GameScene: SKScene, GameBoardDelegate, DialogNodeDelegate {
     
     var gameOverNode: GameOverNode?
     var prepareGameNode: PrepareGameNode?
+    var pauseNode: PauseMenuNode?
     
     var gameSceneDelegate: GameSceneDelegate?
     
@@ -95,6 +97,12 @@ class GameScene: SKScene, GameBoardDelegate, DialogNodeDelegate {
         self.prepareGameNode!.delegate = self
         
         (self.view as! GameView).removeAllControls()
+        
+        if let view = self.view as? GameView {
+            for controller in view.gameControllers {
+                controller.assignDialog(self.prepareGameNode)
+            }
+        }
     }
     
     func debug(message: String)
@@ -111,7 +119,6 @@ class GameScene: SKScene, GameBoardDelegate, DialogNodeDelegate {
         if(self.gameState == .PrepareGame) {
             let player = self.gameBoard.addPlayer()
             controller.assignPlayer(player)
-            controller.assignDialog(self.prepareGameNode)
             
             if(controller.name == "wasdController") {
                 self.prepareGameNode?.wasdPressed(player!.color)
@@ -139,10 +146,27 @@ class GameScene: SKScene, GameBoardDelegate, DialogNodeDelegate {
             if(item!.name == "playAgain") {
                 self.gameOverNodeDidContinue()
             } else if(item!.name == "toMenu") {
-                self.gameOverNodeDidCancel()
+                self.toMenu()
             }
         } else if(dialog === self.prepareGameNode && item != nil) {
             self.prepareGameNodeDidContinue()
+        } else if(dialog === self.pauseNode && item != nil) {
+            if(item!.name == "continue") {
+                self.gameState = .RunningGame
+                self.gameBoard.resume()
+                self.pauseNode!.removeFromParent()
+                self.pauseNode = nil
+            } else if(item!.name == "toMenu") {
+                self.toMenu()
+            }
+        }
+    }
+    
+    func dialogDidCancel(dialog: DialogNode) {
+        if(dialog === self.prepareGameNode) {
+            self.toMenu()
+        } else if(dialog === self.gameOverNode) {
+            self.toMenu()
         }
     }
     
@@ -161,6 +185,21 @@ class GameScene: SKScene, GameBoardDelegate, DialogNodeDelegate {
         }
     }
     
+    func gameBoardPaused() {
+        pauseNode = PauseMenuNode()
+        self.pauseNode!.size = self.size
+        self.pauseNode!.delegate = self
+        self.addChild(pauseNode!)
+        pauseNode!.initialize()
+        //self.gameState = .Paused
+    
+        if let view = self.view as? GameView {
+            for controller in view.gameControllers {
+                controller.assignDialog(self.pauseNode)
+            }
+        }
+    }
+    
     func gameOverNodeDidContinue() {
         self.gameBoard.newGame()
         self.gameOverNode?.removeFromParent()
@@ -172,9 +211,15 @@ class GameScene: SKScene, GameBoardDelegate, DialogNodeDelegate {
         self.gameState = .PrepareGame
         
         (self.view as! GameView).removeAllControls()
+        
+        if let view = self.view as? GameView {
+            for controller in view.gameControllers {
+                controller.assignDialog(self.prepareGameNode)
+            }
+        }
     }
     
-    func gameOverNodeDidCancel() {
+    func toMenu() {
         (self.view as! GameView).removeAllControls()
         
         self.gameSceneDelegate?.gameSceneDidCancel()
@@ -186,6 +231,4 @@ class GameScene: SKScene, GameBoardDelegate, DialogNodeDelegate {
         self.prepareGameNode?.removeFromParent()
         self.prepareGameNode =  nil
     }
-    
-
 }

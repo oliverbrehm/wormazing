@@ -12,6 +12,7 @@ import SpriteKit
 protocol GameBoardDelegate
 {
     func gameBoardGameOver(message: String, color: SKColor)
+    func gameBoardPaused()
 }
 
 class GameBoard: SKSpriteNode {
@@ -23,7 +24,7 @@ class GameBoard: SKSpriteNode {
     var players: [Player] = []
     
     var growTimer = 0 // steps
-    var gameStarted = false
+    var running = false
     
     var collectables: [Collectable] = []
     
@@ -81,8 +82,21 @@ class GameBoard: SKSpriteNode {
         self.collectables.removeAll()
     }
     
+    func pause()
+    {
+        if(self.running) {
+            self.running = false
+            self.delegate?.gameBoardPaused()
+        }
+    }
+    
+    func resume()
+    {
+        self.running = true
+    }
+    
     func addPlayer() -> Player? {
-        if(self.gameStarted) {
+        if(self.running) {
             return nil
         }
         
@@ -108,7 +122,7 @@ class GameBoard: SKSpriteNode {
     {
         self.spawnItem()
 
-        gameStarted = true
+        running = true
     }
     
     func spawnItem()
@@ -134,7 +148,7 @@ class GameBoard: SKSpriteNode {
     
     func gameOver()
     {        
-        gameStarted = false
+        running = false
     }
     
     func hitItem(x: Int, y: Int) -> Bool {
@@ -192,7 +206,7 @@ class GameBoard: SKSpriteNode {
     
     func updateStep(currentTime: CFTimeInterval)
     {
-        if(!gameStarted) {
+        if(!running) {
             return;
         }
         

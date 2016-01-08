@@ -69,4 +69,8 @@ class MenuScene: SKScene, DialogNodeDelegate {
             exit(EXIT_SUCCESS)
         }
     }
+    
+    func dialogDidCancel(dialog: DialogNode) {
+    // TODO
+    }
 }

@@ -39,7 +39,14 @@ class GameViewTv : GameView
     }
     
     override func pressesBegan(presses: Set<UIPress>, withEvent event: UIPressesEvent?) {
-        siriRemoteController.keyDown(.enter)
+        switch(presses.first!.type) {
+            case UIPressType.Menu:
+                siriRemoteController.keyDown(.cancel)
+            case UIPressType.Select:
+                siriRemoteController.keyDown(.enter)
+            default:
+                break
+        }
     }
     
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {

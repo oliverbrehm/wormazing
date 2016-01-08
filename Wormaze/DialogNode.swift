@@ -12,6 +12,7 @@ import SpriteKit
 protocol DialogNodeDelegate
 {
     func dialogDidAcceptItem(dialog: DialogNode, item: MenuItem?)
+    func dialogDidCancel(dialog: DialogNode)
 }
 
 class DialogNode: SKSpriteNode
@@ -75,5 +76,9 @@ class DialogNode: SKSpriteNode
     
     func acceptItem() {
         self.delegate?.dialogDidAcceptItem(self, item: self.selectedItem())
+    }
+    
+    func cancel() {
+        self.delegate?.dialogDidCancel(self)
     }
 }

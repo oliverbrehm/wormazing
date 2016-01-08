@@ -23,7 +23,6 @@ class GameOverNode : DialogNode
 
     func initialize(message: String, color: SKColor)
     {
-        self.zPosition = GameScene.zPositions.Background
         let localGameButton = MenuButton(size: CGSize(width: 200, height: 100), label: "Play again", name: "playAgain");
         localGameButton.position = CGPoint(x: 0.0, y: 00.0)
         self.addItem(localGameButton)

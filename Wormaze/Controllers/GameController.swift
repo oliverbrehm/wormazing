@@ -10,7 +10,7 @@ import Foundation
 
 enum GameKey
 {
-    case up, down, left, right, enter
+    case up, down, left, right, enter, cancel
 }
 
 protocol GameControllerDelegate
@@ -48,16 +48,15 @@ class GameController
     
     func isAssigned() -> Bool
     {
-        return (self.player != nil) || (self.dialog != nil)
+        return (self.player != nil && self.dialog != nil)
     }
     
     func keyDown(key: GameKey)
     {
-        if(self.dialog == nil && self.player == nil && key != .enter) {
+        if(self.player == nil && (key == .up || key == .down || key == .left || key == .right)) {
             self.delegate?.gameControllerNotAssigned(self)
-            return
         }
-        
+    
         switch(key) {
         case .up:
             self.player?.navigate(PlayerDirection.up)
@@ -73,6 +72,9 @@ class GameController
             self.dialog?.selectNextItem()
         case .enter:
             self.dialog?.acceptItem()
+        case .cancel:
+            self.player?.pause()
+            self.dialog?.cancel()
         }
     }
 }

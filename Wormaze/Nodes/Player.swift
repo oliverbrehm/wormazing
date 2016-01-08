@@ -99,6 +99,11 @@ class Player: SKNode {
         return self.tiles.tiles.count
     }
     
+    func pause()
+    {
+        self.gameBoard.pause()
+    }
+    
     func step() -> Bool
     {
         if let head = self.tiles.head() {
@@ -134,7 +139,7 @@ class Player: SKNode {
     
     func navigate(playerDirection : PlayerDirection)
     {
-        if(didNavigate || !self.gameBoard.gameStarted) {
+        if(didNavigate || !self.gameBoard.running) {
             return;
         }
         

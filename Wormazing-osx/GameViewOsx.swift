@@ -32,15 +32,24 @@ class GameViewOsx : GameView
     
     override func keyDown(theEvent: NSEvent) {
         
-        if(theEvent.keyCode == 0x24) {
-            if(arrowController.isAssigned()) {
-                self.arrowController.keyDown(.enter)
-            } else if(wasdController.isAssigned()) {
-                self.wasdController.keyDown(.enter)
+        if(theEvent.keyCode == 0x24) { // return key
+            if(wasdController.isAssigned()) {
+                wasdController.keyDown(.enter)
             } else if(hbnmController.isAssigned()) {
-                self.hbnmController.keyDown(.enter)
+                hbnmController.keyDown(.enter)
+            } else {
+                arrowController.keyDown(.enter)
             }
         }
+        
+        if(theEvent.keyCode == 0x35) { // escape key
+            if(wasdController.isAssigned()) {
+                wasdController.keyDown(.cancel)
+            } else if(hbnmController.isAssigned()) {
+                hbnmController.keyDown(.cancel)
+            } else {
+                arrowController.keyDown(.cancel)
+            }        }
         
         if theEvent.modifierFlags.contains(NSEventModifierFlags.NumericPadKeyMask) {
             if let theArrow = theEvent.charactersIgnoringModifiers, keyChar = theArrow.unicodeScalars.first?.value{
