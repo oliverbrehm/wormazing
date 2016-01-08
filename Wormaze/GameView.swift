@@ -27,15 +27,13 @@ class GameView : SKView, GameSceneDelegate, MenuSceneDelegate, GameControllerDel
     }
     
     func gameSceneDidCancel() {
-        // TODO why doesn't resuing the old scene do anything...
-        //self.skView!.presentScene(self.menuScene!, transition: SKTransition.crossFadeWithDuration(0.5))
-        let m = MenuScene(menuDelegate: self)
-        self.presentScene(m, transition: SKTransition.crossFadeWithDuration(0.5))
+        self.menuScene = MenuScene(menuDelegate: self)
+        self.presentScene(menuScene!, transition: SKTransition.crossFadeWithDuration(0.5))
     }
     
-    func menuSceneDidStartGame() {
-        /* Set the scale mode to scale to fit the window */
+    func menuSceneDidStartGame(mode: GameMode) {
         self.gameScene = GameScene(fileNamed:"GameScene")
+        gameScene!.gameMode = mode
         gameScene!.scaleMode = .Fill
         gameScene!.gameSceneDelegate = self
                     
@@ -50,7 +48,14 @@ class GameView : SKView, GameSceneDelegate, MenuSceneDelegate, GameControllerDel
     
     func primaryController() -> GameController?
     {
-        return nil
+        return nil // implemented in subclass
+    }
+    
+    func removeAllControls()
+    {
+        for controler in gameControllers {
+            controler.removeControl()
+        }
     }
     
     func gameControllerNotAssigned(controller: GameController) {

@@ -12,7 +12,7 @@ import SpriteKit
 protocol MenuSceneDelegate
 {
     func menuSceneDidCancel()
-    func menuSceneDidStartGame()
+    func menuSceneDidStartGame(mode: GameMode)
 }
 
 class MenuScene: SKScene, DialogNodeDelegate {
@@ -61,8 +61,10 @@ class MenuScene: SKScene, DialogNodeDelegate {
             return
         }
         
-        if(item!.name == "startGame") {
-            self.menuDelegate?.menuSceneDidStartGame()
+        if(item!.name == "singleplayer") {
+            self.menuDelegate?.menuSceneDidStartGame(.singleplayer)
+        } else if(item!.name == "multiplayer") {
+            self.menuDelegate?.menuSceneDidStartGame(.multiplayer)
         } else if(item!.name == "exitGame") {
             exit(EXIT_SUCCESS)
         }

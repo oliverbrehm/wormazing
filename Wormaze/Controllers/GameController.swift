@@ -46,9 +46,14 @@ class GameController
         self.dialog = nil
     }
     
+    func isAssigned() -> Bool
+    {
+        return (self.player != nil) || (self.dialog != nil)
+    }
+    
     func keyDown(key: GameKey)
     {
-        if(self.dialog == nil && self.player == nil) {
+        if(self.dialog == nil && self.player == nil && key != .enter) {
             self.delegate?.gameControllerNotAssigned(self)
             return
         }

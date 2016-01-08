@@ -94,6 +94,11 @@ class Player: SKNode {
         return false;
     }
     
+    func length() -> Int
+    {
+        return self.tiles.tiles.count
+    }
+    
     func step() -> Bool
     {
         if let head = self.tiles.head() {

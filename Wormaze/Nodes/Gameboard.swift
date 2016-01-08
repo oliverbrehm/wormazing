@@ -11,7 +11,7 @@ import SpriteKit
 
 protocol GameBoardDelegate
 {
-    func gameBoardGameOver()
+    func gameBoardGameOver(message: String, color: SKColor)
 }
 
 class GameBoard: SKSpriteNode {
@@ -88,13 +88,13 @@ class GameBoard: SKSpriteNode {
         
         let color : SKColor
         if(players.count == 0) {
-            color = SKColor.orangeColor()
+            color = GameScene.playerColors.player1
         } else if(players.count == 1) {
-            color = SKColor.blueColor()
+            color = GameScene.playerColors.player2
         } else if(players.count == 2) {
-            color = SKColor.purpleColor()
+            color = GameScene.playerColors.player3
         } else {
-            color = SKColor.greenColor()
+            color = GameScene.playerColors.player4
         }
         
         let player = Player(x:  3, y: (self.players.count + 1) * 5, color: color, gameBoard: self)
@@ -133,9 +133,7 @@ class GameBoard: SKSpriteNode {
     }
     
     func gameOver()
-    {
-        self.delegate?.gameBoardGameOver()
-        
+    {        
         gameStarted = false
     }
     
@@ -181,6 +179,17 @@ class GameBoard: SKSpriteNode {
         return n
     }
     
+    func winningPlayer() -> Player?
+    {
+        for player in self.players {
+            if(player.isAlive) {
+                return player
+            }
+        }
+        
+        return nil
+    }
+    
     func updateStep(currentTime: CFTimeInterval)
     {
         if(!gameStarted) {
@@ -197,12 +206,6 @@ class GameBoard: SKSpriteNode {
             if(player.isAlive) {
                 if(player.step()) {
                     player.gameOver()
-                    
-                    if(numberOfAlivePlayers() < 1) {
-                        gameOver()
-                        break
-                    }
-                    
                 }
                 
                 if(grow) {

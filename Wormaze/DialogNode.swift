@@ -21,10 +21,13 @@ class DialogNode: SKSpriteNode
     
     var delegate: DialogNodeDelegate?
     
-    init(size: CGSize, color: SKColor)
+    var dialogName = ""
+    
+    init(size: CGSize, color: SKColor, name: String)
     {
         super.init(texture: nil, color: color, size: size)
         self.zPosition = GameScene.zPositions.Menu
+        self.name = name
     }
 
     required init?(coder aDecoder: NSCoder) {

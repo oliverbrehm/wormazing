@@ -15,6 +15,19 @@ struct GameSceneZ
     let Menu = CGFloat(2)
 }
 
+class PlayerColors
+{
+    let player1 = SKColor.redColor()
+    let player2 = SKColor.blueColor()
+    let player3 = SKColor.greenColor()
+    let player4 = SKColor.orangeColor()
+    
+    let player1ColorName = "Red"
+    let player2ColorName = "Blue"
+    let player3ColorName = "Green"
+    let player4ColorName = "Orange"
+}
+
 protocol GameSceneDelegate
 {
     func gameSceneDidCancel()
@@ -27,22 +40,31 @@ enum GameState
     case GameOver
 }
 
+enum GameMode
+{
+    case singleplayer, multiplayer
+}
+
 class GameScene: SKScene, GameBoardDelegate, DialogNodeDelegate {
     static let zPositions = GameSceneZ()
+    static let playerColors = PlayerColors()
     
     var gameState = GameState.PrepareGame
+    var gameMode = GameMode.singleplayer
     
     static let stepTime: CFTimeInterval = 0.1
     
     var lastStepTime: CFTimeInterval = 0;
     var currentTime: CFTimeInterval = 0;
     
-    let gameBoard = GameBoard()
+    var gameBoard = GameBoard()
     
     var gameOverNode: GameOverNode?
     var prepareGameNode: PrepareGameNode?
     
     var gameSceneDelegate: GameSceneDelegate?
+    
+    let debugLabel = SKLabelNode(fontNamed: "Chalkduster")
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
@@ -50,25 +72,42 @@ class GameScene: SKScene, GameBoardDelegate, DialogNodeDelegate {
         
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5);
         
+        self.debugLabel.text = ""
+        self.debugLabel.fontSize = 14.0
+        self.debugLabel.position = CGPoint(x: 200.0, y: -self.size.height / 2.0 + 7.0)
+        self.addChild(self.debugLabel)
+        
+        if(gameMode == .singleplayer) {
+            self.gameBoard = SingleplayerGame()
+        } else {
+            self.gameBoard = MultiplayerGame()
+        }
+        
         self.addChild(gameBoard)
-        gameBoard.initialize(CGSize(width: self.size.width - 15, height: self.size.height - 15))
+        gameBoard.initialize(CGSize(width: self.size.width - 15, height: self.size.height - 30))
         gameBoard.delegate = self
     
-        
         gameBoard.position = CGPoint(x: -gameBoard.size.width / 2.0, y: -gameBoard.size.height / 2.0);
         
-        self.prepareGameNode = PrepareGameNode(size: CGSize(width: self.size.width, height: self.size.height), color: SKColor(white: 1.0, alpha: 0.3))
+        self.prepareGameNode = PrepareGameNode(size: CGSize(width: self.size.width, height: self.size.height), color: SKColor(white: 1.0, alpha: 0.3), name: "GameOverNode")
         self.addChild(self.prepareGameNode!)
-        self.prepareGameNode!.initialize()
+        self.prepareGameNode!.initialize(self.gameMode)
         self.prepareGameNode!.delegate = self
         
-        if let view = self.view as? GameView {
-            view.primaryController()?.removeControl()
-        }
+        (self.view as! GameView).removeAllControls()
+    }
+    
+    func debug(message: String)
+    {
+        self.debugLabel.text = "DEBUG: " + message
     }
     
     func addGameController(controller: GameController)
     {
+        if(self.gameMode == .singleplayer && self.gameBoard.players.count >= 1) {
+            return
+        }
+    
         if(self.gameState == .PrepareGame) {
             let player = self.gameBoard.addPlayer()
             controller.assignPlayer(player)
@@ -102,17 +141,17 @@ class GameScene: SKScene, GameBoardDelegate, DialogNodeDelegate {
             } else if(item!.name == "toMenu") {
                 self.gameOverNodeDidCancel()
             }
-        } else if(dialog === self.prepareGameNode && self.prepareGameNode!.playerJoined) {
+        } else if(dialog === self.prepareGameNode && item != nil) {
             self.prepareGameNodeDidContinue()
         }
     }
     
-    func gameBoardGameOver() {
+    func gameBoardGameOver(message: String, color: SKColor) {
         gameOverNode = GameOverNode()
         self.gameOverNode!.size = self.size
         self.gameOverNode!.delegate = self
         self.addChild(gameOverNode!)
-        gameOverNode!.initialize()
+        gameOverNode!.initialize(message, color: color)
         self.gameState = .GameOver
         
         if let view = self.view as? GameView {
@@ -126,20 +165,18 @@ class GameScene: SKScene, GameBoardDelegate, DialogNodeDelegate {
         self.gameBoard.newGame()
         self.gameOverNode?.removeFromParent()
         self.gameOverNode = nil
-        self.prepareGameNode = PrepareGameNode(size: CGSize(width: self.size.width, height: self.size.height), color: SKColor(white: 1.0, alpha: 0.3))
+        self.prepareGameNode = PrepareGameNode(size: CGSize(width: self.size.width, height: self.size.height), color: SKColor(white: 1.0, alpha: 0.3), name: "GameOverNode")
         self.addChild(self.prepareGameNode!)
-        self.prepareGameNode!.initialize()
+        self.prepareGameNode!.initialize(self.gameMode)
         self.prepareGameNode!.delegate = self
         self.gameState = .PrepareGame
         
-        if let view = self.view as? GameView {
-            for controller in view.gameControllers {
-                controller.removeControl()
-            }
-        }
+        (self.view as! GameView).removeAllControls()
     }
     
     func gameOverNodeDidCancel() {
+        (self.view as! GameView).removeAllControls()
+        
         self.gameSceneDelegate?.gameSceneDidCancel()
     }
     
@@ -147,6 +184,7 @@ class GameScene: SKScene, GameBoardDelegate, DialogNodeDelegate {
         self.gameBoard.startGame()
         self.gameState = .RunningGame
         self.prepareGameNode?.removeFromParent()
+        self.prepareGameNode =  nil
     }
     
 

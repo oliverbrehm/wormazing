@@ -27,18 +27,19 @@ class GameViewOsx : GameView
     
     override func primaryController() -> GameController?
     {
-        return wasdController
-    }
-    
-    override func mouseDown(theEvent: NSEvent) {
-        /* Called when a mouse click occurs */
-        
+        return arrowController
     }
     
     override func keyDown(theEvent: NSEvent) {
         
         if(theEvent.keyCode == 0x24) {
-            self.wasdController.keyDown(.enter)
+            if(arrowController.isAssigned()) {
+                self.arrowController.keyDown(.enter)
+            } else if(wasdController.isAssigned()) {
+                self.wasdController.keyDown(.enter)
+            } else if(hbnmController.isAssigned()) {
+                self.hbnmController.keyDown(.enter)
+            }
         }
         
         if theEvent.modifierFlags.contains(NSEventModifierFlags.NumericPadKeyMask) {

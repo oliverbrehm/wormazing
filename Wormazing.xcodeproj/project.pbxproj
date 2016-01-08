@@ -59,6 +59,10 @@
 		77FBF05C1C317F040048D24D /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FBF05B1C317F040048D24D /* MenuScene.swift */; };
 		77FBF05F1C3187790048D24D /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FBF05E1C3187790048D24D /* MenuItem.swift */; };
 		77FBF0611C3188960048D24D /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FBF0601C3188960048D24D /* MenuButton.swift */; };
+		A71AA1751C3FE61B00BC484E /* SingleplayerGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71AA1741C3FE61B00BC484E /* SingleplayerGame.swift */; };
+		A71AA1761C3FE61B00BC484E /* SingleplayerGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71AA1741C3FE61B00BC484E /* SingleplayerGame.swift */; };
+		A71AA1781C3FE62700BC484E /* MultiplayerGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71AA1771C3FE62700BC484E /* MultiplayerGame.swift */; };
+		A71AA1791C3FE62700BC484E /* MultiplayerGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71AA1771C3FE62700BC484E /* MultiplayerGame.swift */; };
 		A7F7AAD61C3EBD590031E3A9 /* GameViewOsx.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F7AAD51C3EBD590031E3A9 /* GameViewOsx.swift */; };
 		A7F7AAD81C3EBD650031E3A9 /* GameViewTv.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F7AAD71C3EBD650031E3A9 /* GameViewTv.swift */; };
 		A7F7AADA1C3EC3710031E3A9 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F7AAD91C3EC3710031E3A9 /* GameView.swift */; };
@@ -100,6 +104,8 @@
 		77FBF05B1C317F040048D24D /* MenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuScene.swift; path = Scenes/MenuScene.swift; sourceTree = "<group>"; };
 		77FBF05E1C3187790048D24D /* MenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		77FBF0601C3188960048D24D /* MenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuButton.swift; path = Nodes/MenuButton.swift; sourceTree = "<group>"; };
+		A71AA1741C3FE61B00BC484E /* SingleplayerGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SingleplayerGame.swift; path = Nodes/SingleplayerGame.swift; sourceTree = "<group>"; };
+		A71AA1771C3FE62700BC484E /* MultiplayerGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiplayerGame.swift; sourceTree = "<group>"; };
 		A7F7AAD51C3EBD590031E3A9 /* GameViewOsx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameViewOsx.swift; path = "Wormazing-osx/GameViewOsx.swift"; sourceTree = "<group>"; };
 		A7F7AAD71C3EBD650031E3A9 /* GameViewTv.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewTv.swift; sourceTree = "<group>"; };
 		A7F7AAD91C3EC3710031E3A9 /* GameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
@@ -159,12 +165,14 @@
 			isa = PBXGroup;
 			children = (
 				77FBF05D1C31875A0048D24D /* Menu */,
-				774666E01C2D75510043B095 /* Gameboard.swift */,
 				774666E21C2D798F0043B095 /* Player.swift */,
 				77133C1A1C2EE9C3000EB7A1 /* Collectable.swift */,
 				77FBF0511C3176590048D24D /* PlayerTiles.swift */,
 				77FBF0531C3177CE0048D24D /* GameOverNode.swift */,
 				77F5D1351C31D2B10045A59E /* PrepareGameNode.swift */,
+				774666E01C2D75510043B095 /* Gameboard.swift */,
+				A71AA1741C3FE61B00BC484E /* SingleplayerGame.swift */,
+				A71AA1771C3FE62700BC484E /* MultiplayerGame.swift */,
 			);
 			name = Nodes;
 			path = Wormaze;
@@ -366,10 +374,12 @@
 				A7F7AAD61C3EBD590031E3A9 /* GameViewOsx.swift in Sources */,
 				77FBF0561C3178370048D24D /* DialogNode.swift in Sources */,
 				A7F7AADA1C3EC3710031E3A9 /* GameView.swift in Sources */,
+				A71AA1781C3FE62700BC484E /* MultiplayerGame.swift in Sources */,
 				774666E31C2D798F0043B095 /* Player.swift in Sources */,
 				77FBF0521C3176590048D24D /* PlayerTiles.swift in Sources */,
 				774666D11C2D74D10043B095 /* GameScene.swift in Sources */,
 				77FBF0541C3177CE0048D24D /* GameOverNode.swift in Sources */,
+				A71AA1751C3FE61B00BC484E /* SingleplayerGame.swift in Sources */,
 				77FBF05C1C317F040048D24D /* MenuScene.swift in Sources */,
 				77FBF0611C3188960048D24D /* MenuButton.swift in Sources */,
 				77FBF05F1C3187790048D24D /* MenuItem.swift in Sources */,
@@ -384,6 +394,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				77F0A4BF1C3C1B8000C7E950 /* GameController.swift in Sources */,
+				A71AA1791C3FE62700BC484E /* MultiplayerGame.swift in Sources */,
 				778656A91C3C1225001C4E32 /* GameScene.swift in Sources */,
 				778656AA1C3C1225001C4E32 /* MenuScene.swift in Sources */,
 				778656AB1C3C1225001C4E32 /* DialogNode.swift in Sources */,
@@ -395,6 +406,7 @@
 				778656B01C3C1225001C4E32 /* Player.swift in Sources */,
 				778656B11C3C1225001C4E32 /* Collectable.swift in Sources */,
 				778656B21C3C1225001C4E32 /* PlayerTiles.swift in Sources */,
+				A71AA1761C3FE61B00BC484E /* SingleplayerGame.swift in Sources */,
 				A7F7AADB1C3EC3710031E3A9 /* GameView.swift in Sources */,
 				778656B31C3C1225001C4E32 /* GameOverNode.swift in Sources */,
 				778656B41C3C1225001C4E32 /* PrepareGameNode.swift in Sources */,
