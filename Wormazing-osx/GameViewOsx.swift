@@ -11,9 +11,9 @@ import SpriteKit
 
 class GameViewOsx : GameView
 {
-    let wasdController = GameController(name: "wasdController")
-    let hbnmController = GameController(name: "hbnmController")
-    let arrowController = GameController(name: "arrowKeysController")
+    let wasdController = Controller(name: "wasdController")
+    let hbnmController = Controller(name: "hbnmController")
+    let arrowController = Controller(name: "arrowKeysController")
     
     override func initialize() {
         super.initialize()
@@ -25,7 +25,7 @@ class GameViewOsx : GameView
         self.gameControllers.appendContentsOf([wasdController, hbnmController, arrowController])
     }
     
-    override func primaryController() -> GameController?
+    override func primaryController() -> Controller?
     {
         return arrowController
     }

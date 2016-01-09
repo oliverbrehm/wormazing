@@ -8,18 +8,78 @@
 
 import Foundation
 import SpriteKit
+import GameController
 
 class GameView : SKView, GameSceneDelegate, MenuSceneDelegate, GameControllerDelegate
 {    
     var menuScene : MenuScene?
     var gameScene : GameScene?
     
-    var gameControllers: [GameController] = []
+    var gameControllers: [Controller] = []
     
     func initialize()
     {
         self.menuScene = MenuScene(menuDelegate: self)
         self.presentScene(menuScene)
+    }
+    
+    func initializeGameControllers()
+    {
+        NSNotificationCenter.defaultCenter().addObserverForName(GCControllerDidConnectNotification, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: {(notification: NSNotification) -> Void in
+            self.gameControllerConnected(notification)
+        })
+        
+        NSNotificationCenter.defaultCenter().addObserverForName(GCControllerDidDisconnectNotification, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: {(notification: NSNotification) -> Void in
+            self.gameControllerDisonnected(notification)
+        })
+        
+        
+        for gameController in GCController.controllers() {
+            let controller = Controller(name: "mfcController")
+            
+            gameController.gamepad?.dpad.left.valueChangedHandler = {(CGControllerButtonInput, Float, pressed: Bool) -> Void in
+                if(pressed) {
+                    controller.keyDown(.left)
+                }
+            }
+            
+            gameController.gamepad?.dpad.right.valueChangedHandler = {(CGControllerButtonInput, Float, pressed: Bool) -> Void in
+                if(pressed) {
+                    controller.keyDown(.right)
+                }
+            }
+            
+            gameController.gamepad?.dpad.up.valueChangedHandler = {(CGControllerButtonInput, Float, pressed: Bool) -> Void in
+                if(pressed) {
+                    controller.keyDown(.up)
+                }
+            }
+            
+            gameController.gamepad?.dpad.down.valueChangedHandler = {(CGControllerButtonInput, Float, pressed: Bool) -> Void in
+                if(pressed) {
+                    controller.keyDown(.down)
+                }
+            }
+            
+            gameController.controllerPausedHandler = {GCController -> Void in
+                controller.keyDown(.cancel)
+            }
+            
+            // TODO force unwrap
+            gameController.playerIndex = GCControllerPlayerIndex(rawValue: gameControllers.count)!
+            
+            self.gameControllers.append(controller)
+        }
+    }
+    
+    func gameControllerConnected(notification: NSNotification) {
+        Swift.print("Controller connected")
+        // TODO
+    }
+    
+    func gameControllerDisonnected(notification: NSNotification) {
+        Swift.print("Controller disconnected")
+        // TODO
     }
     
     func menuSceneDidCancel() {
@@ -46,7 +106,7 @@ class GameView : SKView, GameSceneDelegate, MenuSceneDelegate, GameControllerDel
         self.showsNodeCount = true
     }
     
-    func primaryController() -> GameController?
+    func primaryController() -> Controller?
     {
         return nil // implemented in subclass
     }
@@ -58,7 +118,7 @@ class GameView : SKView, GameSceneDelegate, MenuSceneDelegate, GameControllerDel
         }
     }
     
-    func gameControllerNotAssigned(controller: GameController) {
+    func gameControllerNotAssigned(controller: Controller) {
         if let s = self.gameScene {
             s.addGameController(controller)
         }

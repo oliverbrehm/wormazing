@@ -110,7 +110,7 @@ class GameScene: SKScene, GameBoardDelegate, DialogNodeDelegate {
         self.debugLabel.text = "DEBUG: " + message
     }
     
-    func addGameController(controller: GameController)
+    func addGameController(controller: Controller)
     {
         if(self.gameMode == .singleplayer && self.gameBoard.players.count >= 1) {
             return

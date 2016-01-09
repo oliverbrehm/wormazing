@@ -15,10 +15,10 @@ enum GameKey
 
 protocol GameControllerDelegate
 {
-    func gameControllerNotAssigned(controller: GameController)
+    func gameControllerNotAssigned(controller: Controller)
 }
 
-class GameController
+class Controller
 {
     var player: Player?
     var dialog: DialogNode?
