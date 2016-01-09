@@ -59,6 +59,12 @@
 		77FBF05C1C317F040048D24D /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FBF05B1C317F040048D24D /* MenuScene.swift */; };
 		77FBF05F1C3187790048D24D /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FBF05E1C3187790048D24D /* MenuItem.swift */; };
 		77FBF0611C3188960048D24D /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FBF0601C3188960048D24D /* MenuButton.swift */; };
+		A71926AD1C40FE0A0094DED8 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A71926AC1C40FE0A0094DED8 /* GameKit.framework */; };
+		A71926AF1C4100130094DED8 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A71926AE1C4100130094DED8 /* GameKit.framework */; };
+		A71926B31C41045C0094DED8 /* GameKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71926B21C41045C0094DED8 /* GameKitManager.swift */; };
+		A71926B41C41045C0094DED8 /* GameKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71926B21C41045C0094DED8 /* GameKitManager.swift */; };
+		A71926B61C41087A0094DED8 /* GameKitManagerTv.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71926B51C41087A0094DED8 /* GameKitManagerTv.swift */; };
+		A71926B81C41088A0094DED8 /* GameKitManagerOsx.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71926B71C41088A0094DED8 /* GameKitManagerOsx.swift */; };
 		A71AA1751C3FE61B00BC484E /* SingleplayerGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71AA1741C3FE61B00BC484E /* SingleplayerGame.swift */; };
 		A71AA1761C3FE61B00BC484E /* SingleplayerGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71AA1741C3FE61B00BC484E /* SingleplayerGame.swift */; };
 		A71AA1781C3FE62700BC484E /* MultiplayerGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71AA1771C3FE62700BC484E /* MultiplayerGame.swift */; };
@@ -108,6 +114,12 @@
 		77FBF05B1C317F040048D24D /* MenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuScene.swift; path = Scenes/MenuScene.swift; sourceTree = "<group>"; };
 		77FBF05E1C3187790048D24D /* MenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		77FBF0601C3188960048D24D /* MenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuButton.swift; path = Nodes/MenuButton.swift; sourceTree = "<group>"; };
+		A71926AC1C40FE0A0094DED8 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS9.1.sdk/System/Library/Frameworks/GameKit.framework; sourceTree = DEVELOPER_DIR; };
+		A71926AE1C4100130094DED8 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		A71926B01C4100130094DED8 /* Wormazing.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = Wormazing.entitlements; path = "Wormazing-osx/Wormazing.entitlements"; sourceTree = "<group>"; };
+		A71926B21C41045C0094DED8 /* GameKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameKitManager.swift; path = GameKit/GameKitManager.swift; sourceTree = "<group>"; };
+		A71926B51C41087A0094DED8 /* GameKitManagerTv.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameKitManagerTv.swift; sourceTree = "<group>"; };
+		A71926B71C41088A0094DED8 /* GameKitManagerOsx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameKitManagerOsx.swift; path = "Wormazing-osx/GameKitManagerOsx.swift"; sourceTree = "<group>"; };
 		A71AA1741C3FE61B00BC484E /* SingleplayerGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SingleplayerGame.swift; path = Nodes/SingleplayerGame.swift; sourceTree = "<group>"; };
 		A71AA1771C3FE62700BC484E /* MultiplayerGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiplayerGame.swift; sourceTree = "<group>"; };
 		A71AA17A1C40698000BC484E /* PauseMenuNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PauseMenuNode.swift; sourceTree = "<group>"; };
@@ -124,6 +136,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A782D8451C4087F300D1704C /* GameController.framework in Frameworks */,
+				A71926AF1C4100130094DED8 /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,6 +145,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A782D8471C4087FC00D1704C /* GameController.framework in Frameworks */,
+				A71926AD1C40FE0A0094DED8 /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -165,6 +179,7 @@
 				774666DF1C2D75190043B095 /* Nodes */,
 				7700DA791C34346800059A73 /* Controller.swift */,
 				A7F7AAD91C3EC3710031E3A9 /* GameView.swift */,
+				A71926B11C4104310094DED8 /* GameKit */,
 				77FBF05A1C317EAC0048D24D /* Resources */,
 			);
 			name = Wormazing;
@@ -214,6 +229,7 @@
 				778656A21C3C1027001C4E32 /* Assets.xcassets */,
 				778656A41C3C1027001C4E32 /* Info.plist */,
 				A7F7AAD71C3EBD650031E3A9 /* GameViewTv.swift */,
+				A71926B51C41087A0094DED8 /* GameKitManagerTv.swift */,
 			);
 			path = "Wormazing-tv";
 			sourceTree = "<group>";
@@ -221,11 +237,13 @@
 		778656A81C3C1044001C4E32 /* Wormazing-osx */ = {
 			isa = PBXGroup;
 			children = (
+				A71926B01C4100130094DED8 /* Wormazing.entitlements */,
 				774666D41C2D74D10043B095 /* Assets.xcassets */,
 				774666D91C2D74D10043B095 /* Info.plist */,
 				774666D61C2D74D10043B095 /* MainMenu.xib */,
 				774666CE1C2D74D10043B095 /* AppDelegate.swift */,
 				A7F7AAD51C3EBD590031E3A9 /* GameViewOsx.swift */,
+				A71926B71C41088A0094DED8 /* GameKitManagerOsx.swift */,
 			);
 			name = "Wormazing-osx";
 			sourceTree = "<group>";
@@ -259,9 +277,19 @@
 			name = Menu;
 			sourceTree = "<group>";
 		};
+		A71926B11C4104310094DED8 /* GameKit */ = {
+			isa = PBXGroup;
+			children = (
+				A71926B21C41045C0094DED8 /* GameKitManager.swift */,
+			);
+			name = GameKit;
+			sourceTree = "<group>";
+		};
 		A782D8481C40880400D1704C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A71926AE1C4100130094DED8 /* GameKit.framework */,
+				A71926AC1C40FE0A0094DED8 /* GameKit.framework */,
 				A782D8461C4087FC00D1704C /* GameController.framework */,
 				A782D8441C4087F300D1704C /* GameController.framework */,
 			);
@@ -317,10 +345,24 @@
 				TargetAttributes = {
 					774666CA1C2D74D10043B095 = {
 						CreatedOnToolsVersion = 7.1;
+						DevelopmentTeam = CR6FRMMTU7;
+						SystemCapabilities = {
+							com.apple.GameCenter = {
+								enabled = 1;
+							};
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
 					};
 					778656921C3C1027001C4E32 = {
 						CreatedOnToolsVersion = 7.1;
 						DevelopmentTeam = CR6FRMMTU7;
+						SystemCapabilities = {
+							com.apple.GameCenter = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -395,7 +437,9 @@
 				77FBF0561C3178370048D24D /* DialogNode.swift in Sources */,
 				A7F7AADA1C3EC3710031E3A9 /* GameView.swift in Sources */,
 				A71AA1781C3FE62700BC484E /* MultiplayerGame.swift in Sources */,
+				A71926B81C41088A0094DED8 /* GameKitManagerOsx.swift in Sources */,
 				774666E31C2D798F0043B095 /* Player.swift in Sources */,
+				A71926B31C41045C0094DED8 /* GameKitManager.swift in Sources */,
 				77FBF0521C3176590048D24D /* PlayerTiles.swift in Sources */,
 				774666D11C2D74D10043B095 /* GameScene.swift in Sources */,
 				77FBF0541C3177CE0048D24D /* GameOverNode.swift in Sources */,
@@ -415,6 +459,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				77F0A4BF1C3C1B8000C7E950 /* Controller.swift in Sources */,
+				A71926B41C41045C0094DED8 /* GameKitManager.swift in Sources */,
 				A71AA1791C3FE62700BC484E /* MultiplayerGame.swift in Sources */,
 				778656A91C3C1225001C4E32 /* GameScene.swift in Sources */,
 				778656AA1C3C1225001C4E32 /* MenuScene.swift in Sources */,
@@ -433,6 +478,7 @@
 				778656B31C3C1225001C4E32 /* GameOverNode.swift in Sources */,
 				778656B41C3C1225001C4E32 /* PrepareGameNode.swift in Sources */,
 				7786569C1C3C1027001C4E32 /* GameViewController.swift in Sources */,
+				A71926B61C41087A0094DED8 /* GameKitManagerTv.swift in Sources */,
 				778656961C3C1027001C4E32 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -546,11 +592,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Wormazing-osx/Wormazing.entitlements";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Wormaze/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "edu.self.Wormazing-osx";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.oliverbrehm-apps.Wormazing-osx";
 				PRODUCT_NAME = Wormazing;
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -558,11 +608,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Wormazing-osx/Wormazing.entitlements";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Wormaze/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "edu.self.Wormazing-osx";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.oliverbrehm-apps.Wormazing-osx";
 				PRODUCT_NAME = Wormazing;
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -576,7 +630,7 @@
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = "Wormazing-tv/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "edu.self.Wormazing-tv";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.oliverbrehm-apps.Wormazing-tv";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = appletvos;
@@ -595,7 +649,7 @@
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = "Wormazing-tv/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "edu.self.Wormazing-tv";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.oliverbrehm-apps.Wormazing-tv";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = appletvos;

@@ -91,7 +91,7 @@ class GameScene: SKScene, GameBoardDelegate, DialogNodeDelegate {
     
         gameBoard.position = CGPoint(x: -gameBoard.size.width / 2.0, y: -gameBoard.size.height / 2.0);
         
-        self.prepareGameNode = PrepareGameNode(size: CGSize(width: self.size.width, height: self.size.height), color: SKColor(white: 1.0, alpha: 0.3), name: "GameOverNode")
+        self.prepareGameNode = PrepareGameNode(size: CGSize(width: self.size.width, height: self.size.height), color: SKColor(white: 1.0, alpha: 0.5), name: "GameOverNode")
         self.addChild(self.prepareGameNode!)
         self.prepareGameNode!.initialize(self.gameMode)
         self.prepareGameNode!.delegate = self
@@ -170,13 +170,19 @@ class GameScene: SKScene, GameBoardDelegate, DialogNodeDelegate {
         }
     }
     
-    func gameBoardGameOver(message: String, color: SKColor) {
+    func gameBoardGameOver(score: Int?, message: String, color: SKColor) {
         gameOverNode = GameOverNode()
         self.gameOverNode!.size = self.size
         self.gameOverNode!.delegate = self
         self.addChild(gameOverNode!)
         gameOverNode!.initialize(message, color: color)
         self.gameState = .GameOver
+        
+        if let view = (self.view as? GameView) {
+            if(view.gameKitManager != nil && score != nil) {
+                view.gameKitManager!.reportSingleplayerHighscore(score!)
+            }
+        }
         
         if let view = self.view as? GameView {
             for controller in view.gameControllers {
@@ -204,7 +210,7 @@ class GameScene: SKScene, GameBoardDelegate, DialogNodeDelegate {
         self.gameBoard.newGame()
         self.gameOverNode?.removeFromParent()
         self.gameOverNode = nil
-        self.prepareGameNode = PrepareGameNode(size: CGSize(width: self.size.width, height: self.size.height), color: SKColor(white: 1.0, alpha: 0.3), name: "GameOverNode")
+        self.prepareGameNode = PrepareGameNode(size: CGSize(width: self.size.width, height: self.size.height), color: SKColor(white: 1.0, alpha: 0.5), name: "GameOverNode")
         self.addChild(self.prepareGameNode!)
         self.prepareGameNode!.initialize(self.gameMode)
         self.prepareGameNode!.delegate = self

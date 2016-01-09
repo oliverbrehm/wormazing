@@ -11,7 +11,7 @@ import SpriteKit
 
 protocol GameBoardDelegate
 {
-    func gameBoardGameOver(message: String, color: SKColor)
+    func gameBoardGameOver(score: Int?, message: String, color: SKColor)
     func gameBoardPaused()
 }
 

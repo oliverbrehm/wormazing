@@ -16,17 +16,20 @@ class GameViewTv : GameView
     
     let THRESHOLD : CGFloat = 100.0
     
-    let siriRemoteController = GameController(name: "siriRemoteController")
+    let siriRemoteController = Controller(name: "siriRemoteController")
     
     override func initialize() {
         super.initialize()
+        
+        self.gameKitManager = GameKitManagerTv()
+        self.gameKitManager!.initialize()
         
         self.siriRemoteController.delegate = self
         
         self.gameControllers.append(siriRemoteController)
     }
     
-    override func primaryController() -> GameController? {
+    override func primaryController() -> Controller? {
         return siriRemoteController
     }
     

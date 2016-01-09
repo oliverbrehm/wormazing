@@ -17,8 +17,10 @@ class GameView : SKView, GameSceneDelegate, MenuSceneDelegate, GameControllerDel
     
     var gameControllers: [Controller] = []
     
+    var gameKitManager: GameKitManager?
+    
     func initialize()
-    {
+    {    
         self.menuScene = MenuScene(menuDelegate: self)
         self.presentScene(menuScene)
     }
@@ -83,7 +85,7 @@ class GameView : SKView, GameSceneDelegate, MenuSceneDelegate, GameControllerDel
     }
     
     func menuSceneDidCancel() {
-        
+        // TODO
     }
     
     func gameSceneDidCancel() {

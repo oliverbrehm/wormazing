@@ -47,10 +47,17 @@ class SingleplayerGame : GameBoard {
         return n
     }
     
+    override func newGame() {
+        super.newGame()
+        
+        self.score = 0.0
+        self.updateScore()
+    }
+    
     override func gameOver() {
         super.gameOver()
     
-        self.delegate?.gameBoardGameOver("Game over. Your score is \(Int(score))!", color: SKColor.redColor())
+        self.delegate?.gameBoardGameOver(Int(self.score), message: "Game over. Your score is \(Int(score))!", color: SKColor.redColor())
     }
     
     func numOccupiedTilesAroundHead() -> Int

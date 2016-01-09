@@ -18,6 +18,9 @@ class GameViewOsx : GameView
     override func initialize() {
         super.initialize()
         
+        self.gameKitManager = GameKitManagerOsx()
+        self.gameKitManager!.initialize()
+        
         self.wasdController.delegate = self
         self.hbnmController.delegate = self
         self.arrowController.delegate = self

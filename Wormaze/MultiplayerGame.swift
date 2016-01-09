@@ -46,6 +46,6 @@ class MultiplayerGame : GameBoard {
             color = winner!.color
         }
         
-        self.delegate?.gameBoardGameOver(message, color: color)
+        self.delegate?.gameBoardGameOver(nil, message: message, color: color)
     }
 }

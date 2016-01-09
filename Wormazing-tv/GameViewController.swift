@@ -17,8 +17,25 @@ class GameViewController: UIViewController {
         let gameView = self.view as! GameViewTv
         gameView.initialize()
     }
+    
+    override func viewDidAppear(animated: Bool) {
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("showGamecenterAuthenticationViewController"), name: GameKitManager.GameCenterNotAuthenticatedNotification, object: nil)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    func showGamecenterAuthenticationViewController()
+    {
+        if let view = self.view as? GameView {
+            if let manager = view.gameKitManager as? GameKitManagerTv {
+                if let viewController = manager.authenticationViewController {
+                    self.presentViewController(viewController, animated: true, completion: { () -> Void in
+                        
+                    })
+                }
+            }
+        }
     }
 }
