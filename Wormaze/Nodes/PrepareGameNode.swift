@@ -23,7 +23,7 @@ class PrepareGameNode: DialogNode {
     func initialize(mode: GameMode) {
         self.gameMode = mode
     
-        self.startGameButton = MenuButton(size: CGSize(width: 200, height: 100), label: "Start game", name: "startGame");
+        self.startGameButton = MenuButton(label: "Start game", name: "startGame");
         startGameButton!.position = CGPoint(x: 0.0, y: 100.0)
         
         text = SKLabelNode(fontNamed: "Chalkduster")
@@ -71,8 +71,8 @@ class PrepareGameNode: DialogNode {
     func showStartGameButton()
     {
         if(gameMode == .singleplayer || (gameMode == .multiplayer && self.numPlayersJoined >= 2)) {
-            self.addItem(startGameButton!)
             startGameButton!.initialize()
+            self.addItem(startGameButton!)
         }
     }
     

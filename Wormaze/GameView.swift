@@ -10,8 +10,15 @@ import Foundation
 import SpriteKit
 import GameController
 
+class GameColors
+{
+    let background = SKColor(red: 0.2, green: 0.6, blue: 0.3, alpha: 1.0)
+}
+
 class GameView : SKView, GameSceneDelegate, MenuSceneDelegate, GameControllerDelegate
-{    
+{
+    static let gameColors = GameColors()
+
     var menuScene : MenuScene?
     var gameScene : GameScene?
     
@@ -90,6 +97,7 @@ class GameView : SKView, GameSceneDelegate, MenuSceneDelegate, GameControllerDel
     
     func gameSceneDidCancel() {
         self.menuScene = MenuScene(menuDelegate: self)
+        self.menuScene?.scaleMode = .Fill
         self.presentScene(menuScene!, transition: SKTransition.crossFadeWithDuration(0.5))
     }
     

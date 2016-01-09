@@ -19,21 +19,34 @@ class MainMenu : DialogNode
     
     func initialize()
     {
-        let singlePlayerButton = MenuButton(size: CGSize(width: 200, height: 100), label: "Sigleplayer", name: "singleplayer");
-        singlePlayerButton.position = CGPoint(x: 0.0, y: 120.0)
-        self.addItem(singlePlayerButton)
+        self.color = SKColor(white: 1.0, alpha: 0.0)
+    
+        let logo = SKSpriteNode(imageNamed: "logo")
+        logo.position = CGPoint(x: 0.0, y: 80.0 + logo.size.height / 2.0)
+        self.addChild(logo)
+        
+        let growAction = SKAction.scaleTo(1.1, duration: 10.0)
+        growAction.timingMode = .EaseInEaseOut
+        let shrinkAction = SKAction.scaleTo(1.0, duration: 10.0)
+        shrinkAction.timingMode = .EaseInEaseOut
+        let pulseAction = SKAction.sequence([growAction, shrinkAction])
+        logo.runAction(SKAction.repeatActionForever(pulseAction))
+        
+        let singlePlayerButton = MenuButton(label: "Sigleplayer", name: "singleplayer");
+        singlePlayerButton.position = CGPoint(x: 0.0, y: -50.0)
         singlePlayerButton.initialize()
-        
-        let testButton = MenuButton(size: CGSize(width: 200, height: 100), label: "Multiplayer", name: "multiplayer");
-        testButton.position = CGPoint(x: 0.0, y: 0.0)
-        self.addItem(testButton)
+        self.addItem(singlePlayerButton)
+
+        let testButton = MenuButton(label: "Multiplayer", name: "multiplayer");
+        testButton.position = CGPoint(x: 0.0, y: -200.0)
         testButton.initialize()
-        
+        self.addItem(testButton)
+
         // TODO if osx
-        let exitGameButton = MenuButton(size: CGSize(width: 200, height: 100), label: "Exit", name: "exitGame");
-        exitGameButton.position = CGPoint(x: 0.0, y: -120.0)
-        self.addItem(exitGameButton)
+        let exitGameButton = MenuButton(label: "Exit", name: "exitGame");
+        exitGameButton.position = CGPoint(x: 0.0, y: -350.0)
         exitGameButton.initialize()
+        self.addItem(exitGameButton)
     }
     
     required init?(coder aDecoder: NSCoder) {

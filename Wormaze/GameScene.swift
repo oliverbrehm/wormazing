@@ -53,7 +53,7 @@ class GameScene: SKScene, GameBoardDelegate, DialogNodeDelegate {
     var gameState = GameState.PrepareGame
     var gameMode = GameMode.singleplayer
     
-    static let stepTime: CFTimeInterval = 0.1
+    static let stepTime: CFTimeInterval = 0.13
     
     var lastStepTime: CFTimeInterval = 0;
     var currentTime: CFTimeInterval = 0;
@@ -86,7 +86,7 @@ class GameScene: SKScene, GameBoardDelegate, DialogNodeDelegate {
         }
         
         self.addChild(gameBoard)
-        gameBoard.initialize(CGSize(width: self.size.width - 15, height: self.size.height - 30))
+        gameBoard.initialize(CGSize(width: self.size.width - 40, height: self.size.height - 40))
         gameBoard.delegate = self
     
         gameBoard.position = CGPoint(x: -gameBoard.size.width / 2.0, y: -gameBoard.size.height / 2.0);

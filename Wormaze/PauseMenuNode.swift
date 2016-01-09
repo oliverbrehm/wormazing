@@ -22,16 +22,16 @@ class PauseMenuNode: DialogNode {
 
     func initialize()
     {
-        let continueButton = MenuButton(size: CGSize(width: 200, height: 100), label: "Resume", name: "continue");
+        let continueButton = MenuButton(label: "Resume", name: "continue");
         continueButton.position = CGPoint(x: 0.0, y: 00.0)
-        self.addItem(continueButton)
         continueButton.initialize()
-        
-        let exitGameButton = MenuButton(size: CGSize(width: 200, height: 100), label: "Exit game", name: "toMenu");
+        self.addItem(continueButton)
+
+        let exitGameButton = MenuButton(label: "Exit game", name: "toMenu");
         exitGameButton.position = CGPoint(x: 0.0, y: -120.0)
-        self.addItem(exitGameButton)
         exitGameButton.initialize()
-        
+        self.addItem(exitGameButton)
+
         let messageNode : SKLabelNode = SKLabelNode(fontNamed: "Chalkduster")
         messageNode.fontSize = 32.0
         messageNode.position = CGPoint(x: 0.0, y: 120.0)

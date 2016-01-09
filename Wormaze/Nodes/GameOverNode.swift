@@ -23,15 +23,15 @@ class GameOverNode : DialogNode
 
     func initialize(message: String, color: SKColor)
     {
-        let localGameButton = MenuButton(size: CGSize(width: 200, height: 100), label: "Play again", name: "playAgain");
+        let localGameButton = MenuButton(label: "Play again", name: "playAgain");
         localGameButton.position = CGPoint(x: 0.0, y: 00.0)
-        self.addItem(localGameButton)
         localGameButton.initialize()
+        self.addItem(localGameButton)
         
-        let exitGameButton = MenuButton(size: CGSize(width: 200, height: 100), label: "To Menu", name: "toMenu");
+        let exitGameButton = MenuButton(label: "To Menu", name: "toMenu");
         exitGameButton.position = CGPoint(x: 0.0, y: -120.0)
-        self.addItem(exitGameButton)
         exitGameButton.initialize()
+        self.addItem(exitGameButton)
         
         let messageNode : SKLabelNode = SKLabelNode(fontNamed: "Chalkduster")
         messageNode.fontSize = 32.0

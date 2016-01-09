@@ -40,7 +40,7 @@ class GameBoard: SKSpriteNode {
     init() {
         self.tilesX = 0
         self.tilesY = 0
-        super.init(texture: nil, color: SKColor(red: 0.0, green: 0.5, blue: 0.0, alpha: 1.0), size: CGSizeZero)
+        super.init(texture: nil, color: GameView.gameColors.background, size: CGSizeZero)
     }
     
     func initialize(size: CGSize)

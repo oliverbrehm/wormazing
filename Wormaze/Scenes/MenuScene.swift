@@ -28,7 +28,7 @@ class MenuScene: SKScene, DialogNodeDelegate {
         self.mainMenu = MainMenu()
         self.menuDelegate = menuDelegate
         super.init(size: CGSize(width: 1920, height: 1080))
-        self.backgroundColor = SKColor.blackColor()
+        self.backgroundColor = GameView.gameColors.background
         self.mainMenu.delegate = self
         self.mainMenu.size = self.size
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
