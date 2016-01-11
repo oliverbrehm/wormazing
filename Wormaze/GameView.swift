@@ -25,6 +25,7 @@ class GameView : SKView, GameSceneDelegate, MenuSceneDelegate, GameControllerDel
     var gameControllers: [Controller] = []
     
     var gameKitManager: GameKitManager?
+    var collectableManager: CollectableManager = CollectableManager()
     
     func initialize()
     {    

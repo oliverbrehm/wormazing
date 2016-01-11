@@ -10,8 +10,8 @@ import Foundation
 import SpriteKit
 
 class MultiplayerGame : GameBoard {
-    override func updateStep(currentTime: CFTimeInterval) {
-        super.updateStep(currentTime)
+    override func step() {
+        super.step()
         
         if(running) {
             if(numberOfAlivePlayers() < 2) {

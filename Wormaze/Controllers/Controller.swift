@@ -72,6 +72,7 @@ class Controller
             self.dialog?.selectNextItem()
         case .enter:
             self.dialog?.acceptItem()
+            self.player?.useInvincibility()
         case .cancel:
             self.player?.pause()
             self.dialog?.cancel()

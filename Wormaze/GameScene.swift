@@ -53,11 +53,6 @@ class GameScene: SKScene, GameBoardDelegate, DialogNodeDelegate {
     var gameState = GameState.PrepareGame
     var gameMode = GameMode.singleplayer
     
-    static let stepTime: CFTimeInterval = 0.13
-    
-    var lastStepTime: CFTimeInterval = 0;
-    var currentTime: CFTimeInterval = 0;
-    
     var gameBoard = GameBoard()
     
     var gameOverNode: GameOverNode?
@@ -132,13 +127,8 @@ class GameScene: SKScene, GameBoardDelegate, DialogNodeDelegate {
         }
     }
     
-    override func update(currentTime: CFTimeInterval) {        
-        self.currentTime = currentTime;
-                
-        if(currentTime > lastStepTime + GameScene.stepTime) {
-            lastStepTime = currentTime
-            gameBoard.updateStep(currentTime)
-        }
+    override func update(currentTime: CFTimeInterval) {
+        gameBoard.update(currentTime)
     }
     
     func dialogDidAcceptItem(dialog: DialogNode, item: MenuItem?) {

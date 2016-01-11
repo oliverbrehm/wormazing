@@ -1,3 +1,4 @@
+
 //
 //  PlayerTiles.swift
 //  Wormazing
@@ -18,7 +19,9 @@ class Tile : SKSpriteNode {
     static let headTexture = SKTexture(imageNamed: "playerHead")
     static let tailTexture = SKTexture(imageNamed: "playerTail")
     
-    init(x: Int, y: Int, color: SKColor, predecessor: Tile?, playerDirection: PlayerDirection) {
+    static let invincibilityView = SKSpriteNode(color: SKColor.blueColor(), size: Tile.texture.size())
+    
+    init(x: Int, y: Int, color: SKColor, predecessor: Tile?, playerDirection: PlayerDirection, invincible: Bool) {
         self.x = x;
         self.y = y;
         self.predecessor = predecessor
@@ -30,6 +33,13 @@ class Tile : SKSpriteNode {
         self.zPosition = GameScene.zPositions.Player
         self.colorBlendFactor = 1.0
         
+        Tile.invincibilityView.removeFromParent()
+        
+        if(invincible) {
+            Tile.invincibilityView.alpha = 0.5
+            self.addChild(Tile.invincibilityView)
+        }
+
         switch(playerDirection) { // native sprite rotation pointing up
         case .down: self.rotateRight(); self.rotateRight()
         case .right: self.rotateRight()
@@ -88,10 +98,12 @@ class PlayerTiles
     var current = 0
     var increase: Int = 0
     
+    var invincible = false
+    
     func addTile(x: Int, y: Int, color: SKColor, playerDirection: PlayerDirection) -> Tile {
         self.head()?.makeBody()
         
-        let tile = Tile(x: x, y: y, color: color, predecessor: self.head(), playerDirection: playerDirection)
+        let tile = Tile(x: x, y: y, color: color, predecessor: self.head(), playerDirection: playerDirection, invincible: invincible)
         if(tiles.isEmpty) {
             tiles.append(tile)
             return tile
@@ -113,6 +125,15 @@ class PlayerTiles
         return tile
     }
     
+    func toggleInvincibility(invincibility: Bool) {
+        self.invincible = invincibility
+        
+        if(invincible) {
+            Tile.invincibilityView.removeFromParent()
+            self.head()?.addChild(Tile.invincibilityView)
+        }
+    }
+    
     func removeIndex(index: Int) {
         self.tiles[index]?.removeFromParent()
         self.tiles[index] = nil
@@ -128,6 +149,11 @@ class PlayerTiles
         }
         
         var index = current - 1;
+        
+        if(index >= tiles.count) {
+            return nil
+        }
+        
         if(index < 0) {
             index = tiles.count - 1;
         }

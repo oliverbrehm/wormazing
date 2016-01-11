@@ -43,6 +43,22 @@
 		77FBF05C1C317F040048D24D /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FBF05B1C317F040048D24D /* MenuScene.swift */; };
 		77FBF05F1C3187790048D24D /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FBF05E1C3187790048D24D /* MenuItem.swift */; };
 		77FBF0611C3188960048D24D /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FBF0601C3188960048D24D /* MenuButton.swift */; };
+		A71620941C439318003C1EE3 /* CollectableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71620931C439318003C1EE3 /* CollectableManager.swift */; };
+		A71620951C439318003C1EE3 /* CollectableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71620931C439318003C1EE3 /* CollectableManager.swift */; };
+		A71620981C439DEF003C1EE3 /* ItemGrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71620971C439DEF003C1EE3 /* ItemGrow.swift */; };
+		A71620991C439DEF003C1EE3 /* ItemGrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71620971C439DEF003C1EE3 /* ItemGrow.swift */; };
+		A716209B1C439E09003C1EE3 /* ItemIncSpeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = A716209A1C439E09003C1EE3 /* ItemIncSpeed.swift */; };
+		A716209C1C439E09003C1EE3 /* ItemIncSpeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = A716209A1C439E09003C1EE3 /* ItemIncSpeed.swift */; };
+		A716209E1C439E19003C1EE3 /* ItemDecSpeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = A716209D1C439E19003C1EE3 /* ItemDecSpeed.swift */; };
+		A716209F1C439E19003C1EE3 /* ItemDecSpeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = A716209D1C439E19003C1EE3 /* ItemDecSpeed.swift */; };
+		A71620A41C43A023003C1EE3 /* speeddec.png in Resources */ = {isa = PBXBuildFile; fileRef = A71620A01C43A023003C1EE3 /* speeddec.png */; };
+		A71620A51C43A023003C1EE3 /* speeddec.png in Resources */ = {isa = PBXBuildFile; fileRef = A71620A01C43A023003C1EE3 /* speeddec.png */; };
+		A71620A81C43A023003C1EE3 /* speedinc.png in Resources */ = {isa = PBXBuildFile; fileRef = A71620A21C43A023003C1EE3 /* speedinc.png */; };
+		A71620A91C43A023003C1EE3 /* speedinc.png in Resources */ = {isa = PBXBuildFile; fileRef = A71620A21C43A023003C1EE3 /* speedinc.png */; };
+		A71620AD1C43ACE3003C1EE3 /* ItemInvincible.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71620AC1C43ACE3003C1EE3 /* ItemInvincible.swift */; };
+		A71620AE1C43ACE3003C1EE3 /* ItemInvincible.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71620AC1C43ACE3003C1EE3 /* ItemInvincible.swift */; };
+		A71620B01C43ACF9003C1EE3 /* ItemExtralive.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71620AF1C43ACF9003C1EE3 /* ItemExtralive.swift */; };
+		A71620B11C43ACF9003C1EE3 /* ItemExtralive.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71620AF1C43ACF9003C1EE3 /* ItemExtralive.swift */; };
 		A71926AD1C40FE0A0094DED8 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A71926AC1C40FE0A0094DED8 /* GameKit.framework */; };
 		A71926AF1C4100130094DED8 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A71926AE1C4100130094DED8 /* GameKit.framework */; };
 		A71926B31C41045C0094DED8 /* GameKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71926B21C41045C0094DED8 /* GameKitManager.swift */; };
@@ -63,13 +79,13 @@
 		A7F7AADB1C3EC3710031E3A9 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F7AAD91C3EC3710031E3A9 /* GameView.swift */; };
 		A7FCD80E1C41764000FC7A55 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = A7FCD8081C416AA900FC7A55 /* logo.png */; };
 		A7FCD80F1C41764000FC7A55 /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = A7FCD8041C415D3C00FC7A55 /* button.png */; };
-		A7FCD8101C41764000FC7A55 /* collectable.png in Resources */ = {isa = PBXBuildFile; fileRef = 777F61F61C301A3100664D3C /* collectable.png */; };
+		A7FCD8101C41764000FC7A55 /* grow.png in Resources */ = {isa = PBXBuildFile; fileRef = 777F61F61C301A3100664D3C /* grow.png */; };
 		A7FCD8111C41764000FC7A55 /* playerHead.png in Resources */ = {isa = PBXBuildFile; fileRef = 777F61F21C3012B900664D3C /* playerHead.png */; };
 		A7FCD8121C41764000FC7A55 /* playerTail.png in Resources */ = {isa = PBXBuildFile; fileRef = 777F61F31C3012B900664D3C /* playerTail.png */; };
 		A7FCD8131C41764000FC7A55 /* playerTile.png in Resources */ = {isa = PBXBuildFile; fileRef = 777F61F01C3001CA00664D3C /* playerTile.png */; };
 		A7FCD8161C41764200FC7A55 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = A7FCD8081C416AA900FC7A55 /* logo.png */; };
 		A7FCD8171C41764200FC7A55 /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = A7FCD8041C415D3C00FC7A55 /* button.png */; };
-		A7FCD8181C41764200FC7A55 /* collectable.png in Resources */ = {isa = PBXBuildFile; fileRef = 777F61F61C301A3100664D3C /* collectable.png */; };
+		A7FCD8181C41764200FC7A55 /* grow.png in Resources */ = {isa = PBXBuildFile; fileRef = 777F61F61C301A3100664D3C /* grow.png */; };
 		A7FCD8191C41764200FC7A55 /* playerHead.png in Resources */ = {isa = PBXBuildFile; fileRef = 777F61F21C3012B900664D3C /* playerHead.png */; };
 		A7FCD81A1C41764200FC7A55 /* playerTail.png in Resources */ = {isa = PBXBuildFile; fileRef = 777F61F31C3012B900664D3C /* playerTail.png */; };
 		A7FCD81B1C41764200FC7A55 /* playerTile.png in Resources */ = {isa = PBXBuildFile; fileRef = 777F61F01C3001CA00664D3C /* playerTile.png */; };
@@ -90,8 +106,8 @@
 		777F61F01C3001CA00664D3C /* playerTile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = playerTile.png; path = Textures/playerTile.png; sourceTree = "<group>"; };
 		777F61F21C3012B900664D3C /* playerHead.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = playerHead.png; path = Textures/playerHead.png; sourceTree = "<group>"; };
 		777F61F31C3012B900664D3C /* playerTail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = playerTail.png; path = Textures/playerTail.png; sourceTree = "<group>"; };
-		777F61F61C301A3100664D3C /* collectable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = collectable.png; path = Textures/collectable.png; sourceTree = "<group>"; };
-		777F61F81C30248300664D3C /* collectable.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = collectable.svg; path = Textures/collectable.svg; sourceTree = "<group>"; };
+		777F61F61C301A3100664D3C /* grow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = grow.png; path = Textures/grow.png; sourceTree = "<group>"; };
+		777F61F81C30248300664D3C /* grow.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = grow.svg; path = Textures/grow.svg; sourceTree = "<group>"; };
 		777F61F91C30248300664D3C /* playerHead.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = playerHead.svg; path = Textures/playerHead.svg; sourceTree = "<group>"; };
 		777F61FA1C30248300664D3C /* playerTail.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = playerTail.svg; path = Textures/playerTail.svg; sourceTree = "<group>"; };
 		777F61FB1C30248300664D3C /* playerTile.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = playerTile.svg; path = Textures/playerTile.svg; sourceTree = "<group>"; };
@@ -110,6 +126,16 @@
 		77FBF05B1C317F040048D24D /* MenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuScene.swift; path = Scenes/MenuScene.swift; sourceTree = "<group>"; };
 		77FBF05E1C3187790048D24D /* MenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		77FBF0601C3188960048D24D /* MenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuButton.swift; path = Nodes/MenuButton.swift; sourceTree = "<group>"; };
+		A71620931C439318003C1EE3 /* CollectableManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CollectableManager.swift; path = GameLogic/CollectableManager.swift; sourceTree = "<group>"; };
+		A71620971C439DEF003C1EE3 /* ItemGrow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ItemGrow.swift; path = Nodes/Collectables/ItemGrow.swift; sourceTree = "<group>"; };
+		A716209A1C439E09003C1EE3 /* ItemIncSpeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ItemIncSpeed.swift; path = Nodes/Collectables/ItemIncSpeed.swift; sourceTree = "<group>"; };
+		A716209D1C439E19003C1EE3 /* ItemDecSpeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ItemDecSpeed.swift; path = Nodes/Collectables/ItemDecSpeed.swift; sourceTree = "<group>"; };
+		A71620A01C43A023003C1EE3 /* speeddec.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = speeddec.png; path = Textures/speeddec.png; sourceTree = "<group>"; };
+		A71620A11C43A023003C1EE3 /* speeddec.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = speeddec.svg; path = Textures/speeddec.svg; sourceTree = "<group>"; };
+		A71620A21C43A023003C1EE3 /* speedinc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = speedinc.png; path = Textures/speedinc.png; sourceTree = "<group>"; };
+		A71620A31C43A023003C1EE3 /* speedinc.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = speedinc.svg; path = Textures/speedinc.svg; sourceTree = "<group>"; };
+		A71620AC1C43ACE3003C1EE3 /* ItemInvincible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ItemInvincible.swift; path = Nodes/Collectables/ItemInvincible.swift; sourceTree = "<group>"; };
+		A71620AF1C43ACF9003C1EE3 /* ItemExtralive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ItemExtralive.swift; path = Nodes/Collectables/ItemExtralive.swift; sourceTree = "<group>"; };
 		A71926AC1C40FE0A0094DED8 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS9.1.sdk/System/Library/Frameworks/GameKit.framework; sourceTree = DEVELOPER_DIR; };
 		A71926AE1C4100130094DED8 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		A71926B01C4100130094DED8 /* Wormazing.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = Wormazing.entitlements; path = "Wormazing-osx/Wormazing.entitlements"; sourceTree = "<group>"; };
@@ -177,9 +203,8 @@
 			children = (
 				77FBF0591C317E940048D24D /* Scenes */,
 				774666DF1C2D75190043B095 /* Nodes */,
-				7700DA791C34346800059A73 /* Controller.swift */,
+				A71926B11C4104310094DED8 /* GameLogic */,
 				A7F7AAD91C3EC3710031E3A9 /* GameView.swift */,
-				A71926B11C4104310094DED8 /* GameKit */,
 				77FBF05A1C317EAC0048D24D /* Resources */,
 			);
 			name = Wormazing;
@@ -190,8 +215,8 @@
 			isa = PBXGroup;
 			children = (
 				77FBF05D1C31875A0048D24D /* Menu */,
+				A71620961C439D4D003C1EE3 /* Collectables */,
 				774666E21C2D798F0043B095 /* Player.swift */,
-				77133C1A1C2EE9C3000EB7A1 /* Collectable.swift */,
 				77FBF0511C3176590048D24D /* PlayerTiles.swift */,
 				77FBF0531C3177CE0048D24D /* GameOverNode.swift */,
 				77F5D1351C31D2B10045A59E /* PrepareGameNode.swift */,
@@ -207,15 +232,19 @@
 		777F61EF1C2FFDA600664D3C /* Textures */ = {
 			isa = PBXGroup;
 			children = (
+				A71620A01C43A023003C1EE3 /* speeddec.png */,
+				A71620A11C43A023003C1EE3 /* speeddec.svg */,
+				A71620A21C43A023003C1EE3 /* speedinc.png */,
+				A71620A31C43A023003C1EE3 /* speedinc.svg */,
 				A7FCD8081C416AA900FC7A55 /* logo.png */,
 				A7FCD8091C416AA900FC7A55 /* logo.svg */,
 				A7FCD8041C415D3C00FC7A55 /* button.png */,
 				A7FCD8051C415D3C00FC7A55 /* button.svg */,
-				777F61F61C301A3100664D3C /* collectable.png */,
 				777F61F21C3012B900664D3C /* playerHead.png */,
 				777F61F31C3012B900664D3C /* playerTail.png */,
 				777F61F01C3001CA00664D3C /* playerTile.png */,
-				777F61F81C30248300664D3C /* collectable.svg */,
+				777F61F81C30248300664D3C /* grow.svg */,
+				777F61F61C301A3100664D3C /* grow.png */,
 				777F61F91C30248300664D3C /* playerHead.svg */,
 				777F61FA1C30248300664D3C /* playerTail.svg */,
 				777F61FB1C30248300664D3C /* playerTile.svg */,
@@ -281,12 +310,27 @@
 			name = Menu;
 			sourceTree = "<group>";
 		};
-		A71926B11C4104310094DED8 /* GameKit */ = {
+		A71620961C439D4D003C1EE3 /* Collectables */ = {
 			isa = PBXGroup;
 			children = (
-				A71926B21C41045C0094DED8 /* GameKitManager.swift */,
+				77133C1A1C2EE9C3000EB7A1 /* Collectable.swift */,
+				A71620971C439DEF003C1EE3 /* ItemGrow.swift */,
+				A716209A1C439E09003C1EE3 /* ItemIncSpeed.swift */,
+				A716209D1C439E19003C1EE3 /* ItemDecSpeed.swift */,
+				A71620AC1C43ACE3003C1EE3 /* ItemInvincible.swift */,
+				A71620AF1C43ACF9003C1EE3 /* ItemExtralive.swift */,
 			);
-			name = GameKit;
+			name = Collectables;
+			sourceTree = "<group>";
+		};
+		A71926B11C4104310094DED8 /* GameLogic */ = {
+			isa = PBXGroup;
+			children = (
+				7700DA791C34346800059A73 /* Controller.swift */,
+				A71926B21C41045C0094DED8 /* GameKitManager.swift */,
+				A71620931C439318003C1EE3 /* CollectableManager.swift */,
+			);
+			name = GameLogic;
 			sourceTree = "<group>";
 		};
 		A782D8481C40880400D1704C /* Frameworks */ = {
@@ -396,8 +440,10 @@
 			files = (
 				A7FCD8131C41764000FC7A55 /* playerTile.png in Resources */,
 				A7FCD8121C41764000FC7A55 /* playerTail.png in Resources */,
-				A7FCD8101C41764000FC7A55 /* collectable.png in Resources */,
+				A71620A81C43A023003C1EE3 /* speedinc.png in Resources */,
+				A7FCD8101C41764000FC7A55 /* grow.png in Resources */,
 				A7FCD80E1C41764000FC7A55 /* logo.png in Resources */,
+				A71620A41C43A023003C1EE3 /* speeddec.png in Resources */,
 				A7FCD80F1C41764000FC7A55 /* button.png in Resources */,
 				774666D51C2D74D10043B095 /* Assets.xcassets in Resources */,
 				774666D31C2D74D10043B095 /* GameScene.sks in Resources */,
@@ -410,11 +456,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A71620A51C43A023003C1EE3 /* speeddec.png in Resources */,
 				A7FCD8191C41764200FC7A55 /* playerHead.png in Resources */,
-				A7FCD8181C41764200FC7A55 /* collectable.png in Resources */,
+				A7FCD8181C41764200FC7A55 /* grow.png in Resources */,
 				A7FCD81A1C41764200FC7A55 /* playerTail.png in Resources */,
 				77F0A4C01C3C6E9100C7E950 /* GameScene.sks in Resources */,
 				A7FCD8171C41764200FC7A55 /* button.png in Resources */,
+				A71620A91C43A023003C1EE3 /* speedinc.png in Resources */,
 				A7FCD8161C41764200FC7A55 /* logo.png in Resources */,
 				A7FCD81B1C41764200FC7A55 /* playerTile.png in Resources */,
 				778656A11C3C1027001C4E32 /* Main.storyboard in Resources */,
@@ -445,9 +493,15 @@
 				77FBF0541C3177CE0048D24D /* GameOverNode.swift in Sources */,
 				A71AA1751C3FE61B00BC484E /* SingleplayerGame.swift in Sources */,
 				77FBF05C1C317F040048D24D /* MenuScene.swift in Sources */,
+				A71620AD1C43ACE3003C1EE3 /* ItemInvincible.swift in Sources */,
+				A716209E1C439E19003C1EE3 /* ItemDecSpeed.swift in Sources */,
+				A71620B01C43ACF9003C1EE3 /* ItemExtralive.swift in Sources */,
+				A716209B1C439E09003C1EE3 /* ItemIncSpeed.swift in Sources */,
 				77FBF0611C3188960048D24D /* MenuButton.swift in Sources */,
 				77FBF05F1C3187790048D24D /* MenuItem.swift in Sources */,
 				774666CF1C2D74D10043B095 /* AppDelegate.swift in Sources */,
+				A71620981C439DEF003C1EE3 /* ItemGrow.swift in Sources */,
+				A71620941C439318003C1EE3 /* CollectableManager.swift in Sources */,
 				A71AA17B1C40698000BC484E /* PauseMenuNode.swift in Sources */,
 				774666E11C2D75510043B095 /* Gameboard.swift in Sources */,
 				7700DA7A1C34346800059A73 /* Controller.swift in Sources */,
@@ -465,13 +519,17 @@
 				778656AA1C3C1225001C4E32 /* MenuScene.swift in Sources */,
 				778656AB1C3C1225001C4E32 /* DialogNode.swift in Sources */,
 				778656AC1C3C1225001C4E32 /* MainMenu.swift in Sources */,
+				A716209F1C439E19003C1EE3 /* ItemDecSpeed.swift in Sources */,
+				A71620AE1C43ACE3003C1EE3 /* ItemInvincible.swift in Sources */,
 				778656AD1C3C1225001C4E32 /* MenuItem.swift in Sources */,
 				A71AA17C1C40698000BC484E /* PauseMenuNode.swift in Sources */,
 				778656AE1C3C1225001C4E32 /* MenuButton.swift in Sources */,
 				A7F7AAD81C3EBD650031E3A9 /* GameViewTv.swift in Sources */,
+				A71620B11C43ACF9003C1EE3 /* ItemExtralive.swift in Sources */,
 				778656AF1C3C1225001C4E32 /* Gameboard.swift in Sources */,
 				778656B01C3C1225001C4E32 /* Player.swift in Sources */,
 				778656B11C3C1225001C4E32 /* Collectable.swift in Sources */,
+				A71620951C439318003C1EE3 /* CollectableManager.swift in Sources */,
 				778656B21C3C1225001C4E32 /* PlayerTiles.swift in Sources */,
 				A71AA1761C3FE61B00BC484E /* SingleplayerGame.swift in Sources */,
 				A7F7AADB1C3EC3710031E3A9 /* GameView.swift in Sources */,
@@ -480,6 +538,8 @@
 				7786569C1C3C1027001C4E32 /* GameViewController.swift in Sources */,
 				A71926B61C41087A0094DED8 /* GameKitManagerTv.swift in Sources */,
 				778656961C3C1027001C4E32 /* AppDelegate.swift in Sources */,
+				A71620991C439DEF003C1EE3 /* ItemGrow.swift in Sources */,
+				A716209C1C439E09003C1EE3 /* ItemIncSpeed.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

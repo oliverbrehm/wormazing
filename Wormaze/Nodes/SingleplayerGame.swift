@@ -41,9 +41,7 @@ class SingleplayerGame : GameBoard {
                 n++
             }
         }
-        
-        //(self.scene! as! GameScene).debug("n: \(n)")
-        
+                
         return n
     }
     
@@ -62,13 +60,17 @@ class SingleplayerGame : GameBoard {
     
     func numOccupiedTilesAroundHead() -> Int
     {
-        let x = self.players[0].tiles.head()!.x
-        let y = self.players[0].tiles.head()!.y
-        return self.numOccupiedTilesAroundPoint(x, y: y)
+        if let head = self.players[0].tiles.head() {
+            let x = head.x
+            let y = head.y
+            return self.numOccupiedTilesAroundPoint(x, y: y)
+        } else {
+            return 0
+        }
     }
     
-    override func updateStep(currentTime: CFTimeInterval) {
-        super.updateStep(currentTime)
+    override func step() {
+        super.step()
         
         if(self.running) {
             if(self.players.count >= 1) {

@@ -13,20 +13,27 @@ class Collectable: SKSpriteNode {
     var x, y: Int
     
     var lastTime: CFTimeInterval = -1.0
+        
+    init()
+    {
+        self.x = 0
+        self.y = 0
+        
+        super.init(texture: nil, color: SKColor.blackColor(), size: CGSize(width: GameBoard.tileSize, height: GameBoard.tileSize))
+        
+        self.zPosition = GameScene.zPositions.Player
+        self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+
+    }
     
-    static let texture = SKTexture(imageNamed: "collectable")
-    
-    init(x: Int, y: Int)
+    func attatchToGameboard(x: Int, y: Int, gameBoard: GameBoard)
     {
         self.x = x
         self.y = y
         
-        super.init(texture: Collectable.texture, color: SKColor.blueColor(), size: CGSize(width: GameBoard.tileSize, height: GameBoard.tileSize))
+        gameBoard.addChild(self)
         
-        self.zPosition = GameScene.zPositions.Player
-        self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         self.position = CGPoint(x: (CGFloat(x) + 0.5) * GameBoard.tileSize, y: (CGFloat(y) + 0.5) * GameBoard.tileSize);
-        
         self.runAction(SKAction.repeatActionForever(SKAction.rotateByAngle(CGFloat(2 * M_PI), duration: 4.0)))
     }
     
@@ -45,4 +52,6 @@ class Collectable: SKSpriteNode {
         
         lastTime = time
     }
+    
+    func hit(player: Player) {}
 }

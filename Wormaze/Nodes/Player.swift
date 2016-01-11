@@ -21,6 +21,22 @@ class Player: SKNode {
     let color: SKColor
     var didNavigate = false
     var isAlive = true
+    var growTimer = 0 // steps
+    var invincible = false
+    var invincibilityTimer = 0 // steps
+    
+    var invinibilityCount = 3
+    var extralives = 1
+    let invincibilityView = SKNode()
+    let extralivesView = SKNode()
+    
+    static let growingTime = 10 // steps
+    static let invinibilityDuration = 25 // steps
+
+    var lastStepTime: CFTimeInterval = 0;
+
+    var currentSpeed = 7.0
+    static let speedDif = 2.0
     
     required init?(coder aDecoder: NSCoder) {
         gameBoard = GameBoard()
@@ -36,6 +52,147 @@ class Player: SKNode {
         super.init()
         
         self.gameBoard.addChild(self.tiles.addTile(x, y: y, color: self.color, playerDirection: self.nextDirection))
+    }
+    
+    func update(currentTime: CFTimeInterval) -> Bool
+    {
+        let stepTime = 1.0 / currentSpeed
+        if(currentTime > lastStepTime + stepTime) {
+            lastStepTime = currentTime
+            return self.step()
+        }
+        
+        return false
+    }
+    
+    func initialize()
+    {
+        self.invincibilityView.zPosition = GameScene.zPositions.Menu
+        self.invincibilityView.position = CGPoint(x: 10.0, y: -10.0)
+        self.gameBoard.addChild(self.invincibilityView)
+        self.updateInvincibilityView()
+        
+        self.extralivesView.zPosition = GameScene.zPositions.Menu
+        self.extralivesView.position = CGPoint(x: self.gameBoard.size.width - 10.0, y: -10.0)
+        self.gameBoard.addChild(self.extralivesView)
+        self.updateExtralivesView()
+    }
+    
+    func incrementSpeed()
+    {
+        self.currentSpeed += Player.speedDif
+    }
+    
+    func addInvincibility()
+    {
+        self.invinibilityCount++
+        self.updateInvincibilityView()
+    }
+    
+    func useInvincibility()
+    {
+        if(self.invincible || self.invinibilityCount < 1) {
+            return
+        }
+        
+        self.invinibilityCount--
+        self.updateInvincibilityView()
+        self.startInvincibility()
+    }
+    
+    func startInvincibility()
+    {
+        self.invincible = true
+        self.tiles.toggleInvincibility(true)
+    }
+    
+    func stopInvincibility()
+    {
+        self.invincible = false
+        self.tiles.toggleInvincibility(false)
+    }
+    
+    func removeTilesAroundPoint(x: Int, y: Int)
+    {
+        var toDelete: [Int] = []
+        
+        for(var i = 0; i < tiles.tiles.count; i++) {
+            let tile = tiles.tiles[i]
+            if(tile == nil) {
+                continue
+            }
+            
+            let dx = CGFloat.abs(CGFloat(x - tile!.x))
+            let dy = CGFloat.abs(CGFloat(y - tile!.y))
+            
+            if(dx <= 2 && dy <= 2 && tile !== self.tiles.head()) {
+                toDelete.append(i)
+            }
+        }
+        
+        for index in toDelete {
+            self.tiles.removeIndex(index)
+        }
+    }
+    
+    func useExtralive()
+    {
+        self.extralives--
+        self.updateExtralivesView()
+        
+        if let head = self.tiles.head() {
+            self.removeTilesAroundPoint(head.x, y: head.y)
+        }
+    }
+    
+    func updateInvincibilityView()
+    {
+        self.invincibilityView.removeAllChildren()
+        
+        if(self.invinibilityCount < 1) {
+            return
+        }
+        
+        var x: CGFloat = 0.0
+        for _ in 0...self.invinibilityCount - 1 {
+            let inv = SKSpriteNode(color: SKColor.blueColor(), size: CGSize(width: 10.0, height: 10.0))
+            inv.zPosition = GameScene.zPositions.Menu
+            inv.position = CGPoint(x: x, y: 0.0)
+            self.invincibilityView.addChild(inv)
+            x += 20.0
+        }
+    }
+    
+    func addLive()
+    {
+        self.extralives++
+        self.updateExtralivesView()
+    }
+    
+    func updateExtralivesView()
+    {
+        self.extralivesView.removeAllChildren()
+
+        if(self.extralives < 1) {
+            return
+        }
+    
+        var x: CGFloat = 0.0
+        for _ in 0...self.extralives - 1 {
+            let life = SKSpriteNode(color: SKColor.redColor(), size: CGSize(width: 10.0, height: 10.0))
+            life.zPosition = GameScene.zPositions.Menu
+            life.position = CGPoint(x: x, y: 0.0)
+            self.extralivesView.addChild(life)
+            x -= 20.0
+        }
+    }
+    
+    func decrementSpeed()
+    {
+        self.currentSpeed -= Player.speedDif
+        if(self.currentSpeed <= 2.0) {
+            self.currentSpeed = 2.0
+        }
     }
     
     func moveTo(x: Int, y: Int) {
@@ -76,11 +233,15 @@ class Player: SKNode {
         return false
     }
     
-    func checkCollision(x: Int, y: Int) -> Bool {
+    func checkCollision(x: Int, y: Int, invincible: Bool) -> Bool {
         
         if(x < 0 || y < 0
             || x >= gameBoard.tilesX || y >= gameBoard.tilesY) {
             return true;
+        }
+        
+        if(invincible) {
+            return false
         }
         
         for player in self.gameBoard.players
@@ -110,6 +271,8 @@ class Player: SKNode {
             var destX = head.x;
             var destY = head.y;
             
+            var doStep = true
+            
             switch(nextDirection) {
             case .up:
                 destY += 1
@@ -121,16 +284,40 @@ class Player: SKNode {
                 destX += 1
             }
             
-            if(checkCollision(destX, y: destY)) {
-                return true
+            if(checkCollision(destX, y: destY, invincible: self.invincible)) {
+                if(self.invincible) {
+                    doStep = false
+                } else if(extralives > 0) {
+                    self.useExtralive()
+                    self.startInvincibility()
+                    doStep = false
+                } else {
+                    return true // game over
+                }
             }
             
-            self.moveTo(destX, y: destY)
-            self.didNavigate = false
+            if(doStep) {
+                self.moveTo(destX, y: destY)
+                self.didNavigate = false
+            }
             
-            if(self.gameBoard.hitItem(destX, y: destY)) {
-                self.grow(5)
-                self.gameBoard.spawnItem()
+            if let item = self.gameBoard.hitItem(destX, y: destY) {
+                item.hit(self)
+            }
+            
+            if(growTimer >= Player.growingTime) {
+                growTimer = 0
+                self.grow(1)
+            }
+            growTimer++
+            
+            if(invincibilityTimer >= Player.invinibilityDuration) {
+                invincibilityTimer = 0
+                self.stopInvincibility()
+            }
+            
+            if(invincible) {
+                invincibilityTimer++
             }
         }
         

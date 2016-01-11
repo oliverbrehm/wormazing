@@ -17,19 +17,22 @@ protocol GameBoardDelegate
 
 class GameBoard: SKSpriteNode {
     static var tileSize: CGFloat = 15.0
-    static let growingTime = 10 // steps
+    static let spawningTime = 20//50 // steps
     
     var delegate : GameBoardDelegate?
     
     var players: [Player] = []
     
-    var growTimer = 0 // steps
+    var spawnTimer = GameBoard.spawningTime - 15 // steps, initial value so first item will take less time to spawn
     var running = false
     
     var collectables: [Collectable] = []
     
     var tilesX: Int = 0
     var tilesY: Int = 0
+    
+    static let stepTime: CFTimeInterval = 0.13
+    var lastStepTime: CFTimeInterval = 0;
     
     let gameOverNode = SKSpriteNode(color: SKColor.redColor(), size: CGSize(width: 0.0 ,height: 0.0))
     
@@ -112,6 +115,7 @@ class GameBoard: SKSpriteNode {
         }
         
         let player = Player(x:  3, y: (self.players.count + 1) * 5, color: color, gameBoard: self)
+        player.initialize()
         
         self.players.append(player)
         
@@ -120,8 +124,6 @@ class GameBoard: SKSpriteNode {
     
     func startGame()
     {
-        self.spawnItem()
-
         running = true
     }
     
@@ -141,9 +143,11 @@ class GameBoard: SKSpriteNode {
             return
         }
         
-        let collectable = Collectable(x: x, y: y)
-        self.collectables.append(collectable)
-        self.addChild(collectable)
+        ((self.scene as! GameScene).view as! GameView).collectableManager.generate()
+        if let collectable = ((self.scene as! GameScene).view as! GameView).collectableManager.getItem() {
+            self.collectables.append(collectable)
+            collectable.attatchToGameboard(x, y: y, gameBoard: self)
+        }
     }
     
     func gameOver()
@@ -151,7 +155,7 @@ class GameBoard: SKSpriteNode {
         running = false
     }
     
-    func hitItem(x: Int, y: Int) -> Bool {
+    func hitItem(x: Int, y: Int) -> Collectable? {
         var toRemove : Collectable? = nil
         
         for collectable in self.collectables {
@@ -164,16 +168,22 @@ class GameBoard: SKSpriteNode {
         if(toRemove != nil) {
             toRemove!.removeFromParent()
             self.collectables.removeAtIndex(self.collectables.indexOf(toRemove!)!)
-            return true
+            return toRemove
         }
         
-        return false
+        return nil
     }
     
     func pointOccupied(x: Int, y: Int) -> Bool
     {
         for player in self.players {
             if(player.occupiesPoint(x, y: y)) {
+                return true
+            }
+        }
+        
+        for collectable in self.collectables {
+            if(collectable.x == x && collectable.y == y) {
                 return true
             }
         }
@@ -204,30 +214,35 @@ class GameBoard: SKSpriteNode {
         return nil
     }
     
-    func updateStep(currentTime: CFTimeInterval)
+    func update(currentTime: CFTimeInterval)
     {
         if(!running) {
             return;
         }
         
-        let grow = growTimer >= GameBoard.growingTime
-        if(grow) {
-            growTimer = 0
-        }
-        
         for(var i = 0; i < players.count; i++) {
             let player = players[i]
             if(player.isAlive) {
-                if(player.step()) {
+                if(player.update(currentTime)) {
                     player.gameOver()
-                }
-                
-                if(grow) {
-                    player.grow(1)
                 }
             }
         }
         
-        growTimer++
+        if(currentTime > lastStepTime + GameBoard.stepTime) {
+            lastStepTime = currentTime
+            return self.step()
+        }
+    }
+    
+    func step()
+    {
+        // spawn item
+        if(spawnTimer >= GameBoard.spawningTime) {
+            spawnTimer = 0
+            self.spawnItem()
+        }
+        
+        spawnTimer++
     }
 }
