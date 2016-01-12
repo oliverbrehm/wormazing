@@ -17,15 +17,37 @@ struct GameSceneZ
 
 class PlayerColors
 {
-    let player1 = SKColor.redColor()
-    let player2 = SKColor.blueColor()
-    let player3 = SKColor.greenColor()
-    let player4 = SKColor.orangeColor()
+    let colors: [SKColor]
+    let colorNames: [String]
     
-    let player1ColorName = "Red"
-    let player2ColorName = "Blue"
-    let player3ColorName = "Green"
-    let player4ColorName = "Orange"
+    init()
+    {
+        self.colors = [SKColor.redColor(), SKColor.blueColor(), SKColor.greenColor(), SKColor.orangeColor()]
+        self.colorNames = ["Red", "Blue", "Green", "Orange"]
+    }
+    
+    func colorForPlayer(id: Int) -> SKColor?
+    {
+        if(id < 0 || id >= colors.count) {
+            return nil
+        }
+        
+        return colors[id]
+    }
+    
+    func colorNameForPlayer(id: Int) -> String?
+    {
+        if(id < 0 || id >= colorNames.count) {
+            return nil
+        }
+        
+        return colorNames[id]
+    }
+    
+    func colorNameForPlayer(player: Player) -> String?
+    {
+        return self.colorNameForPlayer(player.id)
+    }
 }
 
 protocol GameSceneDelegate
@@ -65,7 +87,7 @@ class GameScene: SKScene, GameBoardDelegate, DialogNodeDelegate {
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
-        self.backgroundColor = SKColor(red: 0.8, green: 0.5, blue: 0.0, alpha: 1.0)
+        self.backgroundColor = SKColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1.0)
         
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5);
         
@@ -81,7 +103,7 @@ class GameScene: SKScene, GameBoardDelegate, DialogNodeDelegate {
         }
         
         self.addChild(gameBoard)
-        gameBoard.initialize(CGSize(width: self.size.width - 40, height: self.size.height - 40))
+        gameBoard.initialize(CGSize(width: self.size.width - 20, height: self.size.height - 60))
         gameBoard.delegate = self
     
         gameBoard.position = CGPoint(x: -gameBoard.size.width / 2.0, y: -gameBoard.size.height / 2.0);

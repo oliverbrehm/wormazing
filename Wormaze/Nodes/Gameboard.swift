@@ -103,18 +103,11 @@ class GameBoard: SKSpriteNode {
             return nil
         }
         
-        let color : SKColor
-        if(players.count == 0) {
-            color = GameScene.playerColors.player1
-        } else if(players.count == 1) {
-            color = GameScene.playerColors.player2
-        } else if(players.count == 2) {
-            color = GameScene.playerColors.player3
-        } else {
-            color = GameScene.playerColors.player4
-        }
+        let id = self.players.count
         
-        let player = Player(x:  3, y: (self.players.count + 1) * 5, color: color, gameBoard: self)
+        let color = GameScene.playerColors.colorForPlayer(id)!
+        
+        let player = Player(id: id, x:  3, y: (self.players.count + 1) * 5, color: color, gameBoard: self)
         player.initialize()
         
         self.players.append(player)
@@ -125,6 +118,25 @@ class GameBoard: SKSpriteNode {
     func startGame()
     {
         running = true
+    }
+    
+    func addPlayerItemsNode(playerId: Int, node: SKSpriteNode)
+    {
+        node.zPosition = GameScene.zPositions.Menu
+        self.addChild(node)
+        
+        switch(playerId) {
+            case 0:
+                node.position = CGPoint(x: 0.0, y: -35.0)
+            case 1:
+                node.position = CGPoint(x: self.size.width - node.size.width, y: -35.0)
+            case 2:
+                node.position = CGPoint(x: 0.0, y: self.size.height)
+            case 3:
+                node.position = CGPoint(x: self.size.width - node.size.width, y: self.size.height)
+            default:
+                node.position = CGPoint(x: 0.0, y: -35.0)
+        }
     }
     
     func spawnItem()

@@ -52,8 +52,13 @@ class GameViewOsx : GameView
                 hbnmController.keyDown(.cancel)
             } else {
                 arrowController.keyDown(.cancel)
-            }        }
+            }
+        }
         
+        if(theEvent.keyCode == 0x77) { // end key
+            arrowController.keyDown(.action)
+        }
+    
         if theEvent.modifierFlags.contains(NSEventModifierFlags.NumericPadKeyMask) {
             if let theArrow = theEvent.charactersIgnoringModifiers, keyChar = theArrow.unicodeScalars.first?.value{
                 
@@ -83,6 +88,8 @@ class GameViewOsx : GameView
                 self.wasdController.keyDown(.down)
             } else if c.containsString("d") {
                 self.wasdController.keyDown(.right)
+            } else if(c.containsString("e")) {
+                self.wasdController.keyDown(.action)
             }
             
             // hbnm controller
@@ -94,6 +101,8 @@ class GameViewOsx : GameView
                 self.hbnmController.keyDown(.down)
             } else if c.containsString("m") {
                 self.hbnmController.keyDown(.right)
+            } else if(c.containsString("j")) {
+                self.hbnmController.keyDown(.action)
             }
         }
     }

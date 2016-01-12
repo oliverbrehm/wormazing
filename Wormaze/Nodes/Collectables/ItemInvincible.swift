@@ -10,7 +10,7 @@ import Foundation
 import SpriteKit
 
 class ItemInvincible: Collectable {
-    static let texture = SKTexture(imageNamed: "invincible")
+    static let texture = SKTexture(imageNamed: "extrainvincible")
 
     override init() {
         super.init()
@@ -18,8 +18,7 @@ class ItemInvincible: Collectable {
     
     override func attatchToGameboard(x: Int, y: Int, gameBoard: GameBoard) {
         super.attatchToGameboard(x, y: y, gameBoard: gameBoard)
-        //self.texture = ItemGrow.texture
-        self.color = SKColor.blueColor()
+        self.texture = ItemInvincible.texture
     }
 
     required init?(coder aDecoder: NSCoder) {

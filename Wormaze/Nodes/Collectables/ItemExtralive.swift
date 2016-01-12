@@ -10,7 +10,7 @@ import Foundation
 import SpriteKit
 
 class ItemExtralive: Collectable {
-    static let texture = SKTexture(imageNamed: "extralive")
+    static let texture = SKTexture(imageNamed: "extralife")
 
     override init() {
         super.init()
@@ -18,8 +18,7 @@ class ItemExtralive: Collectable {
     
     override func attatchToGameboard(x: Int, y: Int, gameBoard: GameBoard) {
         super.attatchToGameboard(x, y: y, gameBoard: gameBoard)
-        //self.texture = ItemGrow.texture
-        self.color = SKColor.redColor()
+        self.texture = ItemExtralive.texture
     }
 
     required init?(coder aDecoder: NSCoder) {

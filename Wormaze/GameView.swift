@@ -12,7 +12,7 @@ import GameController
 
 class GameColors
 {
-    let background = SKColor(red: 0.2, green: 0.6, blue: 0.3, alpha: 1.0)
+    let background = SKColor(red: 0.1, green: 0.3, blue: 0.2, alpha: 1.0)
 }
 
 class GameView : SKView, GameSceneDelegate, MenuSceneDelegate, GameControllerDelegate
@@ -129,7 +129,7 @@ class GameView : SKView, GameSceneDelegate, MenuSceneDelegate, GameControllerDel
         }
     }
     
-    func gameControllerNotAssigned(controller: Controller) {
+    func playerNotAssigned(controller: Controller) {
         if let s = self.gameScene {
             s.addGameController(controller)
         }

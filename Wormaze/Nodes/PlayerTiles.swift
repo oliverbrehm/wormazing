@@ -19,9 +19,7 @@ class Tile : SKSpriteNode {
     static let headTexture = SKTexture(imageNamed: "playerHead")
     static let tailTexture = SKTexture(imageNamed: "playerTail")
     
-    static let invincibilityView = SKSpriteNode(color: SKColor.blueColor(), size: Tile.texture.size())
-    
-    init(x: Int, y: Int, color: SKColor, predecessor: Tile?, playerDirection: PlayerDirection, invincible: Bool) {
+    init(x: Int, y: Int, color: SKColor, predecessor: Tile?, playerDirection: PlayerDirection, invincible: Bool, invincibilityNode: SKSpriteNode) {
         self.x = x;
         self.y = y;
         self.predecessor = predecessor
@@ -33,11 +31,8 @@ class Tile : SKSpriteNode {
         self.zPosition = GameScene.zPositions.Player
         self.colorBlendFactor = 1.0
         
-        Tile.invincibilityView.removeFromParent()
-        
         if(invincible) {
-            Tile.invincibilityView.alpha = 0.5
-            self.addChild(Tile.invincibilityView)
+            self.addChild(invincibilityNode)
         }
 
         switch(playerDirection) { // native sprite rotation pointing up
@@ -49,10 +44,12 @@ class Tile : SKSpriteNode {
     }
     
     func makeBody() {
+        self.removeAllChildren()
         self.texture = Tile.texture
     }
     
     func makeTail() {
+        self.removeAllChildren()
         self.texture = Tile.tailTexture
     }
     
@@ -100,10 +97,17 @@ class PlayerTiles
     
     var invincible = false
     
+    let invincibilityNode = SKSpriteNode(imageNamed: "extrainvincible")
+    
+    init() {
+        self.invincibilityNode.alpha = 0.5
+        self.invincibilityNode.runAction(SKAction.repeatActionForever(SKAction.rotateByAngle(CGFloat(2.0 * M_PI), duration: 0.8)))
+    }
+    
     func addTile(x: Int, y: Int, color: SKColor, playerDirection: PlayerDirection) -> Tile {
         self.head()?.makeBody()
         
-        let tile = Tile(x: x, y: y, color: color, predecessor: self.head(), playerDirection: playerDirection, invincible: invincible)
+        let tile = Tile(x: x, y: y, color: color, predecessor: self.head(), playerDirection: playerDirection, invincible: invincible, invincibilityNode: invincibilityNode)
         if(tiles.isEmpty) {
             tiles.append(tile)
             return tile
@@ -128,9 +132,12 @@ class PlayerTiles
     func toggleInvincibility(invincibility: Bool) {
         self.invincible = invincibility
         
-        if(invincible) {
-            Tile.invincibilityView.removeFromParent()
-            self.head()?.addChild(Tile.invincibilityView)
+        if let head = self.head() {
+            if(invincible) {
+                head.addChild(self.invincibilityNode)
+            } else {
+                head.removeAllChildren()
+            }
         }
     }
     

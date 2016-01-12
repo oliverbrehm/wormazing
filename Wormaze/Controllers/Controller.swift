@@ -10,12 +10,12 @@ import Foundation
 
 enum GameKey
 {
-    case up, down, left, right, enter, cancel
+    case up, down, left, right, enter, cancel, action
 }
 
 protocol GameControllerDelegate
 {
-    func gameControllerNotAssigned(controller: Controller)
+    func playerNotAssigned(controller: Controller)
 }
 
 class Controller
@@ -54,7 +54,7 @@ class Controller
     func keyDown(key: GameKey)
     {
         if(self.player == nil && (key == .up || key == .down || key == .left || key == .right)) {
-            self.delegate?.gameControllerNotAssigned(self)
+            self.delegate?.playerNotAssigned(self)
         }
     
         switch(key) {
@@ -72,10 +72,11 @@ class Controller
             self.dialog?.selectNextItem()
         case .enter:
             self.dialog?.acceptItem()
-            self.player?.useInvincibility()
         case .cancel:
             self.player?.pause()
             self.dialog?.cancel()
+        case .action:
+            self.player?.useInvincibility()
         }
     }
 }

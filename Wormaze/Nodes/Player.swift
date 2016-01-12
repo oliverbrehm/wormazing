@@ -27,11 +27,14 @@ class Player: SKNode {
     
     var invinibilityCount = 3
     var extralives = 1
-    let invincibilityView = SKNode()
-    let extralivesView = SKNode()
+    let itemsView: SKSpriteNode
+    static let invincibilityTexture = SKTexture(imageNamed: "invincible")
+    static let lifeTexture = SKTexture(imageNamed: "life")
     
     static let growingTime = 10 // steps
     static let invinibilityDuration = 25 // steps
+    
+    let id: Int
 
     var lastStepTime: CFTimeInterval = 0;
 
@@ -39,16 +42,21 @@ class Player: SKNode {
     static let speedDif = 2.0
     
     required init?(coder aDecoder: NSCoder) {
+        self.id = 0
         gameBoard = GameBoard()
         tiles = PlayerTiles()
         color = SKColor.blackColor()
+        self.itemsView = SKSpriteNode(coder: aDecoder)!
         super.init(coder: aDecoder)
     }
     
-    init(x: Int, y: Int, color: SKColor, gameBoard: GameBoard) {
+    init(id: Int, x: Int, y: Int, color: SKColor, gameBoard: GameBoard) {
+        self.id = id
         self.gameBoard = gameBoard
         self.tiles = PlayerTiles()
         self.color = color
+        let alphaColor = SKColor(red: color.redComponent, green: color.greenComponent, blue: color.blueComponent, alpha: 0.5)
+        self.itemsView = SKSpriteNode(color: alphaColor, size: CGSize(width: 300.0, height: 35.0))
         super.init()
         
         self.gameBoard.addChild(self.tiles.addTile(x, y: y, color: self.color, playerDirection: self.nextDirection))
@@ -67,15 +75,9 @@ class Player: SKNode {
     
     func initialize()
     {
-        self.invincibilityView.zPosition = GameScene.zPositions.Menu
-        self.invincibilityView.position = CGPoint(x: 10.0, y: -10.0)
-        self.gameBoard.addChild(self.invincibilityView)
-        self.updateInvincibilityView()
-        
-        self.extralivesView.zPosition = GameScene.zPositions.Menu
-        self.extralivesView.position = CGPoint(x: self.gameBoard.size.width - 10.0, y: -10.0)
-        self.gameBoard.addChild(self.extralivesView)
-        self.updateExtralivesView()
+        self.gameBoard.addPlayerItemsNode(self.id, node: self.itemsView)
+        self.updateItemsView()
+        self.itemsView.anchorPoint = CGPoint(x: 0.0, y: 0.0)
     }
     
     func incrementSpeed()
@@ -86,17 +88,17 @@ class Player: SKNode {
     func addInvincibility()
     {
         self.invinibilityCount++
-        self.updateInvincibilityView()
+        self.updateItemsView()
     }
     
     func useInvincibility()
     {
-        if(self.invincible || self.invinibilityCount < 1) {
+        if(!self.gameBoard.running || self.invincible || self.invinibilityCount < 1) {
             return
         }
         
         self.invinibilityCount--
-        self.updateInvincibilityView()
+        self.updateItemsView()
         self.startInvincibility()
     }
     
@@ -138,53 +140,50 @@ class Player: SKNode {
     func useExtralive()
     {
         self.extralives--
-        self.updateExtralivesView()
+        self.updateItemsView()
         
-        if let head = self.tiles.head() {
-            self.removeTilesAroundPoint(head.x, y: head.y)
+        for player in self.gameBoard.players {
+            if let head = player.tiles.head() {
+                // TODO only 1st player tiles get removed
+                player.removeTilesAroundPoint(head.x, y: head.y)
+            }
         }
     }
     
-    func updateInvincibilityView()
+    func updateItemsView()
     {
-        self.invincibilityView.removeAllChildren()
+        self.itemsView.removeAllChildren()
+        var x: CGFloat
         
-        if(self.invinibilityCount < 1) {
-            return
+        if(self.invinibilityCount >= 1) {
+            x = 0.0
+            for _ in 0...self.invinibilityCount - 1 {
+                let inv = SKSpriteNode(texture: Player.invincibilityTexture)
+                inv.zPosition = GameScene.zPositions.Menu
+                inv.position = CGPoint(x: x, y: 0.0)
+                inv.anchorPoint = CGPoint(x: 0.0, y: 0.0)
+                self.itemsView.addChild(inv)
+                x += 20.0
+            }
         }
         
-        var x: CGFloat = 0.0
-        for _ in 0...self.invinibilityCount - 1 {
-            let inv = SKSpriteNode(color: SKColor.blueColor(), size: CGSize(width: 10.0, height: 10.0))
-            inv.zPosition = GameScene.zPositions.Menu
-            inv.position = CGPoint(x: x, y: 0.0)
-            self.invincibilityView.addChild(inv)
-            x += 20.0
+        if(self.extralives >= 1) {
+            x = 0.0
+            for _ in 0...self.extralives - 1 {
+                let life = SKSpriteNode(texture: Player.lifeTexture)
+                life.zPosition = GameScene.zPositions.Menu
+                life.position = CGPoint(x: x, y: 20.0)
+                life.anchorPoint = CGPoint(x: 0.0, y: 0.0)
+                self.itemsView.addChild(life)
+                x += 20.0
+            }
         }
     }
     
     func addLive()
     {
         self.extralives++
-        self.updateExtralivesView()
-    }
-    
-    func updateExtralivesView()
-    {
-        self.extralivesView.removeAllChildren()
-
-        if(self.extralives < 1) {
-            return
-        }
-    
-        var x: CGFloat = 0.0
-        for _ in 0...self.extralives - 1 {
-            let life = SKSpriteNode(color: SKColor.redColor(), size: CGSize(width: 10.0, height: 10.0))
-            life.zPosition = GameScene.zPositions.Menu
-            life.position = CGPoint(x: x, y: 0.0)
-            self.extralivesView.addChild(life)
-            x -= 20.0
-        }
+        self.updateItemsView()
     }
     
     func decrementSpeed()
@@ -296,9 +295,10 @@ class Player: SKNode {
                 }
             }
             
+            self.didNavigate = false
+            
             if(doStep) {
                 self.moveTo(destX, y: destY)
-                self.didNavigate = false
             }
             
             if let item = self.gameBoard.hitItem(destX, y: destY) {

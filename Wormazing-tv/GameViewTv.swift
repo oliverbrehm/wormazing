@@ -47,6 +47,8 @@ class GameViewTv : GameView
                 siriRemoteController.keyDown(.cancel)
             case UIPressType.Select:
                 siriRemoteController.keyDown(.enter)
+            case UIPressType.PlayPause:
+                siriRemoteController.keyDown(.action)
             default:
                 break
         }

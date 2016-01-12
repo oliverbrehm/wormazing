@@ -31,17 +31,7 @@ class MultiplayerGame : GameBoard {
         if(winner == nil) {
             message = "Game over. No winner, no loser."
         } else {
-            var colorString = ""
-            if(winner!.color == GameScene.playerColors.player1) {
-                colorString = GameScene.playerColors.player1ColorName
-            } else if(winner!.color == GameScene.playerColors.player2) {
-                colorString = GameScene.playerColors.player2ColorName
-            } else if(winner!.color == GameScene.playerColors.player3) {
-                colorString = GameScene.playerColors.player3ColorName
-            } else if(winner!.color == GameScene.playerColors.player4) {
-                colorString = GameScene.playerColors.player4ColorName
-            }
-        
+            let colorString = GameScene.playerColors.colorNameForPlayer(winner!)!
             message = "Game over. \(colorString) player wins!"
             color = winner!.color
         }
