@@ -9,6 +9,16 @@
 import Foundation
 import SpriteKit
 
+class ItemScores
+{
+    static let grow: Float = 500.0
+    static let speedInc: Float = 2000.0
+    static let speedDec: Float = 100.0
+    static let invincible: Float = 50.0
+    static let extralife: Float = 500.0
+    static let coin: Float = 200.0
+}
+
 class Collectable: SKSpriteNode {
     var x, y: Int
     
@@ -56,5 +66,30 @@ class Collectable: SKSpriteNode {
         lastTime = time
     }
     
-    func hit(player: Player) {}
+    func score() -> Float {
+        return 0.0 // implemented in subclass
+    }
+    
+    func hit(player: Player) {
+        if let board = gameboard as? SingleplayerGame {
+        let scoreLabel = SKLabelNode(fontNamed: "Chalkduster")
+            scoreLabel.text = "\(Int(self.score()))"
+            scoreLabel.fontSize = 16.0
+            scoreLabel.position = CGPoint(x: self.position.x, y: self.position.y + 30.0)
+            scoreLabel.zPosition = GameScene.zPositions.GameboardOverlay
+            
+            board.addChild(scoreLabel)
+            
+            let waitAction = SKAction.waitForDuration(0.5)
+            let moveAction = SKAction.moveTo(board.scoreLabel.position, duration: 0.3)
+            moveAction.timingMode = SKActionTimingMode.EaseInEaseOut
+            
+            scoreLabel.runAction(SKAction.sequence([waitAction, moveAction]), completion: {
+                board.addScore(self.score())
+                scoreLabel.removeFromParent()
+            })
+        }
+    
+
+    }
 }

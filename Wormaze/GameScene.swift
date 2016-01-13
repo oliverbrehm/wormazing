@@ -12,7 +12,8 @@ struct GameSceneZ
 {
     let Background = CGFloat(0)
     let Player = CGFloat(1)
-    let Menu = CGFloat(2)
+    let GameboardOverlay = CGFloat(2)
+    let Menu = CGFloat(3)
 }
 
 class PlayerColors

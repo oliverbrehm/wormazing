@@ -26,6 +26,11 @@ class ItemInvincible: Collectable {
     }
 
     override func hit(player: Player) {
+        super.hit(player)
         player.addInvincibility()
+    }
+    
+    override func score() -> Float {
+        return ItemScores.invincible
     }
 }

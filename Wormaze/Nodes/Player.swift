@@ -266,6 +266,10 @@ class Player: SKNode {
     
     func step() -> Bool
     {
+        if let board = self.gameBoard as? SingleplayerGame {
+            board.updateScore()
+        }
+    
         if let head = self.tiles.head() {
             var destX = head.x;
             var destY = head.y;

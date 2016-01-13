@@ -26,6 +26,11 @@ class ItemGrow: Collectable {
     }
 
     override func hit(player: Player) {
+        super.hit(player)
         player.grow(5)
+    }
+    
+    override func score() -> Float {
+        return ItemScores.grow
     }
 }

@@ -26,13 +26,20 @@ class ItemCoin: Collectable {
     }
 
     override func hit(player: Player) {
+        super.hit(player)
+        
         let movingCoin = SKSpriteNode(texture: ItemCoin.texture)
         movingCoin.position = self.position
+        movingCoin.zPosition = GameScene.zPositions.GameboardOverlay
         gameboard?.addChild(movingCoin)
         movingCoin.runAction(SKAction.moveTo(gameboard!.coinsNode.position, duration: 0.5), completion: {
             movingCoin.removeFromParent()
             let coins = ++GameView.instance!.coins
             self.gameboard!.coinsNode.update(coins)
         })
+    }
+    
+    override func score() -> Float {
+        return ItemScores.coin
     }
 }

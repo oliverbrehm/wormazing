@@ -30,6 +30,7 @@ class PrepareGameNode: DialogNode {
         gameCostNode.position = CGPoint(x: startGameButton!.size.width / 2.0 + 10.0, y: ItemCoin.texture.size().height / 2.0)
         startGameButton!.addChild(gameCostNode)
         gameCostNode.initialize(GameScene.gameCost)
+        gameCostNode.setColor(SKColor.redColor())
         
         text = SKLabelNode(fontNamed: "Chalkduster")
         text!.text = "Press any key on your controller (wasd / hbnm / arrow keys / siri remote)"

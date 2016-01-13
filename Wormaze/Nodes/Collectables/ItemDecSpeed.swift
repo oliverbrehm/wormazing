@@ -22,6 +22,11 @@ class ItemDecSpeed: Collectable {
     }
     
     override func hit(player: Player) {
+        super.hit(player)
         player.decrementSpeed()
+    }
+    
+    override func score() -> Float {
+        return ItemScores.speedDec
     }
 }

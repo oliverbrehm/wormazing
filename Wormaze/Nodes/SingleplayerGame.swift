@@ -20,12 +20,25 @@ class SingleplayerGame : GameBoard {
         scoreLabel.fontColor = SKColor.blackColor()
         scoreLabel.position = CGPoint(x: self.size.width / 2.0, y: self.size.height + scoreLabel.fontSize / 2.0)
         self.addChild(scoreLabel)
-        self.updateScore()
+        self.updateScoreNode()
     }
 
     func updateScore()
     {
+        let add = Float(self.players[0].length()) * Float(self.numOccupiedTilesAroundHead())
+        score += 1.0 + (add / 100.0)
+        updateScoreNode()
+    }
+
+    func updateScoreNode()
+    {
         scoreLabel.text = "\(Int(score))"
+    }
+    
+    func addScore(score: Float)
+    {
+        self.score += score
+        self.updateScoreNode()
     }
     
     func numOccupiedTilesAroundPoint(x: Int, y: Int) -> Int
@@ -49,7 +62,7 @@ class SingleplayerGame : GameBoard {
         super.newGame()
         
         self.score = 0.0
-        self.updateScore()
+        self.updateScoreNode()
     }
     
     override func gameOver() {
@@ -73,13 +86,6 @@ class SingleplayerGame : GameBoard {
         super.step()
         
         if(self.running) {
-            if(self.players.count >= 1) {
-                let add = Float(self.players[0].length()) * Float(self.numOccupiedTilesAroundHead())
-                score += 1.0 + (add / 100.0)
-                
-                updateScore()
-            }
-        
             if(numberOfAlivePlayers() < 1) {
                 gameOver()
             }

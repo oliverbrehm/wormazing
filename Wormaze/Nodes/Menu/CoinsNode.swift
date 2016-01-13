@@ -31,4 +31,8 @@ class CoinsNode: SKNode {
             l.text = "x \(coins)"
         }
     }
+    
+    func setColor(color: SKColor) {
+        self.coinLabel?.fontColor = color
+    }
 }
