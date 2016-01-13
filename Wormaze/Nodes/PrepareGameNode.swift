@@ -26,6 +26,11 @@ class PrepareGameNode: DialogNode {
         self.startGameButton = MenuButton(label: "Start game", name: "startGame");
         startGameButton!.position = CGPoint(x: 0.0, y: 100.0)
         
+        let gameCostNode = CoinsNode()
+        gameCostNode.position = CGPoint(x: startGameButton!.size.width / 2.0 + 10.0, y: ItemCoin.texture.size().height / 2.0)
+        startGameButton!.addChild(gameCostNode)
+        gameCostNode.initialize(GameScene.gameCost)
+        
         text = SKLabelNode(fontNamed: "Chalkduster")
         text!.text = "Press any key on your controller (wasd / hbnm / arrow keys / siri remote)"
         text!.position = CGPoint(x: -0.0, y: 0.0)

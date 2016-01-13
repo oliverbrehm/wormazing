@@ -27,10 +27,34 @@ class GameView : SKView, GameSceneDelegate, MenuSceneDelegate, GameControllerDel
     var gameKitManager: GameKitManager?
     var collectableManager: CollectableManager = CollectableManager()
     
-    func initialize()
-    {    
+    var coins = 0
+    var extralives = 0
+    
+    let userDefaultsCoinsKey = "userCoins"
+    let userDefaultsLivesKey = "userLives"
+    
+    static var instance: GameView?
+    
+    func initialize(instance: GameView?)
+    {
+        GameView.instance = instance
+        self.initializeUserData()
+    
         self.menuScene = MenuScene(menuDelegate: self)
         self.presentScene(menuScene)
+    }
+    
+    func initializeUserData()
+    {
+        coins = NSUserDefaults.standardUserDefaults().integerForKey(userDefaultsCoinsKey)
+        extralives = NSUserDefaults.standardUserDefaults().integerForKey(userDefaultsLivesKey)
+    }
+    
+    func serializeUserData()
+    {
+        NSUserDefaults.standardUserDefaults().setInteger(coins, forKey: userDefaultsCoinsKey)
+        NSUserDefaults.standardUserDefaults().setInteger(extralives, forKey: userDefaultsLivesKey)
+        NSUserDefaults.standardUserDefaults().synchronize()
     }
     
     func initializeGameControllers()

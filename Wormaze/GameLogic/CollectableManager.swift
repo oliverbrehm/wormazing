@@ -11,6 +11,7 @@ import Foundation
 class SpawningWeights
 {
     static let grow = 50//100
+    static let coin = 100
     static let speedinc = 20
     static let speeddec = 15
     static let invicible = 8
@@ -18,7 +19,7 @@ class SpawningWeights
     
     static func sum() -> Int
     {
-        return grow + speedinc + speeddec + invicible + extralive
+        return grow + speedinc + speeddec + invicible + extralive + coin
     }
 }
 
@@ -34,20 +35,22 @@ class CollectableManager {
         return current
     }
     
-    func generate()
+    func generate(gameboard: GameBoard)
     {
         let r = Int(arc4random()) % SpawningWeights.sum()
         
         if(r < SpawningWeights.grow) {
-            current = ItemGrow()
+            current = ItemGrow(gameboard: gameboard)
         } else if(r < SpawningWeights.grow + SpawningWeights.speedinc) {
-            current = ItemIncSpeed()
+            current = ItemIncSpeed(gameboard: gameboard)
         } else if(r < SpawningWeights.grow + SpawningWeights.speedinc + SpawningWeights.speeddec) {
-            current = ItemDecSpeed()
+            current = ItemDecSpeed(gameboard: gameboard)
         } else if(r < SpawningWeights.grow + SpawningWeights.speedinc + SpawningWeights.speeddec + SpawningWeights.invicible) {
-            current = ItemInvincible()
+            current = ItemInvincible(gameboard: gameboard)
+        } else if(r < SpawningWeights.grow + SpawningWeights.speedinc + SpawningWeights.speeddec + SpawningWeights.invicible + SpawningWeights.extralive) {
+            current = ItemExtralive(gameboard: gameboard)
         } else {
-            current = ItemExtralive()
-        }    
+            current = ItemCoin(gameboard: gameboard)
+        }
     }
 }

@@ -35,6 +35,7 @@ class GameBoard: SKSpriteNode {
     var lastStepTime: CFTimeInterval = 0;
     
     let gameOverNode = SKSpriteNode(color: SKColor.redColor(), size: CGSize(width: 0.0 ,height: 0.0))
+    let coinsNode = CoinsNode()
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -60,12 +61,15 @@ class GameBoard: SKSpriteNode {
         self.size.width = CGFloat(self.tilesX) * GameBoard.tileSize
         self.size.height = CGFloat(self.tilesY) * GameBoard.tileSize
         
-        // game over node
         self.gameOverNode.size = frame.size
         self.gameOverNode.position = CGPoint(x: 0.0, y: 0.0)
         self.gameOverNode.anchorPoint = CGPoint(x: 0.0, y: 0.0)
         self.gameOverNode.alpha = 0.8
         self.gameOverNode.zPosition = 10
+        
+        coinsNode.position = CGPoint(x: -25.0, y: self.size.height + 25.0)
+        self.addChild(coinsNode)
+        coinsNode.initialize(GameView.instance!.coins)
     }
     
     func newGame()
@@ -155,7 +159,7 @@ class GameBoard: SKSpriteNode {
             return
         }
         
-        ((self.scene as! GameScene).view as! GameView).collectableManager.generate()
+        ((self.scene as! GameScene).view as! GameView).collectableManager.generate(self)
         if let collectable = ((self.scene as! GameScene).view as! GameView).collectableManager.getItem() {
             self.collectables.append(collectable)
             collectable.attatchToGameboard(x, y: y, gameBoard: self)
@@ -163,7 +167,9 @@ class GameBoard: SKSpriteNode {
     }
     
     func gameOver()
-    {        
+    {
+        GameView.instance?.serializeUserData()
+
         running = false
     }
     

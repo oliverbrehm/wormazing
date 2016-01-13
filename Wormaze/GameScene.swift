@@ -83,6 +83,8 @@ class GameScene: SKScene, GameBoardDelegate, DialogNodeDelegate {
     
     var gameSceneDelegate: GameSceneDelegate?
     
+    static let gameCost = 10
+    
     let debugLabel = SKLabelNode(fontNamed: "Chalkduster")
     
     override func didMoveToView(view: SKView) {
@@ -238,12 +240,26 @@ class GameScene: SKScene, GameBoardDelegate, DialogNodeDelegate {
     }
     
     func toMenu() {
+        GameView.instance?.serializeUserData()
+    
         (self.view as! GameView).removeAllControls()
         
         self.gameSceneDelegate?.gameSceneDidCancel()
     }
     
     func prepareGameNodeDidContinue() {
+        var coins = GameView.instance!.coins
+        if(coins >= GameScene.gameCost) {
+            coins -= GameScene.gameCost
+        } else {
+            // TODO not enough coins handler
+            coins = 0
+        }
+        
+        GameView.instance!.coins = coins
+        GameView.instance!.serializeUserData()
+    
+        self.gameBoard.coinsNode.update(coins)
         self.gameBoard.startGame()
         self.gameState = .RunningGame
         self.prepareGameNode?.removeFromParent()

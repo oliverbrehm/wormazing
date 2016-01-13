@@ -15,8 +15,8 @@ class GameViewOsx : GameView
     let hbnmController = Controller(name: "hbnmController")
     let arrowController = Controller(name: "arrowKeysController")
     
-    override func initialize() {
-        super.initialize()
+    override func initialize(instance: GameView?) {
+        super.initialize(instance)
         
         self.gameKitManager = GameKitManagerOsx()
         self.gameKitManager!.initialize()

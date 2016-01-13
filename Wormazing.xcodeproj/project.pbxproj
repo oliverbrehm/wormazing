@@ -81,6 +81,12 @@
 		A79479661C44F3AA00A71E94 /* life.png in Resources */ = {isa = PBXBuildFile; fileRef = A794795A1C44F38D00A71E94 /* life.png */; };
 		A79479691C44F40000A71E94 /* extralife.png in Resources */ = {isa = PBXBuildFile; fileRef = A79479681C44F40000A71E94 /* extralife.png */; };
 		A794796A1C44F40300A71E94 /* extralife.png in Resources */ = {isa = PBXBuildFile; fileRef = A79479681C44F40000A71E94 /* extralife.png */; };
+		A7BF6C8F1C46456800165C3D /* coin.png in Resources */ = {isa = PBXBuildFile; fileRef = A7BF6C8D1C46456800165C3D /* coin.png */; };
+		A7BF6C901C46456800165C3D /* coin.svg in Resources */ = {isa = PBXBuildFile; fileRef = A7BF6C8E1C46456800165C3D /* coin.svg */; };
+		A7BF6C921C46458300165C3D /* ItemCoin.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7BF6C911C46458300165C3D /* ItemCoin.swift */; };
+		A7BF6C931C46458300165C3D /* ItemCoin.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7BF6C911C46458300165C3D /* ItemCoin.swift */; };
+		A7BF6C951C46504500165C3D /* CoinsNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7BF6C941C46504500165C3D /* CoinsNode.swift */; };
+		A7BF6C961C46504500165C3D /* CoinsNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7BF6C941C46504500165C3D /* CoinsNode.swift */; };
 		A7F7AAD61C3EBD590031E3A9 /* GameViewOsx.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F7AAD51C3EBD590031E3A9 /* GameViewOsx.swift */; };
 		A7F7AAD81C3EBD650031E3A9 /* GameViewTv.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F7AAD71C3EBD650031E3A9 /* GameViewTv.swift */; };
 		A7F7AADA1C3EC3710031E3A9 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F7AAD91C3EC3710031E3A9 /* GameView.swift */; };
@@ -163,6 +169,10 @@
 		A794795B1C44F38D00A71E94 /* life.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = life.svg; path = Textures/life.svg; sourceTree = "<group>"; };
 		A794795C1C44F38D00A71E94 /* extralife.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = extralife.svg; path = Textures/extralife.svg; sourceTree = "<group>"; };
 		A79479681C44F40000A71E94 /* extralife.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = extralife.png; path = Textures/extralife.png; sourceTree = "<group>"; };
+		A7BF6C8D1C46456800165C3D /* coin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = coin.png; path = Textures/coin.png; sourceTree = "<group>"; };
+		A7BF6C8E1C46456800165C3D /* coin.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = coin.svg; path = Textures/coin.svg; sourceTree = "<group>"; };
+		A7BF6C911C46458300165C3D /* ItemCoin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCoin.swift; sourceTree = "<group>"; };
+		A7BF6C941C46504500165C3D /* CoinsNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoinsNode.swift; path = Nodes/Menu/CoinsNode.swift; sourceTree = "<group>"; };
 		A7F7AAD51C3EBD590031E3A9 /* GameViewOsx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameViewOsx.swift; path = "Wormazing-osx/GameViewOsx.swift"; sourceTree = "<group>"; };
 		A7F7AAD71C3EBD650031E3A9 /* GameViewTv.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewTv.swift; sourceTree = "<group>"; };
 		A7F7AAD91C3EC3710031E3A9 /* GameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
@@ -248,6 +258,8 @@
 		777F61EF1C2FFDA600664D3C /* Textures */ = {
 			isa = PBXGroup;
 			children = (
+				A7BF6C8D1C46456800165C3D /* coin.png */,
+				A7BF6C8E1C46456800165C3D /* coin.svg */,
 				A79479681C44F40000A71E94 /* extralife.png */,
 				A79479561C44F38D00A71E94 /* extrainvincible.png */,
 				A79479571C44F38D00A71E94 /* extrainvincible.svg */,
@@ -330,6 +342,7 @@
 				77FBF0571C31791A0048D24D /* MainMenu.swift */,
 				77FBF05E1C3187790048D24D /* MenuItem.swift */,
 				77FBF0601C3188960048D24D /* MenuButton.swift */,
+				A7BF6C941C46504500165C3D /* CoinsNode.swift */,
 			);
 			name = Menu;
 			sourceTree = "<group>";
@@ -343,6 +356,7 @@
 				A716209D1C439E19003C1EE3 /* ItemDecSpeed.swift */,
 				A71620AC1C43ACE3003C1EE3 /* ItemInvincible.swift */,
 				A71620AF1C43ACF9003C1EE3 /* ItemExtralive.swift */,
+				A7BF6C911C46458300165C3D /* ItemCoin.swift */,
 			);
 			name = Collectables;
 			sourceTree = "<group>";
@@ -466,6 +480,7 @@
 				A794795D1C44F38D00A71E94 /* extrainvincible.png in Resources */,
 				A7FCD8121C41764000FC7A55 /* playerTail.png in Resources */,
 				A71620A81C43A023003C1EE3 /* speedinc.png in Resources */,
+				A7BF6C8F1C46456800165C3D /* coin.png in Resources */,
 				A7FCD8101C41764000FC7A55 /* grow.png in Resources */,
 				A7FCD80E1C41764000FC7A55 /* logo.png in Resources */,
 				A71620A41C43A023003C1EE3 /* speeddec.png in Resources */,
@@ -475,6 +490,7 @@
 				A794795F1C44F38D00A71E94 /* invincible.png in Resources */,
 				A79479611C44F38D00A71E94 /* life.png in Resources */,
 				774666D31C2D74D10043B095 /* GameScene.sks in Resources */,
+				A7BF6C901C46456800165C3D /* coin.svg in Resources */,
 				774666D81C2D74D10043B095 /* MainMenu.xib in Resources */,
 				A7FCD8111C41764000FC7A55 /* playerHead.png in Resources */,
 			);
@@ -515,6 +531,7 @@
 				77F5D1361C31D2B10045A59E /* PrepareGameNode.swift in Sources */,
 				A7F7AAD61C3EBD590031E3A9 /* GameViewOsx.swift in Sources */,
 				77FBF0561C3178370048D24D /* DialogNode.swift in Sources */,
+				A7BF6C921C46458300165C3D /* ItemCoin.swift in Sources */,
 				A7F7AADA1C3EC3710031E3A9 /* GameView.swift in Sources */,
 				A71AA1781C3FE62700BC484E /* MultiplayerGame.swift in Sources */,
 				A71926B81C41088A0094DED8 /* GameKitManagerOsx.swift in Sources */,
@@ -536,6 +553,7 @@
 				A71620941C439318003C1EE3 /* CollectableManager.swift in Sources */,
 				A71AA17B1C40698000BC484E /* PauseMenuNode.swift in Sources */,
 				774666E11C2D75510043B095 /* Gameboard.swift in Sources */,
+				A7BF6C951C46504500165C3D /* CoinsNode.swift in Sources */,
 				7700DA7A1C34346800059A73 /* Controller.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -552,11 +570,13 @@
 				778656AB1C3C1225001C4E32 /* DialogNode.swift in Sources */,
 				778656AC1C3C1225001C4E32 /* MainMenu.swift in Sources */,
 				A716209F1C439E19003C1EE3 /* ItemDecSpeed.swift in Sources */,
+				A7BF6C961C46504500165C3D /* CoinsNode.swift in Sources */,
 				A71620AE1C43ACE3003C1EE3 /* ItemInvincible.swift in Sources */,
 				778656AD1C3C1225001C4E32 /* MenuItem.swift in Sources */,
 				A71AA17C1C40698000BC484E /* PauseMenuNode.swift in Sources */,
 				778656AE1C3C1225001C4E32 /* MenuButton.swift in Sources */,
 				A7F7AAD81C3EBD650031E3A9 /* GameViewTv.swift in Sources */,
+				A7BF6C931C46458300165C3D /* ItemCoin.swift in Sources */,
 				A71620B11C43ACF9003C1EE3 /* ItemExtralive.swift in Sources */,
 				778656AF1C3C1225001C4E32 /* Gameboard.swift in Sources */,
 				778656B01C3C1225001C4E32 /* Player.swift in Sources */,

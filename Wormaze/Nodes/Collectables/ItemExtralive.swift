@@ -12,8 +12,8 @@ import SpriteKit
 class ItemExtralive: Collectable {
     static let texture = SKTexture(imageNamed: "extralife")
 
-    override init() {
-        super.init()
+    override init(gameboard: GameBoard) {
+        super.init(gameboard: gameboard)
     }
     
     override func attatchToGameboard(x: Int, y: Int, gameBoard: GameBoard) {

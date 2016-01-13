@@ -12,8 +12,8 @@ import SpriteKit
 class ItemIncSpeed: Collectable {
     static let texture = SKTexture(imageNamed: "speedinc")
 
-    override init() {
-        super.init()
+    override init(gameboard: GameBoard) {
+        super.init(gameboard: gameboard)     
         self.texture = ItemIncSpeed.texture
     }
 

@@ -13,9 +13,12 @@ class Collectable: SKSpriteNode {
     var x, y: Int
     
     var lastTime: CFTimeInterval = -1.0
-        
-    init()
+    var gameboard: GameBoard?
+    
+    init(gameboard: GameBoard)
     {
+        self.gameboard = gameboard
+    
         self.x = 0
         self.y = 0
         

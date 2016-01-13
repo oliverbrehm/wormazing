@@ -41,6 +41,11 @@ class MainMenu : DialogNode
         testButton.position = CGPoint(x: 0.0, y: -200.0)
         testButton.initialize()
         self.addItem(testButton)
+        
+        let coinsNode = CoinsNode()
+        coinsNode.position = CGPoint(x: -self.size.width / 2.0  + 5.0, y: self.size.height / 2.0 - 5.0)
+        self.addChild(coinsNode)
+        coinsNode.initialize(GameView.instance!.coins)
 
         // TODO if osx
         let exitGameButton = MenuButton(label: "Exit", name: "exitGame");
