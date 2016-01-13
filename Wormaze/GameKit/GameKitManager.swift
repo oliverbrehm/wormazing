@@ -14,6 +14,7 @@ class GameKitManager
     var leaderboardIdentifier: String?
 
     static let GameCenterNotAuthenticatedNotification = "GameCenterNotAuthenticatedNotification"
+    static let GameCenterAuthenticatedNotification = "GameCenterAuthenticatedNotification"
 
     func initialize()
     {
@@ -30,7 +31,11 @@ class GameKitManager
         gkScore.value = Int64(score)
         
         GKScore.reportScores([gkScore]) { (error: NSError?) -> Void in
-            
+            if(error != nil) {
+                print("reportSingleplayerHighscore: \(error!.description)")
+            } else {
+                print("reported highscore \(score).")
+            }
         }
     }
     

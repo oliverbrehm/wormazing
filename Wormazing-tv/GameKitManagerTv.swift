@@ -29,6 +29,7 @@ class GameKitManagerTv: GameKitManager {
                         print(error)
                     } else {
                         self.leaderboardIdentifier = identifier
+                        NSNotificationCenter.defaultCenter().postNotificationName(GameKitManager.GameCenterAuthenticatedNotification, object: self)
                     }
                 })
             }

@@ -17,8 +17,23 @@ class MainMenu : DialogNode
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)        
     }
     
+    func addLeaderboard()
+    {
+        let leaderboard = LeaderboardNode()
+        leaderboard.position = CGPoint(x: -400, y: -200)
+        self.addChild(leaderboard)
+        leaderboard.initialize()
+    }
+    
+    func gameCenterDidAuthenticate()
+    {
+        self.addLeaderboard()
+    }
+    
     func initialize()
     {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("gameCenterDidAuthenticate"), name: GameKitManager.GameCenterAuthenticatedNotification, object: nil)
+
         self.color = SKColor(white: 1.0, alpha: 0.0)
     
         let logo = SKSpriteNode(imageNamed: "logo")

@@ -22,9 +22,11 @@ class GameKitManagerOsx: GameKitManager {
             } else if(localPlayer.authenticated) {
                 localPlayer.loadDefaultLeaderboardIdentifierWithCompletionHandler({ (identifier: String?, error: NSError?) -> Void in
                     if(error != nil) {
-                        print(error)
+                        print("authenticateHandler: \(error!.description)")
                     } else {
+                        print("gamcenter authenticated")
                         self.leaderboardIdentifier = identifier
+                        NSNotificationCenter.defaultCenter().postNotificationName(GameKitManager.GameCenterAuthenticatedNotification, object: self)
                     }
                 })
             }
