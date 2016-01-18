@@ -81,4 +81,17 @@ class DialogNode: SKSpriteNode
     func cancel() {
         self.delegate?.dialogDidCancel(self)
     }
+    
+    func tapInScene(position: CGPoint) {
+        if let s = self.scene {
+            let positionInNode = self.convertPoint(position, fromNode: s)
+            let tappedNodes = self.nodesAtPoint(positionInNode)
+            
+            for item in self.items {
+                if(tappedNodes.contains(item)) {
+                    self.delegate?.dialogDidAcceptItem(self, item: item)
+                }
+            }
+        }
+    }
 }

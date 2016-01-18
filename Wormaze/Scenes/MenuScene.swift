@@ -50,6 +50,7 @@ class MenuScene: SKScene, DialogNodeDelegate {
         }
         
         (self.view as! GameView).primaryController()!.assignDialog(self.mainMenu)
+        (self.view as! GameView).initializeGameControllers()
     }
     
     override func update(currentTime: CFTimeInterval) {

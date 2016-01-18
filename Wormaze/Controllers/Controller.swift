@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SpriteKit
 
 enum GameKey
 {
@@ -25,9 +26,11 @@ class Controller
     var delegate: GameControllerDelegate?
     
     let name: String
+    let index: Int
     
-    init(name: String) {
+    init(name: String, index: Int) {
         self.name = name
+        self.index = index
     }
     
     func assignPlayer(player: Player?)
@@ -78,5 +81,10 @@ class Controller
         case .action:
             self.player?.useInvincibility()
         }
+    }
+    
+    func tapInScene(position: CGPoint)
+    {
+        self.dialog?.tapInScene(position)
     }
 }

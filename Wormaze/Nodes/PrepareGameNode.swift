@@ -134,4 +134,28 @@ class PrepareGameNode: DialogNode {
         player.fontColor = color
         self.showStartGameButton()
     }
+    
+    func touchControllerAdded(color: SKColor) {
+        if(numPlayersJoined >= 1 && gameMode == .singleplayer) {
+            return
+        }
+        
+        let player = self.playerNodes[self.numPlayersJoined]
+        self.numPlayersJoined++
+        player.text = "iOS device ready..."
+        player.fontColor = color
+        self.showStartGameButton()
+    }
+    
+    func gameControllerAdded(color: SKColor) {
+        if(numPlayersJoined >= 1 && gameMode == .singleplayer) {
+            return
+        }
+        
+        let player = self.playerNodes[self.numPlayersJoined]
+        self.numPlayersJoined++
+        player.text = "Game controller ready..."
+        player.fontColor = color
+        self.showStartGameButton()
+    }
 }

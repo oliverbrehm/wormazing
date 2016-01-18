@@ -23,6 +23,7 @@ class GameView : SKView, GameSceneDelegate, MenuSceneDelegate, GameControllerDel
     var gameScene : GameScene?
     
     var gameControllers: [Controller] = []
+    var connectedControllers: [GCController] = []
     
     var gameKitManager: GameKitManager?
     var collectableManager: CollectableManager = CollectableManager()
@@ -33,15 +34,27 @@ class GameView : SKView, GameSceneDelegate, MenuSceneDelegate, GameControllerDel
     let userDefaultsCoinsKey = "userCoins"
     let userDefaultsLivesKey = "userLives"
     
+    var debugLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: 500, height: 30))
+        
     static var instance: GameView?
     
-    func initialize(instance: GameView?)
+    func initialize()
     {
-        GameView.instance = instance
+        GameView.instance = self
+        
+        GameView.instance?.debugLabel.text = ""
+        GameView.instance?.debugLabel.textColor = SKColor.redColor()
+        GameView.instance?.addSubview(GameView.instance!.debugLabel)
+        
         self.initializeUserData()
+        //self.initializeGameControllers()
     
         self.menuScene = MenuScene(menuDelegate: self)
         self.presentScene(menuScene)
+    }
+    
+    static func debug(msg: String) {
+        instance!.debugLabel.text = msg
     }
     
     func initializeUserData()
@@ -59,6 +72,9 @@ class GameView : SKView, GameSceneDelegate, MenuSceneDelegate, GameControllerDel
     
     func initializeGameControllers()
     {
+        print("initializing controllers")
+        //GameView.debug("initializing controllers")
+    
         NSNotificationCenter.defaultCenter().addObserverForName(GCControllerDidConnectNotification, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: {(notification: NSNotification) -> Void in
             self.gameControllerConnected(notification)
         })
@@ -67,52 +83,101 @@ class GameView : SKView, GameSceneDelegate, MenuSceneDelegate, GameControllerDel
             self.gameControllerDisonnected(notification)
         })
         
+        self.addControllers()
+    }
+    
+    /*
+    func getController(index: Int) -> Controller?
+    {
+        for(var i = 0; i < self.gameControllers.count; i++) {
+            let controller = self.gameControllers[i]
+            if(controller.index == index) {
+                return self.gameControllers[i]
+            }
+        }
         
+        return nil
+    }*/
+    
+    func addControllers()
+    {
         for gameController in GCController.controllers() {
-            let controller = Controller(name: "mfcController")
+            let controllerIndex = gameControllers.count
+            let controller = Controller(name: "mfcController", index: controllerIndex)
             
-            gameController.gamepad?.dpad.left.valueChangedHandler = {(CGControllerButtonInput, Float, pressed: Bool) -> Void in
-                if(pressed) {
-                    controller.keyDown(.left)
+            if(self.connectedControllers.contains(gameController)) {
+                break
+            }
+            
+            self.connectedControllers.append(gameController)
+
+            print("controller added")
+            //GameView.debug("controller added")
+
+            
+            gameController.gamepad?.dpad.left.valueChangedHandler = {(CGControllerButtonInput, value: Float, pressed: Bool) -> Void in
+                //GameView.debug("left button")
+                if(pressed && value > 0.3) {
+                    // TODO choose correct controller
+                    //GameView.debug("left button pressed, index: \(controllerIndex)")
+                    //self.getController(controllerIndex)?.keyDown(.left)
+                    self.gameControllers[0].keyDown(.left)
                 }
             }
             
-            gameController.gamepad?.dpad.right.valueChangedHandler = {(CGControllerButtonInput, Float, pressed: Bool) -> Void in
-                if(pressed) {
-                    controller.keyDown(.right)
+            gameController.gamepad?.dpad.right.valueChangedHandler = {(CGControllerButtonInput, value: Float, pressed: Bool) -> Void in
+                if(pressed && value > 0.3) {
+                    self.gameControllers[0].keyDown(.right)
+                    //self.getController(controllerIndex)?.keyDown(.right)
                 }
             }
             
-            gameController.gamepad?.dpad.up.valueChangedHandler = {(CGControllerButtonInput, Float, pressed: Bool) -> Void in
-                if(pressed) {
-                    controller.keyDown(.up)
+            gameController.gamepad?.dpad.up.valueChangedHandler = {(CGControllerButtonInput, value: Float, pressed: Bool) -> Void in
+                if(pressed && value > 0.3) {
+                    self.gameControllers[0].keyDown(.up)
+                    //self.getController(controllerIndex)?.keyDown(.up)
                 }
             }
             
-            gameController.gamepad?.dpad.down.valueChangedHandler = {(CGControllerButtonInput, Float, pressed: Bool) -> Void in
-                if(pressed) {
-                    controller.keyDown(.down)
+            gameController.gamepad?.dpad.down.valueChangedHandler = {(CGControllerButtonInput, value: Float, pressed: Bool) -> Void in
+                if(pressed && value > 0.3) {
+                    self.gameControllers[0].keyDown(.down)
+                    //self.getController(controllerIndex)?.keyDown(.down)
                 }
             }
             
             gameController.controllerPausedHandler = {GCController -> Void in
-                controller.keyDown(.cancel)
+                self.gameControllers[0].keyDown(.cancel)
+                //self.getController(controllerIndex)?.keyDown(.cancel)
+            }
+            
+            gameController.extendedGamepad?.buttonA.valueChangedHandler = {(CGControllerButtonInput, value: Float, pressed: Bool) -> Void in
+                if(pressed && value > 0.3) {
+                    self.gameControllers[0].keyDown(.enter)
+                    //self.getController(controllerIndex)?.keyDown(.enter)
+                }
             }
             
             // TODO force unwrap
-            gameController.playerIndex = GCControllerPlayerIndex(rawValue: gameControllers.count)!
+            gameController.playerIndex = GCControllerPlayerIndex(rawValue: controllerIndex)!
             
             self.gameControllers.append(controller)
+            
+            if let m = self.menuScene {
+                controller.assignDialog(m.mainMenu)
+            }
         }
     }
     
     func gameControllerConnected(notification: NSNotification) {
-        Swift.print("Controller connected")
-        // TODO
+        //GameView.debug("controller connected")
+        print("controller connected")
+        self.addControllers()
     }
     
     func gameControllerDisonnected(notification: NSNotification) {
-        Swift.print("Controller disconnected")
+        GameView.debug("Controller disconnected")
+        print("Controller disconnected")
         // TODO
     }
     

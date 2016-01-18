@@ -37,7 +37,7 @@ class CollectableManager {
     
     func generate(gameboard: GameBoard)
     {
-        let r = Int(arc4random()) % SpawningWeights.sum()
+        let r = Int(arc4random_uniform(UInt32(SpawningWeights.sum())))
         
         if(r < SpawningWeights.grow) {
             current = ItemGrow(gameboard: gameboard)

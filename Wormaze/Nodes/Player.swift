@@ -55,8 +55,8 @@ class Player: SKNode {
         self.gameBoard = gameBoard
         self.tiles = PlayerTiles()
         self.color = color
-        let alphaColor = SKColor(red: color.redComponent, green: color.greenComponent, blue: color.blueComponent, alpha: 0.5)
-        self.itemsView = SKSpriteNode(color: alphaColor, size: CGSize(width: 300.0, height: 35.0))
+        //let alphaColor = SKColor(red: color.redComponent, green: color.greenComponent, blue: color.blueComponent, alpha: 0.5)
+        self.itemsView = SKSpriteNode(color: color.colorWithAlphaComponent(0.5), size: CGSize(width: 300.0, height: 35.0))
         super.init()
         
         self.gameBoard.addChild(self.tiles.addTile(x, y: y, color: self.color, playerDirection: self.nextDirection))

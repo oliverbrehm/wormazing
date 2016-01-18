@@ -86,25 +86,18 @@ class GameScene: SKScene, GameBoardDelegate, DialogNodeDelegate {
     
     static let gameCost = 10
     
-    let debugLabel = SKLabelNode(fontNamed: "Chalkduster")
-    
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
         self.backgroundColor = SKColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1.0)
         
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5);
         
-        self.debugLabel.text = ""
-        self.debugLabel.fontSize = 14.0
-        self.debugLabel.position = CGPoint(x: 200.0, y: -self.size.height / 2.0 + 7.0)
-        self.addChild(self.debugLabel)
-        
         if(gameMode == .singleplayer) {
             self.gameBoard = SingleplayerGame()
         } else {
             self.gameBoard = MultiplayerGame()
         }
-        
+                
         self.addChild(gameBoard)
         gameBoard.initialize(CGSize(width: self.size.width - 20, height: self.size.height - 60))
         gameBoard.delegate = self
@@ -125,11 +118,6 @@ class GameScene: SKScene, GameBoardDelegate, DialogNodeDelegate {
         }
     }
     
-    func debug(message: String)
-    {
-        self.debugLabel.text = "DEBUG: " + message
-    }
-    
     func addGameController(controller: Controller)
     {
         if(self.gameMode == .singleplayer && self.gameBoard.players.count >= 1) {
@@ -148,6 +136,10 @@ class GameScene: SKScene, GameBoardDelegate, DialogNodeDelegate {
                 self.prepareGameNode?.hbnmPressed(player!.color)
             } else if(controller.name == "siriRemoteController") {
                 self.prepareGameNode?.remoteAdded(player!.color)
+            } else if(controller.name == "touchController") {
+                self.prepareGameNode?.touchControllerAdded(player!.color)
+            } else if(controller.name == "gameController") {
+                self.prepareGameNode?.gameControllerAdded(player!.color)
             }
         }
     }

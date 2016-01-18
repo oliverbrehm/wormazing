@@ -150,8 +150,8 @@ class GameBoard: SKSpriteNode {
         var tries = 0
         
         repeat {
-            x = Int(arc4random()) % self.tilesX
-            y = Int(arc4random()) % self.tilesY
+            x = Int(arc4random_uniform(UInt32(self.tilesX)))
+            y = Int(arc4random_uniform(UInt32(self.tilesY)))
             tries++
         } while(self.pointOccupied(x, y: y) && tries < maxTries)
         
