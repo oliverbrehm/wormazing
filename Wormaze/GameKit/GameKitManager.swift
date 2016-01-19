@@ -21,7 +21,7 @@ class GameKitManager
 
     }
     
-    func reportSingleplayerHighscore(score: Int)
+    func reportSingleplayerHighscore(score: Int, completion: () -> Void)
     {
         if(self.leaderboardIdentifier == nil) {
             return
@@ -35,6 +35,8 @@ class GameKitManager
                 print("reportSingleplayerHighscore: \(error!.description)")
             } else {
                 print("reported highscore \(score).")
+                sleep(1)
+                completion()
             }
         }
     }

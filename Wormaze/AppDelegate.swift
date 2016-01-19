@@ -20,7 +20,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         /* Pick a size for the scene */
-        gameView.initialize(self.gameView)
+        gameView.initialize()
         self.window.delegate = self
         CGDisplayHideCursor(0)
     }

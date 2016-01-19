@@ -20,14 +20,14 @@ class MainMenu : DialogNode
     func addLeaderboard()
     {
         let leaderboard = LeaderboardNode()
-        leaderboard.position = CGPoint(x: -400, y: -200)
-        self.addChild(leaderboard)
+        leaderboard.position = CGPoint(x: -self.size.width / 2.0 + leaderboard.size.width / 2.0 + 50.0, y: leaderboard.size.height / 2.0)
+        self.addItem(leaderboard)
         leaderboard.initialize()
     }
     
     func gameCenterDidAuthenticate()
     {
-        self.addLeaderboard()
+        (self.itemForName("leaderboard") as? LeaderboardNode)?.initialize()
     }
     
     func initialize()
@@ -67,6 +67,8 @@ class MainMenu : DialogNode
         exitGameButton.position = CGPoint(x: 0.0, y: -350.0)
         exitGameButton.initialize()
         self.addItem(exitGameButton)
+        
+        self.addLeaderboard()
     }
     
     required init?(coder aDecoder: NSCoder) {

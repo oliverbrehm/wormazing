@@ -10,9 +10,9 @@ import Foundation
 import SpriteKit
 
 class MenuItem: SKSpriteNode {
-    init(size: CGSize, name: String)
+    init(size: CGSize, color: SKColor, name: String)
     {
-        super.init(texture: nil, color: SKColor.darkGrayColor(), size: size)
+        super.init(texture: nil, color: color, size: size)
         self.name = name
         self.zPosition = GameScene.zPositions.Menu
     }

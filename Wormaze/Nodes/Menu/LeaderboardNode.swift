@@ -10,12 +10,18 @@ import Foundation
 import SpriteKit
 import GameKit
 
-class LeaderboardNode: SKSpriteNode {
+class LeaderboardNode: MenuItem {
     var numEntries = 0
 
+    var numLeaders = 0
+    let displayLeaders = 3
+    var previousScore : GKScore?
+    var displayedMe = false
+    var displayedSuccessor = false
+    
     init()
     {
-        super.init(texture: nil, color: SKColor(white: 1.0, alpha: 0.5), size: CGSize(width: 200.0, height: 600.0))
+        super.init(size: CGSize(width: 300.0, height: 400.0), color: SKColor.whiteColor().colorWithAlphaComponent(0.7), name: "leaderboard")
         self.zPosition = GameScene.zPositions.Menu
         self.anchorPoint = CGPoint(x: 0.5, y: 1.0)
     }
@@ -26,6 +32,8 @@ class LeaderboardNode: SKSpriteNode {
     
     func initialize()
     {
+        self.removeAllChildren()
+    
         GKLeaderboard.loadLeaderboardsWithCompletionHandler {(leaderboards: [GKLeaderboard]?, error: NSError?) -> Void in
             if(error != nil) {
                 print("loadLeaderboards: \(error!.description)")
@@ -36,35 +44,93 @@ class LeaderboardNode: SKSpriteNode {
             }
         }
     
-        self.addEntry("Loading leaderboard...", score: 0, color: SKColor.blackColor())
+        self.addEntry("Loading leaderboard...", color: SKColor.blackColor())
     }
     
     func loadLeaderboard(leaderboard: GKLeaderboard)
     {
         self.removeAllChildren()
-    
-        if let scores = leaderboard.scores {
-            for score in scores {
-                self.addEntry(score.player.playerID!, score: Int(score.value), color: SKColor.redColor())
+        self.numEntries = 0
+        
+        self.numLeaders = 0
+        self.previousScore = nil
+        self.displayedMe = false
+        self.displayedSuccessor = false
+        
+        self.addEntry("Leaderboard", color: SKColor.greenColor())
+        self.addSpace()
+        
+        leaderboard.loadScoresWithCompletionHandler { (scores: [GKScore]?, error: NSError?) -> Void in
+            if(error != nil) {
+                print("loadScores: \(error!.description)")
+            } else {
+                if(scores != nil) {
+                    for score in scores! {
+                        self.loadScore(score)
+                    }
+                }
             }
         }
     }
     
-    func addEntry(player: String, score: Int, color: SKColor)
+    func loadScore(score: GKScore) {
+        if(self.displayedSuccessor) {
+            return
+        }
+        
+        if(score.player.playerID == GKLocalPlayer.localPlayer().playerID) {
+            self.displayedMe = true
+            self.addEntry(score.player.displayName , score: Int(score.value), rank: score.rank, color: SKColor.blueColor())
+            return
+        }
+        
+        if(!displayedMe) {
+            if(numLeaders >= displayLeaders) {
+                return
+            } else {
+                numLeaders++
+            }
+        } else {
+            self.displayedSuccessor = true
+        }
+        
+        self.addEntry(score.player.displayName , score: Int(score.value), rank: score.rank, color: SKColor.redColor())
+        
+        if(self.numLeaders == displayLeaders) {
+            self.addEntry("...", color: SKColor.redColor())
+        }
+    }
+    
+    func addEntry(player: String?, color: SKColor) {
+        self.addEntry(player, score: nil, rank: nil, color: color)
+    }
+    
+    func addEntry(player: String?, score: Int?, rank: Int?, color: SKColor)
     {
+        if(rank != nil) {
+            let rankNode = SKLabelNode(fontNamed: "Chalkduster")
+            rankNode.fontColor = color
+            rankNode.fontSize = 14.0
+            rankNode.position = CGPoint(x: -120.0, y: -20.0 - CGFloat(numEntries) * 40.0)
+            rankNode.text = "(\(rank!))"
+            self.addChild(rankNode)
+        }
+        
         let nameNode = SKLabelNode(fontNamed: "Chalkduster")
         nameNode.fontColor = color
         nameNode.fontSize = 14.0
-        nameNode.position = CGPoint(x: -50.0, y: -20.0 - CGFloat(numEntries) * 40.0)
+        nameNode.position = CGPoint(x: -0.0, y: -20.0 - CGFloat(numEntries) * 40.0)
         nameNode.text = player
         self.addChild(nameNode)
         
-        let scoreNode = SKLabelNode(fontNamed: "Chalkduster")
-        scoreNode.fontColor = color
-        scoreNode.fontSize = 14.0
-        scoreNode.position = CGPoint(x: 50.0, y: -20.0 - CGFloat(numEntries) * 40.0)
-        scoreNode.text = "\(score)"
-        self.addChild(scoreNode)
+        if(score != nil) {
+            let scoreNode = SKLabelNode(fontNamed: "Chalkduster")
+            scoreNode.fontColor = color
+            scoreNode.fontSize = 14.0
+            scoreNode.position = CGPoint(x: 120.0, y: -20.0 - CGFloat(numEntries) * 40.0)
+            scoreNode.text = "\(score!)"
+            self.addChild(scoreNode)
+        }
         
         self.numEntries++
     }
@@ -72,5 +138,13 @@ class LeaderboardNode: SKSpriteNode {
     func addSpace()
     {
         self.numEntries++
+    }
+    
+    override func setFocus() {
+       self.color = SKColor.redColor().colorWithAlphaComponent(0.5)
+    }
+    
+    override func loseFocus() {
+        self.color = SKColor.whiteColor().colorWithAlphaComponent(0.5)
     }
 }

@@ -39,5 +39,10 @@ class GameOverNode : DialogNode
         messageNode.position = CGPoint(x: 0.0, y: 120.0)
         messageNode.text = message
         self.addChild(messageNode)
+        
+        let leaderboard = LeaderboardNode()
+        leaderboard.position = CGPoint(x: -self.size.width / 2.0 + leaderboard.size.width / 2.0 + 50.0, y: leaderboard.size.height / 2.0)
+        self.addItem(leaderboard)
+        leaderboard.initialize()
     }
 }

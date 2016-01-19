@@ -34,7 +34,7 @@ class GameView : SKView, GameSceneDelegate, MenuSceneDelegate, GameControllerDel
     let userDefaultsCoinsKey = "userCoins"
     let userDefaultsLivesKey = "userLives"
     
-    var debugLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: 500, height: 30))
+    //var debugLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: 500, height: 30))
         
     static var instance: GameView?
     
@@ -42,9 +42,9 @@ class GameView : SKView, GameSceneDelegate, MenuSceneDelegate, GameControllerDel
     {
         GameView.instance = self
         
-        GameView.instance?.debugLabel.text = ""
+        /*GameView.instance?.debugLabel.text = ""
         GameView.instance?.debugLabel.textColor = SKColor.redColor()
-        GameView.instance?.addSubview(GameView.instance!.debugLabel)
+        GameView.instance?.addSubview(GameView.instance!.debugLabel)*/
         
         self.initializeUserData()
         //self.initializeGameControllers()
@@ -54,7 +54,7 @@ class GameView : SKView, GameSceneDelegate, MenuSceneDelegate, GameControllerDel
     }
     
     static func debug(msg: String) {
-        instance!.debugLabel.text = msg
+        //instance!.debugLabel.text = msg
     }
     
     func initializeUserData()
@@ -72,7 +72,7 @@ class GameView : SKView, GameSceneDelegate, MenuSceneDelegate, GameControllerDel
     
     func initializeGameControllers()
     {
-        print("initializing controllers")
+        Swift.print("initializing controllers")
         //GameView.debug("initializing controllers")
     
         NSNotificationCenter.defaultCenter().addObserverForName(GCControllerDidConnectNotification, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: {(notification: NSNotification) -> Void in
@@ -111,7 +111,7 @@ class GameView : SKView, GameSceneDelegate, MenuSceneDelegate, GameControllerDel
             
             self.connectedControllers.append(gameController)
 
-            print("controller added")
+            Swift.print("controller added")
             //GameView.debug("controller added")
 
             
@@ -171,13 +171,13 @@ class GameView : SKView, GameSceneDelegate, MenuSceneDelegate, GameControllerDel
     
     func gameControllerConnected(notification: NSNotification) {
         //GameView.debug("controller connected")
-        print("controller connected")
+        Swift.print("controller connected")
         self.addControllers()
     }
     
     func gameControllerDisonnected(notification: NSNotification) {
         GameView.debug("Controller disconnected")
-        print("Controller disconnected")
+        Swift.print("Controller disconnected")
         // TODO
     }
     
@@ -206,6 +206,7 @@ class GameView : SKView, GameSceneDelegate, MenuSceneDelegate, GameControllerDel
         self.showsNodeCount = true
     }
     
+    // TODO remove?
     func primaryController() -> Controller?
     {
         return nil // implemented in subclass

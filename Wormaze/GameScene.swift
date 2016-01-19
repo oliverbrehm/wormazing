@@ -187,7 +187,9 @@ class GameScene: SKScene, GameBoardDelegate, DialogNodeDelegate {
         
         if let view = (self.view as? GameView) {
             if(view.gameKitManager != nil && score != nil) {
-                view.gameKitManager!.reportSingleplayerHighscore(score!)
+                view.gameKitManager!.reportSingleplayerHighscore(score!, completion: {
+                    (self.gameOverNode!.itemForName("leaderboard") as? LeaderboardNode)?.initialize()
+                })
             }
         }
         

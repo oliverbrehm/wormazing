@@ -43,6 +43,16 @@ class DialogNode: SKSpriteNode
         }
     }
     
+    func itemForName(name: String) -> MenuItem? {
+        for item in self.items {
+            if(item.name == name) {
+                return item
+            }
+        }
+        
+        return nil
+    }
+    
     func selectNextItem() {
         if(items.count < 1) {
             return
