@@ -63,6 +63,10 @@ class MenuScene: SKScene, DialogNodeDelegate {
         }
         
         if(item!.name == "singleplayer") {
+            AdColony.playVideoAdForZone("vzf8e4e97704c4445c87504e",
+                    withDelegate:nil,
+                withV4VCPrePopup:true,
+                andV4VCPostPopup:true)
             self.menuDelegate?.menuSceneDidStartGame(.singleplayer)
         } else if(item!.name == "multiplayer") {
             self.menuDelegate?.menuSceneDidStartGame(.multiplayer)

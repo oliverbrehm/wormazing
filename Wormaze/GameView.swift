@@ -41,6 +41,11 @@ class GameView : SKView, GameSceneDelegate, MenuSceneDelegate, GameControllerDel
     func initialize()
     {
         GameView.instance = self
+     
+         AdColony.configureWithAppID("appbdee68ae27024084bb334a",
+                         zoneIDs:["vzf8fb4670a60e4a139d01b5"],
+                        delegate:nil,
+                         logging:true)
         
         /*GameView.instance?.debugLabel.text = ""
         GameView.instance?.debugLabel.textColor = SKColor.redColor()

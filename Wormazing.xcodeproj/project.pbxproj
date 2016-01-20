@@ -133,6 +133,30 @@
 		A79479661C44F3AA00A71E94 /* life.png in Resources */ = {isa = PBXBuildFile; fileRef = A794795A1C44F38D00A71E94 /* life.png */; };
 		A79479691C44F40000A71E94 /* extralife.png in Resources */ = {isa = PBXBuildFile; fileRef = A79479681C44F40000A71E94 /* extralife.png */; };
 		A794796A1C44F40300A71E94 /* extralife.png in Resources */ = {isa = PBXBuildFile; fileRef = A79479681C44F40000A71E94 /* extralife.png */; };
+		A7A1D4D31C4FE6D900ACF0A9 /* AdColony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7A1D4D21C4FE6D900ACF0A9 /* AdColony.framework */; };
+		A7A1D4D41C4FE6D900ACF0A9 /* AdColony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7A1D4D21C4FE6D900ACF0A9 /* AdColony.framework */; };
+		A7A1D4D51C4FE6D900ACF0A9 /* AdColony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7A1D4D21C4FE6D900ACF0A9 /* AdColony.framework */; };
+		A7A1D4DF1C4FEBA900ACF0A9 /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A7A1D4DE1C4FEBA900ACF0A9 /* libz.1.2.5.tbd */; };
+		A7A1D4E11C4FEBB700ACF0A9 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7A1D4E01C4FEBB700ACF0A9 /* AudioToolbox.framework */; };
+		A7A1D4E31C4FEBBC00ACF0A9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7A1D4E21C4FEBBC00ACF0A9 /* AVFoundation.framework */; };
+		A7A1D4E51C4FEBC300ACF0A9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7A1D4E41C4FEBC300ACF0A9 /* CoreGraphics.framework */; };
+		A7A1D4E71C4FEBCE00ACF0A9 /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A7A1D4E61C4FEBCE00ACF0A9 /* libz.1.2.5.tbd */; };
+		A7A1D4E91C4FEBD600ACF0A9 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7A1D4E81C4FEBD600ACF0A9 /* AudioToolbox.framework */; };
+		A7A1D4EB1C4FEBDB00ACF0A9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7A1D4EA1C4FEBDB00ACF0A9 /* AVFoundation.framework */; };
+		A7A1D4ED1C4FEBE000ACF0A9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7A1D4EC1C4FEBE000ACF0A9 /* CoreGraphics.framework */; };
+		A7A1D4EF1C4FEBE500ACF0A9 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7A1D4EE1C4FEBE500ACF0A9 /* CoreMedia.framework */; };
+		A7A1D4F11C4FEBED00ACF0A9 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7A1D4F01C4FEBED00ACF0A9 /* CoreTelephony.framework */; };
+		A7A1D4F31C4FEBF300ACF0A9 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7A1D4F21C4FEBF300ACF0A9 /* EventKit.framework */; };
+		A7A1D4F51C4FEBF800ACF0A9 /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7A1D4F41C4FEBF800ACF0A9 /* EventKitUI.framework */; };
+		A7A1D4F71C4FEBFD00ACF0A9 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7A1D4F61C4FEBFD00ACF0A9 /* MediaPlayer.framework */; };
+		A7A1D4F91C4FEC0300ACF0A9 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7A1D4F81C4FEC0300ACF0A9 /* MessageUI.framework */; };
+		A7A1D4FB1C4FEC0800ACF0A9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7A1D4FA1C4FEC0800ACF0A9 /* QuartzCore.framework */; };
+		A7A1D4FD1C4FEC0E00ACF0A9 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7A1D4FC1C4FEC0E00ACF0A9 /* Social.framework */; };
+		A7A1D4FF1C4FEC1300ACF0A9 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7A1D4FE1C4FEC1300ACF0A9 /* StoreKit.framework */; };
+		A7A1D5011C4FEC1C00ACF0A9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7A1D5001C4FEC1C00ACF0A9 /* SystemConfiguration.framework */; };
+		A7A1D5031C4FEC2300ACF0A9 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7A1D5021C4FEC2300ACF0A9 /* WebKit.framework */; };
+		A7A1D5051C4FEC4200ACF0A9 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7A1D5041C4FEC4200ACF0A9 /* WebKit.framework */; };
+		A7A1D5071C4FEC7600ACF0A9 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7A1D5061C4FEC7600ACF0A9 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		A7BF6C8F1C46456800165C3D /* coin.png in Resources */ = {isa = PBXBuildFile; fileRef = A7BF6C8D1C46456800165C3D /* coin.png */; };
 		A7BF6C901C46456800165C3D /* coin.svg in Resources */ = {isa = PBXBuildFile; fileRef = A7BF6C8E1C46456800165C3D /* coin.svg */; };
 		A7BF6C921C46458300165C3D /* ItemCoin.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7BF6C911C46458300165C3D /* ItemCoin.swift */; };
@@ -233,6 +257,31 @@
 		A794795B1C44F38D00A71E94 /* life.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = life.svg; path = Textures/life.svg; sourceTree = "<group>"; };
 		A794795C1C44F38D00A71E94 /* extralife.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = extralife.svg; path = Textures/extralife.svg; sourceTree = "<group>"; };
 		A79479681C44F40000A71E94 /* extralife.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = extralife.png; path = Textures/extralife.png; sourceTree = "<group>"; };
+		A7A1D4D21C4FE6D900ACF0A9 /* AdColony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AdColony.framework; sourceTree = "<group>"; };
+		A7A1D4D61C4FE99F00ACF0A9 /* Wormazing-osx-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Wormazing-osx-Bridging-Header.h"; sourceTree = "<group>"; };
+		A7A1D4D71C4FE99F00ACF0A9 /* Wormazing-tv-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Wormazing-tv-Bridging-Header.h"; sourceTree = "<group>"; };
+		A7A1D4D81C4FE99F00ACF0A9 /* Wormazing-ios-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Wormazing-ios-Bridging-Header.h"; sourceTree = "<group>"; };
+		A7A1D4DE1C4FEBA900ACF0A9 /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
+		A7A1D4E01C4FEBB700ACF0A9 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		A7A1D4E21C4FEBBC00ACF0A9 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		A7A1D4E41C4FEBC300ACF0A9 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		A7A1D4E61C4FEBCE00ACF0A9 /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/usr/lib/libz.1.2.5.tbd; sourceTree = DEVELOPER_DIR; };
+		A7A1D4E81C4FEBD600ACF0A9 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
+		A7A1D4EA1C4FEBDB00ACF0A9 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
+		A7A1D4EC1C4FEBE000ACF0A9 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
+		A7A1D4EE1C4FEBE500ACF0A9 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/CoreMedia.framework; sourceTree = DEVELOPER_DIR; };
+		A7A1D4F01C4FEBED00ACF0A9 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/CoreTelephony.framework; sourceTree = DEVELOPER_DIR; };
+		A7A1D4F21C4FEBF300ACF0A9 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/EventKit.framework; sourceTree = DEVELOPER_DIR; };
+		A7A1D4F41C4FEBF800ACF0A9 /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/EventKitUI.framework; sourceTree = DEVELOPER_DIR; };
+		A7A1D4F61C4FEBFD00ACF0A9 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/MediaPlayer.framework; sourceTree = DEVELOPER_DIR; };
+		A7A1D4F81C4FEC0300ACF0A9 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/MessageUI.framework; sourceTree = DEVELOPER_DIR; };
+		A7A1D4FA1C4FEC0800ACF0A9 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
+		A7A1D4FC1C4FEC0E00ACF0A9 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/Social.framework; sourceTree = DEVELOPER_DIR; };
+		A7A1D4FE1C4FEC1300ACF0A9 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/StoreKit.framework; sourceTree = DEVELOPER_DIR; };
+		A7A1D5001C4FEC1C00ACF0A9 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
+		A7A1D5021C4FEC2300ACF0A9 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/WebKit.framework; sourceTree = DEVELOPER_DIR; };
+		A7A1D5041C4FEC4200ACF0A9 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/PrivateFrameworks/WebKit.framework; sourceTree = DEVELOPER_DIR; };
+		A7A1D5061C4FEC7600ACF0A9 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/AdSupport.framework; sourceTree = DEVELOPER_DIR; };
 		A7BF6C8D1C46456800165C3D /* coin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = coin.png; path = Textures/coin.png; sourceTree = "<group>"; };
 		A7BF6C8E1C46456800165C3D /* coin.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = coin.svg; path = Textures/coin.svg; sourceTree = "<group>"; };
 		A7BF6C911C46458300165C3D /* ItemCoin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCoin.swift; sourceTree = "<group>"; };
@@ -251,7 +300,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7A1D4E51C4FEBC300ACF0A9 /* CoreGraphics.framework in Frameworks */,
+				A7A1D4E31C4FEBBC00ACF0A9 /* AVFoundation.framework in Frameworks */,
+				A7A1D4E11C4FEBB700ACF0A9 /* AudioToolbox.framework in Frameworks */,
+				A7A1D4DF1C4FEBA900ACF0A9 /* libz.1.2.5.tbd in Frameworks */,
 				A782D8451C4087F300D1704C /* GameController.framework in Frameworks */,
+				A7A1D4D31C4FE6D900ACF0A9 /* AdColony.framework in Frameworks */,
 				A71926AF1C4100130094DED8 /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -261,6 +315,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A782D8471C4087FC00D1704C /* GameController.framework in Frameworks */,
+				A7A1D4D41C4FE6D900ACF0A9 /* AdColony.framework in Frameworks */,
 				A71926AD1C40FE0A0094DED8 /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -269,7 +324,25 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7A1D5071C4FEC7600ACF0A9 /* AdSupport.framework in Frameworks */,
+				A7A1D5051C4FEC4200ACF0A9 /* WebKit.framework in Frameworks */,
+				A7A1D5031C4FEC2300ACF0A9 /* WebKit.framework in Frameworks */,
+				A7A1D5011C4FEC1C00ACF0A9 /* SystemConfiguration.framework in Frameworks */,
+				A7A1D4FF1C4FEC1300ACF0A9 /* StoreKit.framework in Frameworks */,
+				A7A1D4FD1C4FEC0E00ACF0A9 /* Social.framework in Frameworks */,
+				A7A1D4FB1C4FEC0800ACF0A9 /* QuartzCore.framework in Frameworks */,
+				A7A1D4F91C4FEC0300ACF0A9 /* MessageUI.framework in Frameworks */,
+				A7A1D4F71C4FEBFD00ACF0A9 /* MediaPlayer.framework in Frameworks */,
+				A7A1D4F51C4FEBF800ACF0A9 /* EventKitUI.framework in Frameworks */,
+				A7A1D4F31C4FEBF300ACF0A9 /* EventKit.framework in Frameworks */,
+				A7A1D4F11C4FEBED00ACF0A9 /* CoreTelephony.framework in Frameworks */,
+				A7A1D4EF1C4FEBE500ACF0A9 /* CoreMedia.framework in Frameworks */,
+				A7A1D4ED1C4FEBE000ACF0A9 /* CoreGraphics.framework in Frameworks */,
+				A7A1D4EB1C4FEBDB00ACF0A9 /* AVFoundation.framework in Frameworks */,
+				A7A1D4E91C4FEBD600ACF0A9 /* AudioToolbox.framework in Frameworks */,
+				A7A1D4E71C4FEBCE00ACF0A9 /* libz.1.2.5.tbd in Frameworks */,
 				A7378CE81C4D01CF005A0708 /* GameKit.framework in Frameworks */,
+				A7A1D4D51C4FE6D900ACF0A9 /* AdColony.framework in Frameworks */,
 				A7378CE61C4D01CA005A0708 /* GameController.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -307,6 +380,9 @@
 				A71926B11C4104310094DED8 /* GameLogic */,
 				A7F7AAD91C3EC3710031E3A9 /* GameView.swift */,
 				77FBF05A1C317EAC0048D24D /* Resources */,
+				A7A1D4D61C4FE99F00ACF0A9 /* Wormazing-osx-Bridging-Header.h */,
+				A7A1D4D71C4FE99F00ACF0A9 /* Wormazing-tv-Bridging-Header.h */,
+				A7A1D4D81C4FE99F00ACF0A9 /* Wormazing-ios-Bridging-Header.h */,
 			);
 			name = Wormazing;
 			path = Wormaze;
@@ -465,6 +541,28 @@
 		A782D8481C40880400D1704C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A7A1D5061C4FEC7600ACF0A9 /* AdSupport.framework */,
+				A7A1D5041C4FEC4200ACF0A9 /* WebKit.framework */,
+				A7A1D5021C4FEC2300ACF0A9 /* WebKit.framework */,
+				A7A1D5001C4FEC1C00ACF0A9 /* SystemConfiguration.framework */,
+				A7A1D4FE1C4FEC1300ACF0A9 /* StoreKit.framework */,
+				A7A1D4FC1C4FEC0E00ACF0A9 /* Social.framework */,
+				A7A1D4FA1C4FEC0800ACF0A9 /* QuartzCore.framework */,
+				A7A1D4F81C4FEC0300ACF0A9 /* MessageUI.framework */,
+				A7A1D4F61C4FEBFD00ACF0A9 /* MediaPlayer.framework */,
+				A7A1D4F41C4FEBF800ACF0A9 /* EventKitUI.framework */,
+				A7A1D4F21C4FEBF300ACF0A9 /* EventKit.framework */,
+				A7A1D4F01C4FEBED00ACF0A9 /* CoreTelephony.framework */,
+				A7A1D4EE1C4FEBE500ACF0A9 /* CoreMedia.framework */,
+				A7A1D4EC1C4FEBE000ACF0A9 /* CoreGraphics.framework */,
+				A7A1D4EA1C4FEBDB00ACF0A9 /* AVFoundation.framework */,
+				A7A1D4E81C4FEBD600ACF0A9 /* AudioToolbox.framework */,
+				A7A1D4E61C4FEBCE00ACF0A9 /* libz.1.2.5.tbd */,
+				A7A1D4E41C4FEBC300ACF0A9 /* CoreGraphics.framework */,
+				A7A1D4E21C4FEBBC00ACF0A9 /* AVFoundation.framework */,
+				A7A1D4E01C4FEBB700ACF0A9 /* AudioToolbox.framework */,
+				A7A1D4DE1C4FEBA900ACF0A9 /* libz.1.2.5.tbd */,
+				A7A1D4D21C4FE6D900ACF0A9 /* AdColony.framework */,
 				A7378CE71C4D01CF005A0708 /* GameKit.framework */,
 				A7378CE51C4D01CA005A0708 /* GameController.framework */,
 				A71926AE1C4100130094DED8 /* GameKit.framework */,
@@ -899,15 +997,22 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Wormazing-osx/Wormazing.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Wormaze/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.oliverbrehm-apps.Wormazing-osx";
 				PRODUCT_NAME = Wormazing;
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Wormaze/Wormazing-osx-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -915,15 +1020,21 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Wormazing-osx/Wormazing.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Wormaze/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.oliverbrehm-apps.Wormazing-osx";
 				PRODUCT_NAME = Wormazing;
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Wormaze/Wormazing-osx-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -932,15 +1043,22 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "Wormazing-tv/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.oliverbrehm-apps.Wormazing-tv";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = appletvos;
+				SWIFT_OBJC_BRIDGING_HEADER = "Wormaze/Wormazing-tv-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
@@ -951,15 +1069,21 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "Wormazing-tv/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.oliverbrehm-apps.Wormazing-tv";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = appletvos;
+				SWIFT_OBJC_BRIDGING_HEADER = "Wormaze/Wormazing-tv-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 				VALIDATE_PRODUCT = YES;
@@ -970,8 +1094,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
+				);
 				INFOPLIST_FILE = "Wormazing-ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -979,6 +1109,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "Wormaze/Wormazing-ios-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -987,8 +1119,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
+				);
 				INFOPLIST_FILE = "Wormazing-ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -996,6 +1134,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "Wormaze/Wormazing-ios-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
