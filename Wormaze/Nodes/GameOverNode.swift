@@ -24,12 +24,27 @@ class GameOverNode : DialogNode
     func initialize(message: String, color: SKColor)
     {
         let localGameButton = MenuButton(label: "Play again", name: "playAgain");
-        localGameButton.position = CGPoint(x: 0.0, y: 00.0)
+        localGameButton.position = CGPoint(x: 0.0, y: 0.0)
         localGameButton.initialize()
         self.addItem(localGameButton)
         
+        let buyLivesButton = MenuButton(label: "Get extralife", name: "buyExtralife");
+        buyLivesButton.position = CGPoint(x: 0.0, y: -120.0)
+        buyLivesButton.initialize()
+        self.addItem(buyLivesButton)
+        
+        let heart = SKSpriteNode(imageNamed: "extralife")
+        buyLivesButton.addChild(heart)
+        heart.position = CGPoint(x: -buyLivesButton.size.width / 2.0 - heart.size.width / 2.0 - 10.0, y: 0.0)
+        
+        let gameCostNode = CoinsNode()
+        gameCostNode.position = CGPoint(x: buyLivesButton.size.width / 2.0 + 10.0, y: ItemCoin.texture.size().height / 2.0)
+        buyLivesButton.addChild(gameCostNode)
+        gameCostNode.initialize(GameScene.gameCost)
+        gameCostNode.setColor(SKColor.redColor())
+        
         let exitGameButton = MenuButton(label: "To Menu", name: "toMenu");
-        exitGameButton.position = CGPoint(x: 0.0, y: -120.0)
+        exitGameButton.position = CGPoint(x: 0.0, y: -240.0)
         exitGameButton.initialize()
         self.addItem(exitGameButton)
         

@@ -13,8 +13,8 @@ class SingleplayerGame : GameBoard {
     var score: Float = 0.0
     let scoreLabel : SKLabelNode = SKLabelNode(fontNamed: "Chalkduster")
 
-    override func initialize(size: CGSize) {
-        super.initialize(size)
+    override func initialize(gameScene: GameScene, size: CGSize) {
+        super.initialize(gameScene, size: size)
         
         scoreLabel.fontSize = 20.0
         scoreLabel.fontColor = SKColor.blackColor()

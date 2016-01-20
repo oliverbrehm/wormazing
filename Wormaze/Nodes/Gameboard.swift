@@ -19,6 +19,8 @@ class GameBoard: SKSpriteNode {
     static var tileSize: CGFloat = 15.0
     static let spawningTime = 20//50 // steps
     
+    var gameScene: GameScene?
+    
     var delegate : GameBoardDelegate?
     
     var players: [Player] = []
@@ -36,8 +38,10 @@ class GameBoard: SKSpriteNode {
     
     let gameOverNode = SKSpriteNode(color: SKColor.redColor(), size: CGSize(width: 0.0 ,height: 0.0))
     let coinsNode = CoinsNode()
+    let livesNode = LivesNode()
     
     required init?(coder aDecoder: NSCoder) {
+        self.gameScene = GameScene()
         super.init(coder: aDecoder)
     }
     
@@ -47,8 +51,10 @@ class GameBoard: SKSpriteNode {
         super.init(texture: nil, color: GameView.gameColors.background, size: CGSizeZero)
     }
     
-    func initialize(size: CGSize)
+    func initialize(gameScene: GameScene, size: CGSize)
     {
+        self.gameScene = gameScene
+
         self.zPosition = GameScene.zPositions.Background
         self.size = size
         GameBoard.tileSize = Tile.texture.size().width
@@ -70,6 +76,10 @@ class GameBoard: SKSpriteNode {
         coinsNode.position = CGPoint(x: -25.0, y: self.size.height + 25.0)
         self.addChild(coinsNode)
         coinsNode.initialize(GameView.instance!.coins)
+        
+        livesNode.position = CGPoint(x: 175.0, y: self.size.height + 25.0)
+        self.addChild(livesNode)
+        livesNode.initialize(GameView.instance!.extralives)
     }
     
     func newGame()

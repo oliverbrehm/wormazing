@@ -31,6 +31,8 @@ class GameView : SKView, GameSceneDelegate, MenuSceneDelegate, GameControllerDel
     var coins = 0
     var extralives = 0
     
+    let lifeCost = 10
+    
     let userDefaultsCoinsKey = "userCoins"
     let userDefaultsLivesKey = "userLives"
     

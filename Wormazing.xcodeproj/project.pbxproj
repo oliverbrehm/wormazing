@@ -133,6 +133,9 @@
 		A79479661C44F3AA00A71E94 /* life.png in Resources */ = {isa = PBXBuildFile; fileRef = A794795A1C44F38D00A71E94 /* life.png */; };
 		A79479691C44F40000A71E94 /* extralife.png in Resources */ = {isa = PBXBuildFile; fileRef = A79479681C44F40000A71E94 /* extralife.png */; };
 		A794796A1C44F40300A71E94 /* extralife.png in Resources */ = {isa = PBXBuildFile; fileRef = A79479681C44F40000A71E94 /* extralife.png */; };
+		A7AC8F0C1C4FF7F70058149C /* LivesNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7AC8F0B1C4FF7F70058149C /* LivesNode.swift */; };
+		A7AC8F0D1C4FF7F70058149C /* LivesNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7AC8F0B1C4FF7F70058149C /* LivesNode.swift */; };
+		A7AC8F0E1C4FF7F70058149C /* LivesNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7AC8F0B1C4FF7F70058149C /* LivesNode.swift */; };
 		A7BF6C8F1C46456800165C3D /* coin.png in Resources */ = {isa = PBXBuildFile; fileRef = A7BF6C8D1C46456800165C3D /* coin.png */; };
 		A7BF6C901C46456800165C3D /* coin.svg in Resources */ = {isa = PBXBuildFile; fileRef = A7BF6C8E1C46456800165C3D /* coin.svg */; };
 		A7BF6C921C46458300165C3D /* ItemCoin.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7BF6C911C46458300165C3D /* ItemCoin.swift */; };
@@ -233,6 +236,7 @@
 		A794795B1C44F38D00A71E94 /* life.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = life.svg; path = Textures/life.svg; sourceTree = "<group>"; };
 		A794795C1C44F38D00A71E94 /* extralife.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = extralife.svg; path = Textures/extralife.svg; sourceTree = "<group>"; };
 		A79479681C44F40000A71E94 /* extralife.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = extralife.png; path = Textures/extralife.png; sourceTree = "<group>"; };
+		A7AC8F0B1C4FF7F70058149C /* LivesNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LivesNode.swift; path = Nodes/Menu/LivesNode.swift; sourceTree = "<group>"; };
 		A7BF6C8D1C46456800165C3D /* coin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = coin.png; path = Textures/coin.png; sourceTree = "<group>"; };
 		A7BF6C8E1C46456800165C3D /* coin.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = coin.svg; path = Textures/coin.svg; sourceTree = "<group>"; };
 		A7BF6C911C46458300165C3D /* ItemCoin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCoin.swift; sourceTree = "<group>"; };
@@ -418,6 +422,7 @@
 				77FBF05E1C3187790048D24D /* MenuItem.swift */,
 				77FBF0601C3188960048D24D /* MenuButton.swift */,
 				A7BF6C941C46504500165C3D /* CoinsNode.swift */,
+				A7AC8F0B1C4FF7F70058149C /* LivesNode.swift */,
 				A75F08A11C46A7E7006AC55D /* LeaderboardNode.swift */,
 			);
 			name = Menu;
@@ -690,6 +695,7 @@
 				774666CF1C2D74D10043B095 /* AppDelegate.swift in Sources */,
 				A71620981C439DEF003C1EE3 /* ItemGrow.swift in Sources */,
 				A71620941C439318003C1EE3 /* CollectableManager.swift in Sources */,
+				A7AC8F0C1C4FF7F70058149C /* LivesNode.swift in Sources */,
 				A75F08A21C46A7E7006AC55D /* LeaderboardNode.swift in Sources */,
 				A71AA17B1C40698000BC484E /* PauseMenuNode.swift in Sources */,
 				774666E11C2D75510043B095 /* Gameboard.swift in Sources */,
@@ -721,6 +727,7 @@
 				A71620B11C43ACF9003C1EE3 /* ItemExtralive.swift in Sources */,
 				778656AF1C3C1225001C4E32 /* Gameboard.swift in Sources */,
 				778656B01C3C1225001C4E32 /* Player.swift in Sources */,
+				A7AC8F0D1C4FF7F70058149C /* LivesNode.swift in Sources */,
 				778656B11C3C1225001C4E32 /* Collectable.swift in Sources */,
 				A71620951C439318003C1EE3 /* CollectableManager.swift in Sources */,
 				778656B21C3C1225001C4E32 /* PlayerTiles.swift in Sources */,
@@ -759,6 +766,7 @@
 				A7378CCC1C4CF45D005A0708 /* PlayerTiles.swift in Sources */,
 				A7378CCD1C4CF45D005A0708 /* GameOverNode.swift in Sources */,
 				A7378CCE1C4CF45D005A0708 /* PrepareGameNode.swift in Sources */,
+				A7AC8F0E1C4FF7F70058149C /* LivesNode.swift in Sources */,
 				A7378CCF1C4CF45D005A0708 /* Gameboard.swift in Sources */,
 				A7378CD01C4CF45D005A0708 /* SingleplayerGame.swift in Sources */,
 				A7378CD11C4CF45D005A0708 /* MultiplayerGame.swift in Sources */,

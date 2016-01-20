@@ -76,7 +76,7 @@ class GameScene: SKScene, GameBoardDelegate, DialogNodeDelegate {
     var gameState = GameState.PrepareGame
     var gameMode = GameMode.singleplayer
     
-    var gameBoard = GameBoard()
+    var gameBoard: GameBoard = GameBoard()
     
     var gameOverNode: GameOverNode?
     var prepareGameNode: PrepareGameNode?
@@ -99,7 +99,7 @@ class GameScene: SKScene, GameBoardDelegate, DialogNodeDelegate {
         }
                 
         self.addChild(gameBoard)
-        gameBoard.initialize(CGSize(width: self.size.width - 20, height: self.size.height - 60))
+        gameBoard.initialize(self, size: CGSize(width: self.size.width - 20, height: self.size.height - 60))
         gameBoard.delegate = self
     
         gameBoard.position = CGPoint(x: -gameBoard.size.width / 2.0, y: -gameBoard.size.height / 2.0);
@@ -154,9 +154,15 @@ class GameScene: SKScene, GameBoardDelegate, DialogNodeDelegate {
                 self.gameOverNodeDidContinue()
             } else if(item!.name == "toMenu") {
                 self.toMenu()
+            } else if(item!.name == "buyExtralife") {
+                self.buyExtralife()
             }
         } else if(dialog === self.prepareGameNode && item != nil) {
-            self.prepareGameNodeDidContinue()
+            if(item!.name == "startGame") {
+                self.prepareGameNodeDidContinue()
+            } else if(item!.name == "buyExtralife") {
+                self.buyExtralife()
+            }
         } else if(dialog === self.pauseNode && item != nil) {
             if(item!.name == "continue") {
                 self.gameState = .RunningGame
@@ -166,6 +172,24 @@ class GameScene: SKScene, GameBoardDelegate, DialogNodeDelegate {
             } else if(item!.name == "toMenu") {
                 self.toMenu()
             }
+        }
+    }
+    
+    func buyExtralife()
+    {
+        if let g = GameView.instance {
+            if(g.coins >= g.lifeCost) {
+                g.coins -= g.lifeCost
+            } else {
+                g.coins = 0
+            }
+            
+            // TODO not enough coins
+            
+            g.extralives++
+            g.serializeUserData()
+            self.gameBoard.livesNode.update(g.extralives)
+            self.gameBoard.coinsNode.update(g.coins)
         }
     }
     
@@ -243,18 +267,6 @@ class GameScene: SKScene, GameBoardDelegate, DialogNodeDelegate {
     }
     
     func prepareGameNodeDidContinue() {
-        var coins = GameView.instance!.coins
-        if(coins >= GameScene.gameCost) {
-            coins -= GameScene.gameCost
-        } else {
-            // TODO not enough coins handler
-            coins = 0
-        }
-        
-        GameView.instance!.coins = coins
-        GameView.instance!.serializeUserData()
-    
-        self.gameBoard.coinsNode.update(coins)
         self.gameBoard.startGame()
         self.gameState = .RunningGame
         self.prepareGameNode?.removeFromParent()

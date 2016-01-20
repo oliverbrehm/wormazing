@@ -26,7 +26,7 @@ class Player: SKNode {
     var invincibilityTimer = 0 // steps
     
     var invinibilityCount = 3
-    var extralives = 1
+    var multiplayerExtralives = 1
     let itemsView: SKSpriteNode
     static let invincibilityTexture = SKTexture(imageNamed: "invincible")
     static let lifeTexture = SKTexture(imageNamed: "life")
@@ -43,10 +43,10 @@ class Player: SKNode {
     
     required init?(coder aDecoder: NSCoder) {
         self.id = 0
-        gameBoard = GameBoard()
         tiles = PlayerTiles()
         color = SKColor.blackColor()
         self.itemsView = SKSpriteNode(coder: aDecoder)!
+        self.gameBoard = GameBoard(coder: aDecoder)!
         super.init(coder: aDecoder)
     }
     
@@ -60,6 +60,14 @@ class Player: SKNode {
         super.init()
         
         self.gameBoard.addChild(self.tiles.addTile(x, y: y, color: self.color, playerDirection: self.nextDirection))
+    }
+    
+    func extralives() -> Int{
+        if(self.gameBoard.gameScene!.gameMode == GameMode.singleplayer) {
+            return GameView.instance!.extralives
+        }
+        
+        return multiplayerExtralives
     }
     
     func update(currentTime: CFTimeInterval) -> Bool
@@ -87,12 +95,17 @@ class Player: SKNode {
     
     func addInvincibility()
     {
-        self.invinibilityCount++
-        self.updateItemsView()
+        if(self.gameBoard.gameScene!.gameMode == GameMode.multiplayer) {
+            self.invinibilityCount++
+            self.updateItemsView()
+        }
     }
     
     func useInvincibility()
     {
+        if(self.gameBoard.gameScene!.gameMode == GameMode.singleplayer) {
+            return
+        }
         if(!self.gameBoard.running || self.invincible || self.invinibilityCount < 1) {
             return
         }
@@ -139,8 +152,14 @@ class Player: SKNode {
     
     func useExtralive()
     {
-        self.extralives--
-        self.updateItemsView()
+        if(self.gameBoard.gameScene!.gameMode == GameMode.singleplayer) {
+            GameView.instance!.extralives--
+            GameView.instance!.serializeUserData()
+            self.gameBoard.livesNode.update(GameView.instance!.extralives)
+        } else {
+            self.multiplayerExtralives--
+            self.updateItemsView()
+        }
         
         for player in self.gameBoard.players {
             if let head = player.tiles.head() {
@@ -167,9 +186,9 @@ class Player: SKNode {
             }
         }
         
-        if(self.extralives >= 1) {
+        if(self.multiplayerExtralives >= 1) {
             x = 0.0
-            for _ in 0...self.extralives - 1 {
+            for _ in 0...self.multiplayerExtralives - 1 {
                 let life = SKSpriteNode(texture: Player.lifeTexture)
                 life.zPosition = GameScene.zPositions.Menu
                 life.position = CGPoint(x: x, y: 20.0)
@@ -182,8 +201,16 @@ class Player: SKNode {
     
     func addLive()
     {
-        self.extralives++
-        self.updateItemsView()
+        if(self.gameBoard.gameScene!.gameMode == GameMode.singleplayer) {
+            if let v = GameView.instance {
+                v.extralives++
+                v.serializeUserData()
+                self.gameBoard.livesNode.update(v.extralives)
+            }
+        } else {
+            self.multiplayerExtralives++
+            self.updateItemsView()
+        }
     }
     
     func decrementSpeed()
@@ -290,7 +317,7 @@ class Player: SKNode {
             if(checkCollision(destX, y: destY, invincible: self.invincible)) {
                 if(self.invincible) {
                     doStep = false
-                } else if(extralives > 0) {
+                } else if(self.extralives() > 0) {
                     self.useExtralive()
                     self.startInvincibility()
                     doStep = false

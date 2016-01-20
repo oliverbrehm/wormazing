@@ -19,22 +19,17 @@ class PrepareGameNode: DialogNode {
     var gameMode = GameMode.singleplayer
     
     var startGameButton: MenuButton?
+    var buyLivesButton: MenuButton?
     
     func initialize(mode: GameMode) {
         self.gameMode = mode
     
         self.startGameButton = MenuButton(label: "Start game", name: "startGame");
-        startGameButton!.position = CGPoint(x: 0.0, y: 100.0)
-        
-        let gameCostNode = CoinsNode()
-        gameCostNode.position = CGPoint(x: startGameButton!.size.width / 2.0 + 10.0, y: ItemCoin.texture.size().height / 2.0)
-        startGameButton!.addChild(gameCostNode)
-        gameCostNode.initialize(GameScene.gameCost)
-        gameCostNode.setColor(SKColor.redColor())
+        startGameButton!.position = CGPoint(x: 0.0, y: 140.0)
         
         text = SKLabelNode(fontNamed: "Chalkduster")
         text!.text = "Press any key on your controller (wasd / hbnm / arrow keys / siri remote)"
-        text!.position = CGPoint(x: -0.0, y: 0.0)
+        text!.position = CGPoint(x: 0.0, y: -100.0)
         text!.fontColor = SKColor.blackColor()
         self.addChild(text!)
         
@@ -47,7 +42,10 @@ class PrepareGameNode: DialogNode {
             player1.text = "Player 1"
         }
         
-        player1.position = CGPoint(x: -0.0, y: -100.0)
+        buyLivesButton = MenuButton(label: "Get extralife", name: "buyExtralife");
+        buyLivesButton!.position = CGPoint(x: 0.0, y: 20.0)
+        
+        player1.position = CGPoint(x: -0.0, y: -200.0)
         player1.fontColor = SKColor.whiteColor()
         player1.fontSize = 18
         self.addChild(player1)
@@ -57,7 +55,7 @@ class PrepareGameNode: DialogNode {
             let player2 = SKLabelNode(fontNamed: "Chalkduster")
             player2.color = SKColor.orangeColor()
             player2.text = "Player 2"
-            player2.position = CGPoint(x: 0.0, y: -200.0)
+            player2.position = CGPoint(x: 0.0, y: -300.0)
             player2.fontColor = SKColor.whiteColor()
             player2.fontSize = 18
             self.addChild(player2)
@@ -66,7 +64,7 @@ class PrepareGameNode: DialogNode {
             let player3 = SKLabelNode(fontNamed: "Chalkduster")
             player3.color = SKColor.orangeColor()
             player3.text = "Player 3"
-            player3.position = CGPoint(x: 0.0, y: -300.0)
+            player3.position = CGPoint(x: 0.0, y: -400.0)
             player3.fontColor = SKColor.whiteColor()
             player3.fontSize = 18
             self.addChild(player3)
@@ -79,6 +77,19 @@ class PrepareGameNode: DialogNode {
         if(gameMode == .singleplayer || (gameMode == .multiplayer && self.numPlayersJoined >= 2)) {
             startGameButton!.initialize()
             self.addItem(startGameButton!)
+            
+            buyLivesButton!.initialize()
+            self.addItem(buyLivesButton!)
+            
+            let heart = SKSpriteNode(imageNamed: "extralife")
+            buyLivesButton!.addChild(heart)
+            heart.position = CGPoint(x: -buyLivesButton!.size.width / 2.0 - heart.size.width / 2.0 - 10.0, y: 0.0)
+            
+            let gameCostNode = CoinsNode()
+            gameCostNode.position = CGPoint(x: buyLivesButton!.size.width / 2.0 + 10.0, y: ItemCoin.texture.size().height / 2.0)
+            buyLivesButton!.addChild(gameCostNode)
+            gameCostNode.initialize(GameScene.gameCost)
+            gameCostNode.setColor(SKColor.redColor())
         }
     }
     
