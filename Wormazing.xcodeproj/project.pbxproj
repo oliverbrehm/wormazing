@@ -52,6 +52,16 @@
 		A70C1C851C51178600FF5392 /* UseLifeCountdownNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70C1C841C51178600FF5392 /* UseLifeCountdownNode.swift */; };
 		A70C1C861C51178600FF5392 /* UseLifeCountdownNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70C1C841C51178600FF5392 /* UseLifeCountdownNode.swift */; };
 		A70C1C871C51178600FF5392 /* UseLifeCountdownNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70C1C841C51178600FF5392 /* UseLifeCountdownNode.swift */; };
+		A70C1C8B1C51375A00FF5392 /* explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = A70C1C891C51375A00FF5392 /* explosion.sks */; };
+		A70C1C8C1C51375A00FF5392 /* explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = A70C1C891C51375A00FF5392 /* explosion.sks */; };
+		A70C1C8D1C51375A00FF5392 /* explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = A70C1C891C51375A00FF5392 /* explosion.sks */; };
+		A70C1C8E1C51375A00FF5392 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = A70C1C8A1C51375A00FF5392 /* spark.png */; };
+		A70C1C8F1C51375A00FF5392 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = A70C1C8A1C51375A00FF5392 /* spark.png */; };
+		A70C1C901C51375A00FF5392 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = A70C1C8A1C51375A00FF5392 /* spark.png */; };
+		A70C1C921C513D5700FF5392 /* playerSpark.sks in Resources */ = {isa = PBXBuildFile; fileRef = A70C1C911C513D5700FF5392 /* playerSpark.sks */; };
+		A70C1C931C513D5700FF5392 /* playerSpark.sks in Resources */ = {isa = PBXBuildFile; fileRef = A70C1C911C513D5700FF5392 /* playerSpark.sks */; };
+		A70C1C941C513D5700FF5392 /* playerSpark.sks in Resources */ = {isa = PBXBuildFile; fileRef = A70C1C911C513D5700FF5392 /* playerSpark.sks */; };
+		A70C1C951C514DA400FF5392 /* coin.png in Resources */ = {isa = PBXBuildFile; fileRef = A7BF6C8D1C46456800165C3D /* coin.png */; };
 		A71620941C439318003C1EE3 /* CollectableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71620931C439318003C1EE3 /* CollectableManager.swift */; };
 		A71620951C439318003C1EE3 /* CollectableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71620931C439318003C1EE3 /* CollectableManager.swift */; };
 		A71620981C439DEF003C1EE3 /* ItemGrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71620971C439DEF003C1EE3 /* ItemGrow.swift */; };
@@ -207,6 +217,9 @@
 		A70C1C7C1C51003400FF5392 /* ShopScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShopScene.swift; path = Scenes/ShopScene.swift; sourceTree = "<group>"; };
 		A70C1C801C510B3500FF5392 /* PlayerConsumablesNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerConsumablesNode.swift; path = Nodes/PlayerConsumablesNode.swift; sourceTree = "<group>"; };
 		A70C1C841C51178600FF5392 /* UseLifeCountdownNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UseLifeCountdownNode.swift; sourceTree = "<group>"; };
+		A70C1C891C51375A00FF5392 /* explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = explosion.sks; path = Particles/explosion.sks; sourceTree = "<group>"; };
+		A70C1C8A1C51375A00FF5392 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spark.png; path = Particles/spark.png; sourceTree = "<group>"; };
+		A70C1C911C513D5700FF5392 /* playerSpark.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = playerSpark.sks; path = Particles/playerSpark.sks; sourceTree = "<group>"; };
 		A71620931C439318003C1EE3 /* CollectableManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CollectableManager.swift; path = GameLogic/CollectableManager.swift; sourceTree = "<group>"; };
 		A71620971C439DEF003C1EE3 /* ItemGrow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ItemGrow.swift; path = Nodes/Collectables/ItemGrow.swift; sourceTree = "<group>"; };
 		A716209A1C439E09003C1EE3 /* ItemIncSpeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ItemIncSpeed.swift; path = Nodes/Collectables/ItemIncSpeed.swift; sourceTree = "<group>"; };
@@ -424,6 +437,7 @@
 		77FBF05A1C317EAC0048D24D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A70C1C881C51372900FF5392 /* Particles */,
 				777F61EF1C2FFDA600664D3C /* Textures */,
 			);
 			name = Resources;
@@ -441,6 +455,16 @@
 				A75F08A11C46A7E7006AC55D /* LeaderboardNode.swift */,
 			);
 			name = Menu;
+			sourceTree = "<group>";
+		};
+		A70C1C881C51372900FF5392 /* Particles */ = {
+			isa = PBXGroup;
+			children = (
+				A70C1C891C51375A00FF5392 /* explosion.sks */,
+				A70C1C8A1C51375A00FF5392 /* spark.png */,
+				A70C1C911C513D5700FF5392 /* playerSpark.sks */,
+			);
+			name = Particles;
 			sourceTree = "<group>";
 		};
 		A71620961C439D4D003C1EE3 /* Collectables */ = {
@@ -614,9 +638,12 @@
 				A7FCD8131C41764000FC7A55 /* playerTile.png in Resources */,
 				A794795D1C44F38D00A71E94 /* extrainvincible.png in Resources */,
 				A7FCD8121C41764000FC7A55 /* playerTail.png in Resources */,
+				A70C1C8B1C51375A00FF5392 /* explosion.sks in Resources */,
 				A71620A81C43A023003C1EE3 /* speedinc.png in Resources */,
 				A7BF6C8F1C46456800165C3D /* coin.png in Resources */,
+				A70C1C8E1C51375A00FF5392 /* spark.png in Resources */,
 				A7FCD8101C41764000FC7A55 /* grow.png in Resources */,
+				A70C1C921C513D5700FF5392 /* playerSpark.sks in Resources */,
 				A7FCD80E1C41764000FC7A55 /* logo.png in Resources */,
 				A71620A41C43A023003C1EE3 /* speeddec.png in Resources */,
 				A79479691C44F40000A71E94 /* extralife.png in Resources */,
@@ -636,11 +663,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				A71620A51C43A023003C1EE3 /* speeddec.png in Resources */,
+				A70C1C8F1C51375A00FF5392 /* spark.png in Resources */,
 				A7FCD8191C41764200FC7A55 /* playerHead.png in Resources */,
 				A7FCD8181C41764200FC7A55 /* grow.png in Resources */,
 				A79479641C44F39A00A71E94 /* extrainvincible.png in Resources */,
 				A794796A1C44F40300A71E94 /* extralife.png in Resources */,
+				A70C1C931C513D5700FF5392 /* playerSpark.sks in Resources */,
 				A7FCD81A1C41764200FC7A55 /* playerTail.png in Resources */,
+				A70C1C8C1C51375A00FF5392 /* explosion.sks in Resources */,
 				77F0A4C01C3C6E9100C7E950 /* GameScene.sks in Resources */,
 				A7FCD8171C41764200FC7A55 /* button.png in Resources */,
 				A71620A91C43A023003C1EE3 /* speedinc.png in Resources */,
@@ -648,6 +678,7 @@
 				A7FCD81B1C41764200FC7A55 /* playerTile.png in Resources */,
 				A79479651C44F3A300A71E94 /* invincible.png in Resources */,
 				A79479661C44F3AA00A71E94 /* life.png in Resources */,
+				A70C1C951C514DA400FF5392 /* coin.png in Resources */,
 				778656A11C3C1027001C4E32 /* Main.storyboard in Resources */,
 				778656A31C3C1027001C4E32 /* Assets.xcassets in Resources */,
 				7786569E1C3C1027001C4E32 /* Game.xcassets in Resources */,
@@ -661,9 +692,12 @@
 				A7378CD71C4CF4BB005A0708 /* GameScene.sks in Resources */,
 				A7378CD81C4CF4BB005A0708 /* coin.png in Resources */,
 				A7378CD91C4CF4BB005A0708 /* extralife.png in Resources */,
+				A70C1C8D1C51375A00FF5392 /* explosion.sks in Resources */,
 				A7378CDA1C4CF4BB005A0708 /* extrainvincible.png in Resources */,
 				A7378CDB1C4CF4BB005A0708 /* invincible.png in Resources */,
+				A70C1C901C51375A00FF5392 /* spark.png in Resources */,
 				A7378CDC1C4CF4BB005A0708 /* life.png in Resources */,
+				A70C1C941C513D5700FF5392 /* playerSpark.sks in Resources */,
 				A7378CDD1C4CF4BB005A0708 /* speeddec.png in Resources */,
 				A7378CDE1C4CF4BB005A0708 /* speedinc.png in Resources */,
 				A7378CDF1C4CF4BB005A0708 /* logo.png in Resources */,

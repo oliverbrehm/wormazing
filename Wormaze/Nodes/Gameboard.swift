@@ -172,9 +172,32 @@ class GameBoard: SKSpriteNode {
         }
     }
     
+    func numOccupiedTilesAroundPoint(x: Int, y: Int) -> Int
+    {
+        var n = 0
+        
+        for player in self.players {
+            for tile in player.tiles.tiles {
+                if(tile == nil) {
+                    continue
+                }
+                
+                if(Float.abs(Float(tile!.x - x)) < 3 && Float.abs(Float(tile!.y - y)) < 3) {
+                    n++
+                }
+            }
+        }
+        
+        return n
+    }
+    
     func gameOver()
     {
         GameView.instance?.serializeUserData()
+        
+        for player in self.players {
+            player.tiles.playerSparks?.removeFromParent()
+        }
 
         running = false
     }

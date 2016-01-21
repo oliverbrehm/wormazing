@@ -25,7 +25,7 @@ class SingleplayerGame : GameBoard {
 
     func updateScore()
     {
-        let add = Float(self.players[0].length()) * Float(self.numOccupiedTilesAroundHead())
+        let add = Float(self.players[0].length()) * Float(self.players[0].numOccupiedTilesAroundHead())
         score += 1.0 + (add / 100.0)
         updateScoreNode()
     }
@@ -41,23 +41,6 @@ class SingleplayerGame : GameBoard {
         self.updateScoreNode()
     }
     
-    func numOccupiedTilesAroundPoint(x: Int, y: Int) -> Int
-    {
-        var n = 0
-    
-        for tile in self.players[0].tiles.tiles {
-            if(tile == nil) {
-                continue
-            }
-            
-            if(Float.abs(Float(tile!.x - x)) < 3 && Float.abs(Float(tile!.y - y)) < 3) {
-                n++
-            }
-        }
-                
-        return n
-    }
-    
     override func newGame() {
         super.newGame()
         
@@ -69,17 +52,6 @@ class SingleplayerGame : GameBoard {
         super.gameOver()
     
         self.delegate?.gameBoardGameOver(Int(self.score), message: "Game over. Your score is \(Int(score))!", color: SKColor.redColor())
-    }
-    
-    func numOccupiedTilesAroundHead() -> Int
-    {
-        if let head = self.players[0].tiles.head() {
-            let x = head.x
-            let y = head.y
-            return self.numOccupiedTilesAroundPoint(x, y: y)
-        } else {
-            return 0
-        }
     }
     
     override func step() {

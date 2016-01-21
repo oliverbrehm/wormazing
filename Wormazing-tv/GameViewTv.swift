@@ -16,7 +16,7 @@ class GameViewTv : GameView
     
     let THRESHOLD : CGFloat = 100.0
     
-    let siriRemoteController = Controller(name: "siriRemoteController")
+    let siriRemoteController = Controller(name: "siriRemoteController", index: 0)
     
     override func initialize() {
         super.initialize()

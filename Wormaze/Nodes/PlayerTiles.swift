@@ -99,9 +99,17 @@ class PlayerTiles
     
     let invincibilityNode = SKSpriteNode(imageNamed: "extrainvincible")
     
+    var playerSparks : SKEmitterNode?
+    
+    var player: Player?
+    
     init() {
         self.invincibilityNode.alpha = 0.5
         self.invincibilityNode.runAction(SKAction.repeatActionForever(SKAction.rotateByAngle(CGFloat(2.0 * M_PI), duration: 0.8)))
+        
+        self.playerSparks = SKEmitterNode(fileNamed: "playerSpark")
+        self.playerSparks!.particleBirthRate = 0
+        self.playerSparks!.targetNode = GameView.instance!.gameScene!.gameBoard
     }
     
     func addTile(x: Int, y: Int, color: SKColor, playerDirection: PlayerDirection) -> Tile {
@@ -126,6 +134,12 @@ class PlayerTiles
             self.tail()?.makeTail()
         }
         
+        if let h = self.head() {
+            self.playerSparks?.removeFromParent()
+            h.addChild(self.playerSparks!)
+            self.playerSparks?.particleBirthRate = max(CGFloat(self.player!.numOccupiedTilesAroundHead() - 4) * 100.0, 0.0)
+        }
+        
         return tile
     }
     
@@ -142,7 +156,28 @@ class PlayerTiles
     }
     
     func removeIndex(index: Int) {
-        self.tiles[index]?.removeFromParent()
+        let tile = self.tiles[index]
+
+        let explosion = SKEmitterNode(fileNamed: "explosion")!
+        
+        let gameboard = GameView.instance!.gameScene!.gameBoard
+        explosion.position = tile!.position
+        gameboard.addChild(explosion)
+        
+        
+        explosion.runAction(SKAction.waitForDuration(0.5)) { () -> Void in
+            explosion.particleBirthRate = 0
+            explosion.runAction(SKAction.waitForDuration(5.0)) { () -> Void in
+                explosion.removeFromParent()
+            }
+        }
+        
+        
+        
+        tile?.runAction(SKAction.fadeOutWithDuration(1.0), completion: { () -> Void in
+            tile?.removeFromParent()
+        })
+        
         self.tiles[index] = nil
     }
     
@@ -177,6 +212,8 @@ class PlayerTiles
     
     func die()
     {
+        self.playerSparks?.removeFromParent()
+        
         if(self.tiles.count < 1) {
             return
         }

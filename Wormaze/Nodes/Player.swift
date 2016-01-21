@@ -60,6 +60,7 @@ class Player: SKNode {
         //let alphaColor = SKColor(red: color.redComponent, green: color.greenComponent, blue: color.blueComponent, alpha: 0.5)
         self.itemsView = SKSpriteNode(color: color.colorWithAlphaComponent(0.5), size: CGSize(width: 300.0, height: 35.0))
         super.init()
+        self.tiles.player = self
         
         self.gameBoard.addChild(self.tiles.addTile(x, y: y, color: self.color, playerDirection: self.nextDirection))
     }
@@ -129,6 +130,17 @@ class Player: SKNode {
         self.tiles.toggleInvincibility(false)
     }
     
+    func numOccupiedTilesAroundHead() -> Int
+    {
+        if let head = self.tiles.head() {
+            let x = head.x
+            let y = head.y
+            return self.gameBoard.numOccupiedTilesAroundPoint(x, y: y)
+        } else {
+            return 0
+        }
+    }
+    
     func removeTilesAroundPoint(x: Int, y: Int)
     {
         var toDelete: [Int] = []
@@ -177,10 +189,10 @@ class Player: SKNode {
     func extralifeUsed()
     {
         self.gameBoard.resume()
-        for player in self.gameBoard.players {
-            if let head = player.tiles.head() {
-                // TODO only 1st player tiles get removed
-                player.removeTilesAroundPoint(head.x, y: head.y)
+        
+        if let h = self.tiles.head() {
+            for player in self.gameBoard.players {
+                player.removeTilesAroundPoint(h.x, y: h.y)
             }
         }
         
