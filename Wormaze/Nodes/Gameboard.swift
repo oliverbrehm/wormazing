@@ -37,8 +37,8 @@ class GameBoard: SKSpriteNode {
     var lastStepTime: CFTimeInterval = 0;
     
     let gameOverNode = SKSpriteNode(color: SKColor.redColor(), size: CGSize(width: 0.0 ,height: 0.0))
-    let coinsNode = CoinsNode()
-    let livesNode = LivesNode()
+    
+    let consumablesNode = PlayerConsumablesNode()
     
     required init?(coder aDecoder: NSCoder) {
         self.gameScene = GameScene()
@@ -73,13 +73,9 @@ class GameBoard: SKSpriteNode {
         self.gameOverNode.alpha = 0.8
         self.gameOverNode.zPosition = 10
         
-        coinsNode.position = CGPoint(x: -25.0, y: self.size.height + 25.0)
-        self.addChild(coinsNode)
-        coinsNode.initialize(GameView.instance!.coins)
-        
-        livesNode.position = CGPoint(x: 175.0, y: self.size.height + 25.0)
-        self.addChild(livesNode)
-        livesNode.initialize(GameView.instance!.extralives)
+        consumablesNode.position = CGPoint(x: -25.0, y: self.size.height + 25.0)
+        self.addChild(consumablesNode)
+        consumablesNode.initialize()
     }
     
     func newGame()
@@ -251,9 +247,7 @@ class GameBoard: SKSpriteNode {
         for(var i = 0; i < players.count; i++) {
             let player = players[i]
             if(player.isAlive) {
-                if(player.update(currentTime)) {
-                    player.gameOver()
-                }
+                player.update(currentTime)
             }
         }
         

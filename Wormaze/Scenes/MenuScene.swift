@@ -9,24 +9,11 @@
 import Foundation
 import SpriteKit
 
-protocol MenuSceneDelegate
-{
-    func menuSceneDidCancel()
-    func menuSceneDidStartGame(mode: GameMode)
-}
-
 class MenuScene: SKScene, DialogNodeDelegate {
-    let menuDelegate : MenuSceneDelegate?
-    
     let mainMenu: MainMenu
     
-    convenience override init() {
-        self.init(menuDelegate: nil)
-    }
-    
-    init(menuDelegate: MenuSceneDelegate?) {
+    override init() {
         self.mainMenu = MainMenu()
-        self.menuDelegate = menuDelegate
         super.init(size: CGSize(width: 1920, height: 1080))
         self.backgroundColor = GameView.gameColors.background
         self.mainMenu.delegate = self
@@ -35,14 +22,15 @@ class MenuScene: SKScene, DialogNodeDelegate {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        self.menuDelegate = nil
         self.mainMenu = MainMenu()
         super.init(coder: aDecoder)
     }
     
     override func didMoveToView(view: SKView) {
-        self.addChild(mainMenu)
-        self.mainMenu.initialize()
+        if(self.children.count <= 0) {
+            self.addChild(mainMenu)
+            self.mainMenu.initialize()
+        }
         
         if let view = self.view as? GameView {
             view.primaryController()?.removeControl()
@@ -51,6 +39,8 @@ class MenuScene: SKScene, DialogNodeDelegate {
         
         (self.view as! GameView).primaryController()!.assignDialog(self.mainMenu)
         (self.view as! GameView).initializeGameControllers()
+        
+        self.mainMenu.consumablesNode.update()
     }
     
     override func update(currentTime: CFTimeInterval) {
@@ -63,9 +53,11 @@ class MenuScene: SKScene, DialogNodeDelegate {
         }
         
         if(item!.name == "singleplayer") {
-            self.menuDelegate?.menuSceneDidStartGame(.singleplayer)
+            GameView.instance!.menuSceneDidStartGame(.singleplayer)
         } else if(item!.name == "multiplayer") {
-            self.menuDelegate?.menuSceneDidStartGame(.multiplayer)
+            GameView.instance!.menuSceneDidStartGame(.multiplayer)
+        } else if(item!.name == "shop") {
+            GameView.instance!.displayShopScene()
         } else if(item!.name == "exitGame") {
             exit(EXIT_SUCCESS)
         }

@@ -43,6 +43,11 @@ class Controller
         self.dialog = dialog
     }
     
+    func removeMenuControl()
+    {
+        self.dialog = nil
+    }
+    
     func removeControl()
     {
         self.player = nil
@@ -76,7 +81,7 @@ class Controller
         case .enter:
             self.dialog?.acceptItem()
         case .cancel:
-            self.player?.pause()
+            self.player?.gameBoard.pause()
             self.dialog?.cancel()
         case .action:
             self.player?.useInvincibility()

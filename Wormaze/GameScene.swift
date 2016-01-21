@@ -51,11 +51,6 @@ class PlayerColors
     }
 }
 
-protocol GameSceneDelegate
-{
-    func gameSceneDidCancel()
-}
-
 enum GameState
 {
     case PrepareGame
@@ -82,8 +77,6 @@ class GameScene: SKScene, GameBoardDelegate, DialogNodeDelegate {
     var prepareGameNode: PrepareGameNode?
     var pauseNode: PauseMenuNode?
     
-    var gameSceneDelegate: GameSceneDelegate?
-    
     static let gameCost = 10
     
     override func didMoveToView(view: SKView) {
@@ -92,28 +85,36 @@ class GameScene: SKScene, GameBoardDelegate, DialogNodeDelegate {
         
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5);
         
-        if(gameMode == .singleplayer) {
-            self.gameBoard = SingleplayerGame()
-        } else {
-            self.gameBoard = MultiplayerGame()
+        if(self.children.count <= 0) {
+            if(gameMode == .singleplayer) {
+                self.gameBoard = SingleplayerGame()
+            } else {
+                self.gameBoard = MultiplayerGame()
+            }
+            
+            self.addChild(gameBoard)
+            gameBoard.initialize(self, size: CGSize(width: self.size.width - 20, height: self.size.height - 60))
+            gameBoard.delegate = self
+            
+            gameBoard.position = CGPoint(x: -gameBoard.size.width / 2.0, y: -gameBoard.size.height / 2.0);
+            
+            self.prepareGameNode = PrepareGameNode(size: CGSize(width: self.size.width, height: self.size.height), color: SKColor(white: 1.0, alpha: 0.5), name: "GameOverNode")
+            self.addChild(self.prepareGameNode!)
+            self.prepareGameNode!.initialize(self.gameMode)
+            self.prepareGameNode!.delegate = self
+            
+            (self.view as! GameView).removeAllControls()
         }
-                
-        self.addChild(gameBoard)
-        gameBoard.initialize(self, size: CGSize(width: self.size.width - 20, height: self.size.height - 60))
-        gameBoard.delegate = self
-    
-        gameBoard.position = CGPoint(x: -gameBoard.size.width / 2.0, y: -gameBoard.size.height / 2.0);
-        
-        self.prepareGameNode = PrepareGameNode(size: CGSize(width: self.size.width, height: self.size.height), color: SKColor(white: 1.0, alpha: 0.5), name: "GameOverNode")
-        self.addChild(self.prepareGameNode!)
-        self.prepareGameNode!.initialize(self.gameMode)
-        self.prepareGameNode!.delegate = self
-        
-        (self.view as! GameView).removeAllControls()
         
         if let view = self.view as? GameView {
-            for controller in view.gameControllers {
-                controller.assignDialog(self.prepareGameNode)
+            if(self.gameOverNode != nil) {
+                for controller in view.gameControllers {
+                    controller.assignDialog(self.gameOverNode)
+                }
+            } else {
+                for controller in view.gameControllers {
+                    controller.assignDialog(self.prepareGameNode)
+                }
             }
         }
     }
@@ -155,13 +156,19 @@ class GameScene: SKScene, GameBoardDelegate, DialogNodeDelegate {
             } else if(item!.name == "toMenu") {
                 self.toMenu()
             } else if(item!.name == "buyExtralife") {
-                self.buyExtralife()
+                if(!GameView.instance!.buyExtralife()) {
+                    GameView.instance!.displayShopScene()
+                } else {
+                    self.gameBoard.consumablesNode.update()
+                }
+            } else if(item!.name == "shop") {
+                GameView.instance!.displayShopScene()
             }
         } else if(dialog === self.prepareGameNode && item != nil) {
             if(item!.name == "startGame") {
                 self.prepareGameNodeDidContinue()
-            } else if(item!.name == "buyExtralife") {
-                self.buyExtralife()
+            } else if(item!.name == "toMenu") {
+                self.toMenu()
             }
         } else if(dialog === self.pauseNode && item != nil) {
             if(item!.name == "continue") {
@@ -172,24 +179,6 @@ class GameScene: SKScene, GameBoardDelegate, DialogNodeDelegate {
             } else if(item!.name == "toMenu") {
                 self.toMenu()
             }
-        }
-    }
-    
-    func buyExtralife()
-    {
-        if let g = GameView.instance {
-            if(g.coins >= g.lifeCost) {
-                g.coins -= g.lifeCost
-            } else {
-                g.coins = 0
-            }
-            
-            // TODO not enough coins
-            
-            g.extralives++
-            g.serializeUserData()
-            self.gameBoard.livesNode.update(g.extralives)
-            self.gameBoard.coinsNode.update(g.coins)
         }
     }
     
@@ -217,9 +206,12 @@ class GameScene: SKScene, GameBoardDelegate, DialogNodeDelegate {
             }
         }
         
-        if let view = self.view as? GameView {
-            for controller in view.gameControllers {
-                controller.assignDialog(self.gameOverNode)
+        // delay menu controls because player probably was in panic
+        self.runAction(SKAction.waitForDuration(1)) { () -> Void in
+            if let view = self.view as? GameView {
+                for controller in view.gameControllers {
+                    controller.assignDialog(self.gameOverNode)
+                }
             }
         }
     }
@@ -263,13 +255,28 @@ class GameScene: SKScene, GameBoardDelegate, DialogNodeDelegate {
     
         (self.view as! GameView).removeAllControls()
         
-        self.gameSceneDelegate?.gameSceneDidCancel()
+        GameView.instance!.gameSceneDidCancel()
     }
     
     func prepareGameNodeDidContinue() {
+        if(gameMode == GameMode.multiplayer) {
+            if(GameView.instance!.coins >= 10) {
+                GameView.instance!.coins -= 10
+                GameView.instance!.serializeUserData()
+                self.startGame()
+            } else {
+                GameView.instance!.displayShopScene()
+            }
+        } else {
+            self.startGame()
+        }
+    }
+
+    func startGame() {
         self.gameBoard.startGame()
         self.gameState = .RunningGame
         self.prepareGameNode?.removeFromParent()
         self.prepareGameNode =  nil
+        self.gameBoard.consumablesNode.update()
     }
 }

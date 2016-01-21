@@ -34,6 +34,8 @@ class Player: SKNode {
     static let growingTime = 10 // steps
     static let invinibilityDuration = 25 // steps
     
+    var countdown : UseLiftCountdwonNode?
+    
     let id: Int
 
     var lastStepTime: CFTimeInterval = 0;
@@ -70,22 +72,22 @@ class Player: SKNode {
         return multiplayerExtralives
     }
     
-    func update(currentTime: CFTimeInterval) -> Bool
+    func update(currentTime: CFTimeInterval)
     {
         let stepTime = 1.0 / currentSpeed
         if(currentTime > lastStepTime + stepTime) {
             lastStepTime = currentTime
-            return self.step()
+            self.step()
         }
-        
-        return false
     }
     
     func initialize()
     {
-        self.gameBoard.addPlayerItemsNode(self.id, node: self.itemsView)
-        self.updateItemsView()
-        self.itemsView.anchorPoint = CGPoint(x: 0.0, y: 0.0)
+        if(GameView.instance!.gameScene!.gameMode == .multiplayer) {
+            self.gameBoard.addPlayerItemsNode(self.id, node: self.itemsView)
+            self.updateItemsView()
+            self.itemsView.anchorPoint = CGPoint(x: 0.0, y: 0.0)
+        }
     }
     
     func incrementSpeed()
@@ -152,21 +154,37 @@ class Player: SKNode {
     
     func useExtralive()
     {
-        if(self.gameBoard.gameScene!.gameMode == GameMode.singleplayer) {
-            GameView.instance!.extralives--
-            GameView.instance!.serializeUserData()
-            self.gameBoard.livesNode.update(GameView.instance!.extralives)
-        } else {
+        self.gameBoard.running = false
+
+        if(self.gameBoard.gameScene!.gameMode == GameMode.multiplayer) {
             self.multiplayerExtralives--
             self.updateItemsView()
+            self.extralifeUsed()
+        } else {
+            countdown = UseLiftCountdwonNode()
+            countdown!.position = CGPoint(x: self.gameBoard.size.width / 2.0, y: self.gameBoard.size.height / 2.0)
+            self.gameBoard.addChild(countdown!)
+            countdown!.initialize()
+            countdown!.execute(5) { () -> Void in
+                self.gameOver()
+                self.countdown!.removeFromParent()
+                self.countdown = nil
+                self.gameBoard.resume()
+            }
         }
-        
+    }
+    
+    func extralifeUsed()
+    {
+        self.gameBoard.resume()
         for player in self.gameBoard.players {
             if let head = player.tiles.head() {
                 // TODO only 1st player tiles get removed
                 player.removeTilesAroundPoint(head.x, y: head.y)
             }
         }
+        
+        self.startInvincibility()
     }
     
     func updateItemsView()
@@ -205,7 +223,7 @@ class Player: SKNode {
             if let v = GameView.instance {
                 v.extralives++
                 v.serializeUserData()
-                self.gameBoard.livesNode.update(v.extralives)
+                self.gameBoard.consumablesNode.update()
             }
         } else {
             self.multiplayerExtralives++
@@ -286,12 +304,7 @@ class Player: SKNode {
         return self.tiles.tiles.count
     }
     
-    func pause()
-    {
-        self.gameBoard.pause()
-    }
-    
-    func step() -> Bool
+    func step()
     {
         if let board = self.gameBoard as? SingleplayerGame {
             board.updateScore()
@@ -319,10 +332,10 @@ class Player: SKNode {
                     doStep = false
                 } else if(self.extralives() > 0) {
                     self.useExtralive()
-                    self.startInvincibility()
                     doStep = false
                 } else {
-                    return true // game over
+                    gameOver()
+                    return
                 }
             }
             
@@ -351,12 +364,20 @@ class Player: SKNode {
                 invincibilityTimer++
             }
         }
-        
-        return false
     }
     
     func navigate(playerDirection : PlayerDirection)
     {
+        if(self.countdown != nil && self.countdown!.delayDone()) {
+            GameView.instance!.extralives--
+            GameView.instance!.serializeUserData()
+            self.gameBoard.consumablesNode.update()
+            self.extralifeUsed()
+            self.countdown?.removeFromParent()
+            self.countdown = nil
+            return
+        }
+        
         if(didNavigate || !self.gameBoard.running) {
             return;
         }

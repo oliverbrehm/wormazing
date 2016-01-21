@@ -11,6 +11,8 @@ import SpriteKit
 
 class MainMenu : DialogNode
 {
+    let consumablesNode = PlayerConsumablesNode()
+    
     init()
     {
         super.init(size: CGSize(width: 400.0, height: 300.0), color: SKColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5), name: "MainMenu")
@@ -53,23 +55,23 @@ class MainMenu : DialogNode
         self.addItem(singlePlayerButton)
 
         let testButton = MenuButton(label: "Multiplayer", name: "multiplayer");
-        testButton.position = CGPoint(x: 0.0, y: -200.0)
+        testButton.position = CGPoint(x: 0.0, y: -170.0)
         testButton.initialize()
         self.addItem(testButton)
         
-        let coinsNode = CoinsNode()
-        coinsNode.position = CGPoint(x: -self.size.width / 2.0  + 5.0, y: self.size.height / 2.0 - 5.0)
-        self.addChild(coinsNode)
-        coinsNode.initialize(GameView.instance!.coins)
         
-        let livesNode = LivesNode()
-        livesNode.position = CGPoint(x: -self.size.width / 2.0 + 200.0, y: self.size.height / 2.0 - 5.0)
-        self.addChild(livesNode)
-        livesNode.initialize(GameView.instance!.extralives)
+        consumablesNode.position = CGPoint(x: -self.size.width / 2.0 + 5.0, y: self.size.height / 2.0 - 5.0)
+        consumablesNode.initialize()
+        self.addChild(consumablesNode)
+        
+        let shopButton = MenuButton(label: "Shop", name: "shop");
+        shopButton.position = CGPoint(x: 0.0, y: -290.0)
+        shopButton.initialize()
+        self.addItem(shopButton)
 
         // TODO if osx
         let exitGameButton = MenuButton(label: "Exit", name: "exitGame");
-        exitGameButton.position = CGPoint(x: 0.0, y: -350.0)
+        exitGameButton.position = CGPoint(x: 0.0, y: -410.0)
         exitGameButton.initialize()
         self.addItem(exitGameButton)
         

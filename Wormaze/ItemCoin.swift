@@ -32,10 +32,10 @@ class ItemCoin: Collectable {
         movingCoin.position = self.position
         movingCoin.zPosition = GameScene.zPositions.GameboardOverlay
         gameboard?.addChild(movingCoin)
-        movingCoin.runAction(SKAction.moveTo(gameboard!.coinsNode.position, duration: 0.5), completion: {
+        movingCoin.runAction(SKAction.moveTo(gameboard!.convertPoint(gameboard!.consumablesNode.coinsNode.position, fromNode: gameboard!.consumablesNode), duration: 0.5), completion: {
             movingCoin.removeFromParent()
-            let coins = ++GameView.instance!.coins
-            self.gameboard!.coinsNode.update(coins)
+            GameView.instance!.coins++
+            self.gameboard!.consumablesNode.update()
         })
     }
     

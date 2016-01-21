@@ -19,13 +19,17 @@ class PrepareGameNode: DialogNode {
     var gameMode = GameMode.singleplayer
     
     var startGameButton: MenuButton?
-    var buyLivesButton: MenuButton?
     
     func initialize(mode: GameMode) {
         self.gameMode = mode
     
         self.startGameButton = MenuButton(label: "Start game", name: "startGame");
         startGameButton!.position = CGPoint(x: 0.0, y: 140.0)
+        
+        let exitButton = MenuButton(label: "Exit", name: "toMenu");
+        exitButton.initialize()
+        exitButton.position = CGPoint(x: 0.0, y: 0.0)
+        self.addItem(exitButton)
         
         text = SKLabelNode(fontNamed: "Chalkduster")
         text!.text = "Press any key on your controller (wasd / hbnm / arrow keys / siri remote)"
@@ -41,9 +45,6 @@ class PrepareGameNode: DialogNode {
         } else if(mode == .multiplayer) {
             player1.text = "Player 1"
         }
-        
-        buyLivesButton = MenuButton(label: "Get extralife", name: "buyExtralife");
-        buyLivesButton!.position = CGPoint(x: 0.0, y: 20.0)
         
         player1.position = CGPoint(x: -0.0, y: -200.0)
         player1.fontColor = SKColor.whiteColor()
@@ -78,18 +79,13 @@ class PrepareGameNode: DialogNode {
             startGameButton!.initialize()
             self.addItem(startGameButton!)
             
-            buyLivesButton!.initialize()
-            self.addItem(buyLivesButton!)
-            
-            let heart = SKSpriteNode(imageNamed: "extralife")
-            buyLivesButton!.addChild(heart)
-            heart.position = CGPoint(x: -buyLivesButton!.size.width / 2.0 - heart.size.width / 2.0 - 10.0, y: 0.0)
-            
-            let gameCostNode = CoinsNode()
-            gameCostNode.position = CGPoint(x: buyLivesButton!.size.width / 2.0 + 10.0, y: ItemCoin.texture.size().height / 2.0)
-            buyLivesButton!.addChild(gameCostNode)
-            gameCostNode.initialize(GameScene.gameCost)
-            gameCostNode.setColor(SKColor.redColor())
+            if(gameMode == .multiplayer) {
+                let gameCostNode = CoinsNode()
+                startGameButton!.addChild(gameCostNode)
+                gameCostNode.initialize(10)
+                gameCostNode.position = CGPoint(x: startGameButton!.size.width / 2.0 + 10.0, y: ItemCoin.texture.size().height / 2.0)
+                gameCostNode.setColor(SKColor.redColor())
+            }
         }
     }
     

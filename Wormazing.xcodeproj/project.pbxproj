@@ -43,6 +43,15 @@
 		77FBF05C1C317F040048D24D /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FBF05B1C317F040048D24D /* MenuScene.swift */; };
 		77FBF05F1C3187790048D24D /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FBF05E1C3187790048D24D /* MenuItem.swift */; };
 		77FBF0611C3188960048D24D /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FBF0601C3188960048D24D /* MenuButton.swift */; };
+		A70C1C7D1C51003400FF5392 /* ShopScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70C1C7C1C51003400FF5392 /* ShopScene.swift */; };
+		A70C1C7E1C51003400FF5392 /* ShopScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70C1C7C1C51003400FF5392 /* ShopScene.swift */; };
+		A70C1C7F1C51003400FF5392 /* ShopScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70C1C7C1C51003400FF5392 /* ShopScene.swift */; };
+		A70C1C811C510B3500FF5392 /* PlayerConsumablesNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70C1C801C510B3500FF5392 /* PlayerConsumablesNode.swift */; };
+		A70C1C821C510B3500FF5392 /* PlayerConsumablesNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70C1C801C510B3500FF5392 /* PlayerConsumablesNode.swift */; };
+		A70C1C831C510B3500FF5392 /* PlayerConsumablesNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70C1C801C510B3500FF5392 /* PlayerConsumablesNode.swift */; };
+		A70C1C851C51178600FF5392 /* UseLifeCountdownNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70C1C841C51178600FF5392 /* UseLifeCountdownNode.swift */; };
+		A70C1C861C51178600FF5392 /* UseLifeCountdownNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70C1C841C51178600FF5392 /* UseLifeCountdownNode.swift */; };
+		A70C1C871C51178600FF5392 /* UseLifeCountdownNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70C1C841C51178600FF5392 /* UseLifeCountdownNode.swift */; };
 		A71620941C439318003C1EE3 /* CollectableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71620931C439318003C1EE3 /* CollectableManager.swift */; };
 		A71620951C439318003C1EE3 /* CollectableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71620931C439318003C1EE3 /* CollectableManager.swift */; };
 		A71620981C439DEF003C1EE3 /* ItemGrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71620971C439DEF003C1EE3 /* ItemGrow.swift */; };
@@ -195,6 +204,9 @@
 		77FBF05B1C317F040048D24D /* MenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuScene.swift; path = Scenes/MenuScene.swift; sourceTree = "<group>"; };
 		77FBF05E1C3187790048D24D /* MenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		77FBF0601C3188960048D24D /* MenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuButton.swift; path = Nodes/MenuButton.swift; sourceTree = "<group>"; };
+		A70C1C7C1C51003400FF5392 /* ShopScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShopScene.swift; path = Scenes/ShopScene.swift; sourceTree = "<group>"; };
+		A70C1C801C510B3500FF5392 /* PlayerConsumablesNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerConsumablesNode.swift; path = Nodes/PlayerConsumablesNode.swift; sourceTree = "<group>"; };
+		A70C1C841C51178600FF5392 /* UseLifeCountdownNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UseLifeCountdownNode.swift; sourceTree = "<group>"; };
 		A71620931C439318003C1EE3 /* CollectableManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CollectableManager.swift; path = GameLogic/CollectableManager.swift; sourceTree = "<group>"; };
 		A71620971C439DEF003C1EE3 /* ItemGrow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ItemGrow.swift; path = Nodes/Collectables/ItemGrow.swift; sourceTree = "<group>"; };
 		A716209A1C439E09003C1EE3 /* ItemIncSpeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ItemIncSpeed.swift; path = Nodes/Collectables/ItemIncSpeed.swift; sourceTree = "<group>"; };
@@ -323,12 +335,14 @@
 				A71620961C439D4D003C1EE3 /* Collectables */,
 				774666E21C2D798F0043B095 /* Player.swift */,
 				77FBF0511C3176590048D24D /* PlayerTiles.swift */,
+				A70C1C801C510B3500FF5392 /* PlayerConsumablesNode.swift */,
 				77FBF0531C3177CE0048D24D /* GameOverNode.swift */,
 				77F5D1351C31D2B10045A59E /* PrepareGameNode.swift */,
 				774666E01C2D75510043B095 /* Gameboard.swift */,
 				A71AA1741C3FE61B00BC484E /* SingleplayerGame.swift */,
 				A71AA1771C3FE62700BC484E /* MultiplayerGame.swift */,
 				A71AA17A1C40698000BC484E /* PauseMenuNode.swift */,
+				A70C1C841C51178600FF5392 /* UseLifeCountdownNode.swift */,
 			);
 			name = Nodes;
 			path = Wormaze;
@@ -402,6 +416,7 @@
 				774666D01C2D74D10043B095 /* GameScene.swift */,
 				774666D21C2D74D10043B095 /* GameScene.sks */,
 				77FBF05B1C317F040048D24D /* MenuScene.swift */,
+				A70C1C7C1C51003400FF5392 /* ShopScene.swift */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -681,6 +696,7 @@
 				A71926B81C41088A0094DED8 /* GameKitManagerOsx.swift in Sources */,
 				774666E31C2D798F0043B095 /* Player.swift in Sources */,
 				A71926B31C41045C0094DED8 /* GameKitManager.swift in Sources */,
+				A70C1C851C51178600FF5392 /* UseLifeCountdownNode.swift in Sources */,
 				77FBF0521C3176590048D24D /* PlayerTiles.swift in Sources */,
 				774666D11C2D74D10043B095 /* GameScene.swift in Sources */,
 				77FBF0541C3177CE0048D24D /* GameOverNode.swift in Sources */,
@@ -688,6 +704,7 @@
 				77FBF05C1C317F040048D24D /* MenuScene.swift in Sources */,
 				A71620AD1C43ACE3003C1EE3 /* ItemInvincible.swift in Sources */,
 				A716209E1C439E19003C1EE3 /* ItemDecSpeed.swift in Sources */,
+				A70C1C7D1C51003400FF5392 /* ShopScene.swift in Sources */,
 				A71620B01C43ACF9003C1EE3 /* ItemExtralive.swift in Sources */,
 				A716209B1C439E09003C1EE3 /* ItemIncSpeed.swift in Sources */,
 				77FBF0611C3188960048D24D /* MenuButton.swift in Sources */,
@@ -697,6 +714,7 @@
 				A71620941C439318003C1EE3 /* CollectableManager.swift in Sources */,
 				A7AC8F0C1C4FF7F70058149C /* LivesNode.swift in Sources */,
 				A75F08A21C46A7E7006AC55D /* LeaderboardNode.swift in Sources */,
+				A70C1C811C510B3500FF5392 /* PlayerConsumablesNode.swift in Sources */,
 				A71AA17B1C40698000BC484E /* PauseMenuNode.swift in Sources */,
 				774666E11C2D75510043B095 /* Gameboard.swift in Sources */,
 				A7BF6C951C46504500165C3D /* CoinsNode.swift in Sources */,
@@ -715,11 +733,13 @@
 				778656AA1C3C1225001C4E32 /* MenuScene.swift in Sources */,
 				778656AB1C3C1225001C4E32 /* DialogNode.swift in Sources */,
 				778656AC1C3C1225001C4E32 /* MainMenu.swift in Sources */,
+				A70C1C821C510B3500FF5392 /* PlayerConsumablesNode.swift in Sources */,
 				A716209F1C439E19003C1EE3 /* ItemDecSpeed.swift in Sources */,
 				A7BF6C961C46504500165C3D /* CoinsNode.swift in Sources */,
 				A71620AE1C43ACE3003C1EE3 /* ItemInvincible.swift in Sources */,
 				778656AD1C3C1225001C4E32 /* MenuItem.swift in Sources */,
 				A71AA17C1C40698000BC484E /* PauseMenuNode.swift in Sources */,
+				A70C1C7E1C51003400FF5392 /* ShopScene.swift in Sources */,
 				778656AE1C3C1225001C4E32 /* MenuButton.swift in Sources */,
 				A7F7AAD81C3EBD650031E3A9 /* GameViewTv.swift in Sources */,
 				A7BF6C931C46458300165C3D /* ItemCoin.swift in Sources */,
@@ -736,6 +756,7 @@
 				778656B31C3C1225001C4E32 /* GameOverNode.swift in Sources */,
 				778656B41C3C1225001C4E32 /* PrepareGameNode.swift in Sources */,
 				7786569C1C3C1027001C4E32 /* GameViewController.swift in Sources */,
+				A70C1C861C51178600FF5392 /* UseLifeCountdownNode.swift in Sources */,
 				A71926B61C41087A0094DED8 /* GameKitManagerTv.swift in Sources */,
 				778656961C3C1027001C4E32 /* AppDelegate.swift in Sources */,
 				A71620991C439DEF003C1EE3 /* ItemGrow.swift in Sources */,
@@ -754,11 +775,13 @@
 				A7378CC01C4CF45D005A0708 /* MenuItem.swift in Sources */,
 				A7378CC11C4CF45D005A0708 /* MenuButton.swift in Sources */,
 				A7378CC21C4CF45D005A0708 /* CoinsNode.swift in Sources */,
+				A70C1C831C510B3500FF5392 /* PlayerConsumablesNode.swift in Sources */,
 				A7378CC31C4CF45D005A0708 /* LeaderboardNode.swift in Sources */,
 				A7378CC41C4CF45D005A0708 /* Collectable.swift in Sources */,
 				A7378CC51C4CF45D005A0708 /* ItemGrow.swift in Sources */,
 				A7378CC61C4CF45D005A0708 /* ItemIncSpeed.swift in Sources */,
 				A7378CC71C4CF45D005A0708 /* ItemDecSpeed.swift in Sources */,
+				A70C1C7F1C51003400FF5392 /* ShopScene.swift in Sources */,
 				A7378CC81C4CF45D005A0708 /* ItemInvincible.swift in Sources */,
 				A7378CC91C4CF45D005A0708 /* ItemExtralive.swift in Sources */,
 				A7378CCA1C4CF45D005A0708 /* ItemCoin.swift in Sources */,
@@ -775,6 +798,7 @@
 				A7378CD41C4CF45D005A0708 /* GameKitManager.swift in Sources */,
 				A7378CD51C4CF45D005A0708 /* CollectableManager.swift in Sources */,
 				A7378CD61C4CF45D005A0708 /* GameView.swift in Sources */,
+				A70C1C871C51178600FF5392 /* UseLifeCountdownNode.swift in Sources */,
 				A7378CB91C4CF0EE005A0708 /* GameViewIOs.swift in Sources */,
 				A7378CBB1C4CF0FB005A0708 /* GameKitManagerIOs.swift in Sources */,
 				A7378CAB1C4CF046005A0708 /* GameViewController.swift in Sources */,

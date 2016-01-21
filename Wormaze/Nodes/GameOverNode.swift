@@ -23,31 +23,47 @@ class GameOverNode : DialogNode
 
     func initialize(message: String, color: SKColor)
     {
+        var yOffset = 0.0
+
         let localGameButton = MenuButton(label: "Play again", name: "playAgain");
-        localGameButton.position = CGPoint(x: 0.0, y: 0.0)
+        localGameButton.position = CGPoint(x: 0.0, y: yOffset)
         localGameButton.initialize()
         self.addItem(localGameButton)
         
-        let buyLivesButton = MenuButton(label: "Get extralife", name: "buyExtralife");
-        buyLivesButton.position = CGPoint(x: 0.0, y: -120.0)
-        buyLivesButton.initialize()
-        self.addItem(buyLivesButton)
+        yOffset -= 120.0
         
-        let heart = SKSpriteNode(imageNamed: "extralife")
-        buyLivesButton.addChild(heart)
-        heart.position = CGPoint(x: -buyLivesButton.size.width / 2.0 - heart.size.width / 2.0 - 10.0, y: 0.0)
+        if(GameView.instance!.gameScene!.gameMode == GameMode.singleplayer) {
+            let buyLivesButton = MenuButton(label: "Get extralife", name: "buyExtralife");
+            buyLivesButton.position = CGPoint(x: 0.0, y: yOffset)
+            buyLivesButton.initialize()
+            self.addItem(buyLivesButton)
+
         
-        let gameCostNode = CoinsNode()
-        gameCostNode.position = CGPoint(x: buyLivesButton.size.width / 2.0 + 10.0, y: ItemCoin.texture.size().height / 2.0)
-        buyLivesButton.addChild(gameCostNode)
-        gameCostNode.initialize(GameScene.gameCost)
-        gameCostNode.setColor(SKColor.redColor())
+            let heart = SKSpriteNode(imageNamed: "extralife")
+            buyLivesButton.addChild(heart)
+            heart.position = CGPoint(x: -buyLivesButton.size.width / 2.0 - heart.size.width / 2.0 - 10.0, y: 0.0)
+            
+            let gameCostNode = CoinsNode()
+            gameCostNode.position = CGPoint(x: buyLivesButton.size.width / 2.0 + 10.0, y: ItemCoin.texture.size().height / 2.0)
+            buyLivesButton.addChild(gameCostNode)
+            gameCostNode.initialize(GameScene.gameCost)
+            gameCostNode.setColor(SKColor.redColor())
+            yOffset -= 120.0
+            
+            let shopButton = MenuButton(label: "Get coins", name: "shop");
+            shopButton.position = CGPoint(x: 0.0, y: yOffset)
+            shopButton.initialize()
+            self.addItem(shopButton)
+            yOffset -= 120.0
+        }
+
         
         let exitGameButton = MenuButton(label: "To Menu", name: "toMenu");
-        exitGameButton.position = CGPoint(x: 0.0, y: -240.0)
-        exitGameButton.initialize()
+        exitGameButton.position = CGPoint(x: 0.0, y: yOffset)
         self.addItem(exitGameButton)
-        
+        exitGameButton.initialize()
+        yOffset -= 120.0
+
         let messageNode : SKLabelNode = SKLabelNode(fontNamed: "Chalkduster")
         messageNode.fontSize = 32.0
         messageNode.fontColor = color
@@ -55,9 +71,11 @@ class GameOverNode : DialogNode
         messageNode.text = message
         self.addChild(messageNode)
         
-        let leaderboard = LeaderboardNode()
-        leaderboard.position = CGPoint(x: -self.size.width / 2.0 + leaderboard.size.width / 2.0 + 50.0, y: leaderboard.size.height / 2.0)
-        self.addItem(leaderboard)
-        leaderboard.initialize()
+        if(GameView.instance!.gameScene!.gameMode == GameMode.singleplayer) {
+            let leaderboard = LeaderboardNode()
+            leaderboard.position = CGPoint(x: -self.size.width / 2.0 + leaderboard.size.width / 2.0 + 50.0, y: leaderboard.size.height / 2.0)
+            self.addItem(leaderboard)
+            leaderboard.initialize()
+        }
     }
 }

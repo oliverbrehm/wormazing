@@ -15,7 +15,7 @@ class GameColors
     let background = SKColor(red: 0.1, green: 0.3, blue: 0.2, alpha: 1.0)
 }
 
-class GameView : SKView, GameSceneDelegate, MenuSceneDelegate, GameControllerDelegate
+class GameView : SKView, GameControllerDelegate
 {
     static let gameColors = GameColors()
 
@@ -51,7 +51,7 @@ class GameView : SKView, GameSceneDelegate, MenuSceneDelegate, GameControllerDel
         self.initializeUserData()
         //self.initializeGameControllers()
     
-        self.menuScene = MenuScene(menuDelegate: self)
+        self.menuScene = MenuScene()
         self.presentScene(menuScene)
     }
     
@@ -86,6 +86,19 @@ class GameView : SKView, GameSceneDelegate, MenuSceneDelegate, GameControllerDel
         })
         
         self.addControllers()
+    }
+    
+    func buyExtralife() -> Bool
+    {
+        if(self.coins >= self.lifeCost) {
+            self.coins -= self.lifeCost
+            
+            self.extralives++
+            self.serializeUserData()
+            return true
+        }
+        
+        return false
     }
     
     /*
@@ -187,17 +200,30 @@ class GameView : SKView, GameSceneDelegate, MenuSceneDelegate, GameControllerDel
         // TODO
     }
     
+    func displayShopScene() {
+        let shopScene = ShopScene()
+        self.presentScene(shopScene, transition: SKTransition.crossFadeWithDuration(0.5))
+    }
+    
+    func shopSceneDidCancel() {
+        if(self.gameScene != nil) {
+            self.presentScene(self.gameScene!, transition: SKTransition.crossFadeWithDuration(0.5))
+        } else {
+            self.presentScene(self.menuScene!, transition: SKTransition.crossFadeWithDuration(0.5))
+        }
+    }
+    
     func gameSceneDidCancel() {
-        self.menuScene = MenuScene(menuDelegate: self)
+        self.menuScene = MenuScene()
         self.menuScene?.scaleMode = .Fill
         self.presentScene(menuScene!, transition: SKTransition.crossFadeWithDuration(0.5))
+        self.gameScene = nil
     }
     
     func menuSceneDidStartGame(mode: GameMode) {
         self.gameScene = GameScene(fileNamed:"GameScene")
         gameScene!.gameMode = mode
         gameScene!.scaleMode = .Fill
-        gameScene!.gameSceneDelegate = self
                     
         self.presentScene(gameScene!, transition: SKTransition.crossFadeWithDuration(0.5))
         
@@ -212,6 +238,13 @@ class GameView : SKView, GameSceneDelegate, MenuSceneDelegate, GameControllerDel
     func primaryController() -> Controller?
     {
         return nil // implemented in subclass
+    }
+    
+    func removeAllMenuControls()
+    {
+        for controller in gameControllers {
+            controller.removeMenuControl()
+        }
     }
     
     func removeAllControls()
