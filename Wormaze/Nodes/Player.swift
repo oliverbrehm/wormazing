@@ -235,7 +235,7 @@ class Player: SKNode {
             if let v = GameView.instance {
                 v.extralives++
                 v.serializeUserData()
-                self.gameBoard.consumablesNode.update()
+                self.gameBoard.gameScene!.consumablesNode.update()
             }
         } else {
             self.multiplayerExtralives++
@@ -383,7 +383,7 @@ class Player: SKNode {
         if(self.countdown != nil && self.countdown!.delayDone()) {
             GameView.instance!.extralives--
             GameView.instance!.serializeUserData()
-            self.gameBoard.consumablesNode.update()
+            self.gameBoard.gameScene!.consumablesNode.update()
             self.extralifeUsed()
             self.countdown?.removeFromParent()
             self.countdown = nil
@@ -423,5 +423,16 @@ class Player: SKNode {
             self.nextDirection = playerDirection
             didNavigate = true
         }
+    }
+    
+    func distanceToPoint(x: Int, y: Int) -> Int {
+        if let h = self.tiles.head() {
+            let dx = h.x - x
+            let dy = h.y - y
+            
+            return Int(sqrt(CGFloat(dx * dx + dy * dy)))
+        }
+        
+        return Int.max
     }
 }

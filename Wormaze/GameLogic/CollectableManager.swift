@@ -11,11 +11,11 @@ import Foundation
 class SpawningWeights
 {
     static let coin = 100
-    static let grow = 50
-    static let speedinc = 20
-    static let speeddec = 10
+    static let grow = 100
+    static let speedinc = 30
+    static let speeddec = 30
     static let invicible = 6
-    static let extralive = 3
+    static let extralive = 5
     
     static func sum() -> Int
     {

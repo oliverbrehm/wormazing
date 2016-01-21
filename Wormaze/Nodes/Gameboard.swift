@@ -37,9 +37,7 @@ class GameBoard: SKSpriteNode {
     var lastStepTime: CFTimeInterval = 0;
     
     let gameOverNode = SKSpriteNode(color: SKColor.redColor(), size: CGSize(width: 0.0 ,height: 0.0))
-    
-    let consumablesNode = PlayerConsumablesNode()
-    
+        
     required init?(coder aDecoder: NSCoder) {
         self.gameScene = GameScene()
         super.init(coder: aDecoder)
@@ -53,6 +51,8 @@ class GameBoard: SKSpriteNode {
     
     func initialize(gameScene: GameScene, size: CGSize)
     {
+        //self.shader = SKShader(fileNamed: "gameSceneFrame")
+        
         self.gameScene = gameScene
 
         self.zPosition = GameScene.zPositions.Background
@@ -72,10 +72,6 @@ class GameBoard: SKSpriteNode {
         self.gameOverNode.anchorPoint = CGPoint(x: 0.0, y: 0.0)
         self.gameOverNode.alpha = 0.8
         self.gameOverNode.zPosition = 10
-        
-        consumablesNode.position = CGPoint(x: -25.0, y: self.size.height + 25.0)
-        self.addChild(consumablesNode)
-        consumablesNode.initialize()
     }
     
     func newGame()
@@ -90,6 +86,7 @@ class GameBoard: SKSpriteNode {
         gameOverNode.removeFromParent()
         
         for collectable in self.collectables {
+            collectable.particles.removeFromParent()
             collectable.removeFromParent()
         }
         self.collectables.removeAll()
@@ -168,7 +165,8 @@ class GameBoard: SKSpriteNode {
         ((self.scene as! GameScene).view as! GameView).collectableManager.generate(self)
         if let collectable = ((self.scene as! GameScene).view as! GameView).collectableManager.getItem() {
             self.collectables.append(collectable)
-            collectable.attatchToGameboard(x, y: y, gameBoard: self)
+            collectable.attatchToGameboard(x, y: y)
+            self.updateLighting()
         }
     }
     
@@ -282,6 +280,8 @@ class GameBoard: SKSpriteNode {
     
     func step()
     {
+        self.updateLighting()
+        
         // spawn item
         if(spawnTimer >= GameBoard.spawningTime) {
             spawnTimer = 0
@@ -289,5 +289,27 @@ class GameBoard: SKSpriteNode {
         }
         
         spawnTimer++
+    }
+    
+    func updateLighting()
+    {
+        for collectable in self.collectables {
+            let d = self.distanceToPlayers(collectable.x, y: collectable.y)
+            collectable.alpha = max(0.5, 1.0 - CGFloat(d) / 40.0)
+        }
+    }
+    
+    func distanceToPlayers(x: Int, y: Int) -> Int
+    {
+        var distance = Int.max
+        
+        for player in self.players {
+            let d = player.distanceToPoint(x, y: y)
+            if(d < distance) {
+                distance = d
+            }
+        }
+        
+        return distance
     }
 }

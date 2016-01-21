@@ -16,8 +16,8 @@ class ItemInvincible: Collectable {
         super.init(gameboard: gameboard)
     }
     
-    override func attatchToGameboard(x: Int, y: Int, gameBoard: GameBoard) {
-        super.attatchToGameboard(x, y: y, gameBoard: gameBoard)
+    override func attatchToGameboard(x: Int, y: Int) {
+        super.attatchToGameboard(x, y: y)
         self.texture = ItemInvincible.texture
     }
 

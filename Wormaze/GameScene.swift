@@ -77,11 +77,13 @@ class GameScene: SKScene, GameBoardDelegate, DialogNodeDelegate {
     var prepareGameNode: PrepareGameNode?
     var pauseNode: PauseMenuNode?
     
+    let consumablesNode = PlayerConsumablesNode()
+    
     static let gameCost = 10
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
-        self.backgroundColor = SKColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1.0)
+        self.backgroundColor = SKColor(red: 0.4, green: 0.3, blue: 0.3, alpha: 1.0)
         
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5);
         
@@ -93,17 +95,21 @@ class GameScene: SKScene, GameBoardDelegate, DialogNodeDelegate {
             }
             
             self.addChild(gameBoard)
-            gameBoard.initialize(self, size: CGSize(width: self.size.width - 20, height: self.size.height - 60))
+            gameBoard.initialize(self, size: CGSize(width: self.size.width - 20, height: self.size.height - 40))
             gameBoard.delegate = self
             
-            gameBoard.position = CGPoint(x: -gameBoard.size.width / 2.0, y: -gameBoard.size.height / 2.0);
+            gameBoard.position = CGPoint(x: -gameBoard.size.width / 2.0, y: -gameBoard.size.height / 2.0 - 10.0);
+            
+            consumablesNode.position = CGPoint(x: -self.size.width / 2.0 + 5.0, y: self.size.height / 2.0 - 5.0)
+            self.addChild(consumablesNode)
+            consumablesNode.initialize()
             
             self.prepareGameNode = PrepareGameNode(size: CGSize(width: self.size.width, height: self.size.height), color: SKColor(white: 1.0, alpha: 0.5), name: "GameOverNode")
             self.addChild(self.prepareGameNode!)
             self.prepareGameNode!.initialize(self.gameMode)
             self.prepareGameNode!.delegate = self
             
-            (self.view as! GameView).removeAllControls()
+            (self.view as! GameView).removeAllControls()            
         }
         
         if let view = self.view as? GameView {
@@ -159,7 +165,7 @@ class GameScene: SKScene, GameBoardDelegate, DialogNodeDelegate {
                 if(!GameView.instance!.buyExtralife()) {
                     GameView.instance!.displayShopScene()
                 } else {
-                    self.gameBoard.consumablesNode.update()
+                    self.consumablesNode.update()
                 }
             } else if(item!.name == "shop") {
                 GameView.instance!.displayShopScene()
@@ -201,7 +207,9 @@ class GameScene: SKScene, GameBoardDelegate, DialogNodeDelegate {
         if let view = (self.view as? GameView) {
             if(view.gameKitManager != nil && score != nil) {
                 view.gameKitManager!.reportSingleplayerHighscore(score!, completion: {
-                    (self.gameOverNode!.itemForName("leaderboard") as? LeaderboardNode)?.initialize()
+                    if(self.gameOverNode != nil) {
+                        (self.gameOverNode!.itemForName("leaderboard") as? LeaderboardNode)?.initialize()
+                    }
                 })
             }
         }
@@ -277,6 +285,6 @@ class GameScene: SKScene, GameBoardDelegate, DialogNodeDelegate {
         self.gameState = .RunningGame
         self.prepareGameNode?.removeFromParent()
         self.prepareGameNode =  nil
-        self.gameBoard.consumablesNode.update()
+        self.consumablesNode.update()
     }
 }

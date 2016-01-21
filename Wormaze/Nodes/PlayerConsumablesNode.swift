@@ -18,10 +18,12 @@ class PlayerConsumablesNode: SKSpriteNode {
         coinsNode.position = CGPoint(x: 5.0, y: 0.0)
         self.addChild(coinsNode)
         coinsNode.initialize(GameView.instance!.coins)
+        coinsNode.setScale(0.8)
         
-        livesNode.position = CGPoint(x: 200.0, y: 0.0)
+        livesNode.position = CGPoint(x: 150.0, y: 0.0)
         self.addChild(livesNode)
         livesNode.initialize(GameView.instance!.extralives)
+        livesNode.setScale(0.8)
     }
     
     func update()

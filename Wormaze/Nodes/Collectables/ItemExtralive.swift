@@ -16,8 +16,8 @@ class ItemExtralive: Collectable {
         super.init(gameboard: gameboard)
     }
     
-    override func attatchToGameboard(x: Int, y: Int, gameBoard: GameBoard) {
-        super.attatchToGameboard(x, y: y, gameBoard: gameBoard)
+    override func attatchToGameboard(x: Int, y: Int) {
+        super.attatchToGameboard(x, y: y)
         self.texture = ItemExtralive.texture
     }
 
@@ -27,7 +27,20 @@ class ItemExtralive: Collectable {
 
     override func hit(player: Player) {
         super.hit(player)
-        player.addLive()
+        
+        let movingHeart = SKSpriteNode(texture: ItemExtralive.texture)
+        movingHeart.position = self.position
+        movingHeart.zPosition = GameScene.zPositions.GameboardOverlay
+        gameboard?.addChild(movingHeart)
+        
+        let pointInScene = gameboard!.gameScene!.convertPoint(gameboard!.gameScene!.consumablesNode.livesNode.position, fromNode: gameboard!.gameScene!.consumablesNode)
+        let pointInGameboard = gameboard!.gameScene!.convertPoint(pointInScene, toNode: gameboard!)
+        
+        movingHeart.runAction(SKAction.moveTo(pointInGameboard, duration: 0.5), completion: {
+            movingHeart.removeFromParent()
+            player.addLive()
+        })
+        
     }
     
     override func score() -> Float {

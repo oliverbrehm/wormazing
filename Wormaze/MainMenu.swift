@@ -41,6 +41,7 @@ class MainMenu : DialogNode
         let logo = SKSpriteNode(imageNamed: "logo")
         logo.position = CGPoint(x: 0.0, y: 80.0 + logo.size.height / 2.0)
         self.addChild(logo)
+        logo.zPosition = 2
         
         let growAction = SKAction.scaleTo(1.1, duration: 10.0)
         growAction.timingMode = .EaseInEaseOut
@@ -53,12 +54,13 @@ class MainMenu : DialogNode
         singlePlayerButton.position = CGPoint(x: 0.0, y: -50.0)
         singlePlayerButton.initialize()
         self.addItem(singlePlayerButton)
-
-        let testButton = MenuButton(label: "Multiplayer", name: "multiplayer");
-        testButton.position = CGPoint(x: 0.0, y: -170.0)
-        testButton.initialize()
-        self.addItem(testButton)
+        singlePlayerButton.zPosition = 2
         
+        let multiPlayerButton = MenuButton(label: "Multiplayer", name: "multiplayer");
+        multiPlayerButton.position = CGPoint(x: 0.0, y: -170.0)
+        multiPlayerButton.initialize()
+        self.addItem(multiPlayerButton)
+        multiPlayerButton.zPosition = 2
         
         consumablesNode.position = CGPoint(x: -self.size.width / 2.0 + 5.0, y: self.size.height / 2.0 - 5.0)
         consumablesNode.initialize()
@@ -68,14 +70,20 @@ class MainMenu : DialogNode
         shopButton.position = CGPoint(x: 0.0, y: -290.0)
         shopButton.initialize()
         self.addItem(shopButton)
+        shopButton.zPosition = 2
 
         // TODO if osx
         let exitGameButton = MenuButton(label: "Exit", name: "exitGame");
         exitGameButton.position = CGPoint(x: 0.0, y: -410.0)
         exitGameButton.initialize()
         self.addItem(exitGameButton)
+        exitGameButton.zPosition = 2
         
         self.addLeaderboard()
+        
+        let particles = SKEmitterNode(fileNamed: "backgroundFireflies")!
+        self.addChild(particles)
+        particles.zPosition = 0
     }
     
     required init?(coder aDecoder: NSCoder) {

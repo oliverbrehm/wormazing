@@ -9,21 +9,22 @@
 import Foundation
 import SpriteKit
 
-class UseLiftCountdwonNode: SKSpriteNode {
+class UseLiftCountdwonNode: SKCropNode {
     let countdownLabel = SKLabelNode(fontNamed: "Chalkduster")
     var counter = 0
     var counterMax = 0
     
     func initialize() {
+        let node = SKSpriteNode()
         self.zPosition = GameScene.zPositions.Menu
-        self.size = CGSize(width: 250.0, height: 250.0)
-        self.color = SKColor.redColor()
-        self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        node.size = CGSize(width: 250.0, height: 250.0)
+        node.color = SKColor.redColor()
+        node.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         
         countdownLabel.text = ""
         countdownLabel.fontColor = SKColor.greenColor()
         countdownLabel.fontSize = 40
-        self.addChild(countdownLabel)
+        node.addChild(countdownLabel)
         
         let infoLabel1 = SKLabelNode(fontNamed: "Chalkduster")
         infoLabel1.fontColor = SKColor.whiteColor()
@@ -37,7 +38,13 @@ class UseLiftCountdwonNode: SKSpriteNode {
         infoLabel2.fontSize = 20
         infoLabel2.text = "Press any direction"
         infoLabel2.position = CGPoint(x: 0.0, y: -75.0)
-        self.addChild(infoLabel2)
+        node.addChild(infoLabel2)
+        
+        let mask = SKShapeNode()
+        mask.path = CGPathCreateWithRoundedRect(node.frame, 10.0, 10.0, nil)
+        mask.fillColor = SKColor.whiteColor()
+        self.maskNode = mask
+        self.addChild(node)
     }
     
     func execute(secs: Int, completion: () -> Void) {

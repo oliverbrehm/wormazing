@@ -25,6 +25,8 @@ class Collectable: SKSpriteNode {
     var lastTime: CFTimeInterval = -1.0
     var gameboard: GameBoard?
     
+    let particles = SKEmitterNode(fileNamed: "collectableFireflies")!
+    
     init(gameboard: GameBoard)
     {
         self.gameboard = gameboard
@@ -39,15 +41,20 @@ class Collectable: SKSpriteNode {
 
     }
     
-    func attatchToGameboard(x: Int, y: Int, gameBoard: GameBoard)
+    func attatchToGameboard(x: Int, y: Int)
     {
         self.x = x
         self.y = y
         
-        gameBoard.addChild(self)
+        gameboard!.addChild(self)
         
         self.position = CGPoint(x: (CGFloat(x) + 0.5) * GameBoard.tileSize, y: (CGFloat(y) + 0.5) * GameBoard.tileSize);
         self.runAction(SKAction.repeatActionForever(SKAction.rotateByAngle(CGFloat(2 * M_PI), duration: 4.0)))
+        
+        // add particles
+        particles.position = self.position
+        particles.targetNode = gameboard!
+        gameboard!.addChild(particles)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -90,6 +97,10 @@ class Collectable: SKSpriteNode {
             })
         }
     
-
+        // remove particles
+        self.particles.particleBirthRate = 0.0
+        gameboard!.runAction(SKAction.waitForDuration(5), completion: { () -> Void in
+            self.particles.removeFromParent()
+        })
     }
 }

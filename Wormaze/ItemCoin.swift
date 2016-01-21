@@ -16,8 +16,8 @@ class ItemCoin: Collectable {
         super.init(gameboard: gameboard)
     }
     
-    override func attatchToGameboard(x: Int, y: Int, gameBoard: GameBoard) {
-        super.attatchToGameboard(x, y: y, gameBoard: gameBoard)
+    override func attatchToGameboard(x: Int, y: Int) {
+        super.attatchToGameboard(x, y: y)
         self.texture = ItemCoin.texture
     }
 
@@ -32,10 +32,14 @@ class ItemCoin: Collectable {
         movingCoin.position = self.position
         movingCoin.zPosition = GameScene.zPositions.GameboardOverlay
         gameboard?.addChild(movingCoin)
-        movingCoin.runAction(SKAction.moveTo(gameboard!.convertPoint(gameboard!.consumablesNode.coinsNode.position, fromNode: gameboard!.consumablesNode), duration: 0.5), completion: {
+        
+        let pointInScene = gameboard!.gameScene!.convertPoint(gameboard!.gameScene!.consumablesNode.coinsNode.position, fromNode: gameboard!.gameScene!.consumablesNode)
+        let pointInGameboard = gameboard!.gameScene!.convertPoint(pointInScene, toNode: gameboard!)
+        
+        movingCoin.runAction(SKAction.moveTo(pointInGameboard, duration: 0.5), completion: {
             movingCoin.removeFromParent()
             GameView.instance!.coins++
-            self.gameboard!.consumablesNode.update()
+            self.gameboard!.gameScene!.consumablesNode.update()
         })
     }
     

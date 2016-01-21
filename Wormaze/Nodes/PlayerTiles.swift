@@ -55,7 +55,7 @@ class Tile : SKSpriteNode {
     
     func die(delay: NSTimeInterval, delayDelta: NSTimeInterval, tiles: PlayerTiles, index: Int) {
         let delayAction = SKAction.waitForDuration(delay)
-        let colorizeAction = SKAction.colorizeWithColor(SKColor.blackColor(), colorBlendFactor: 1.0, duration: 0.5)
+        let colorizeAction = SKAction.colorizeWithColor(SKColor(white: 0.3, alpha: 1.0), colorBlendFactor: 1.0, duration: 0.5)
         let deletionDelayAction = SKAction.waitForDuration(delayDelta * Double(tiles.tiles.count))
         
         self.runAction(SKAction.sequence([delayAction, colorizeAction, deletionDelayAction]), completion: {
@@ -160,6 +160,10 @@ class PlayerTiles
 
         let explosion = SKEmitterNode(fileNamed: "explosion")!
         
+        if(GameView.instance!.gameScene == nil) {
+            return
+        }
+        
         let gameboard = GameView.instance!.gameScene!.gameBoard
         explosion.position = tile!.position
         gameboard.addChild(explosion)
@@ -171,8 +175,6 @@ class PlayerTiles
                 explosion.removeFromParent()
             }
         }
-        
-        
         
         tile?.runAction(SKAction.fadeOutWithDuration(1.0), completion: { () -> Void in
             tile?.removeFromParent()

@@ -12,7 +12,7 @@ import GameController
 
 class GameColors
 {
-    let background = SKColor(red: 0.1, green: 0.3, blue: 0.2, alpha: 1.0)
+    let background = SKColor(red: 0.0, green: 0.1, blue: 0.2, alpha: 1.0)
 }
 
 class GameView : SKView, GameControllerDelegate

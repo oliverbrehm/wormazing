@@ -16,8 +16,8 @@ class SingleplayerGame : GameBoard {
     override func initialize(gameScene: GameScene, size: CGSize) {
         super.initialize(gameScene, size: size)
         
-        scoreLabel.fontSize = 20.0
-        scoreLabel.fontColor = SKColor.blackColor()
+        scoreLabel.fontSize = 30.0
+        scoreLabel.fontColor = SKColor.whiteColor()
         scoreLabel.position = CGPoint(x: self.size.width / 2.0, y: self.size.height + scoreLabel.fontSize / 2.0)
         self.addChild(scoreLabel)
         self.updateScoreNode()
